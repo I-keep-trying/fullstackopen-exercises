@@ -1,11 +1,12 @@
 import React from 'react'
 
 const Total = (props) => {
+  console.log('Total props', props)
   return (
     <div>
       <p>
         Number of exercises{' '}
-        {props.exercises1 + props.exercises2 + props.exercises3}
+        {props.part1.exercises + props.part2.exercises + props.part3.exercises}
       </p>
     </div>
   )
