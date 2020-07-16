@@ -1,13 +1,13 @@
 import React from 'react'
 
 const Total = (props) => {
-  console.log('Total props', props)
+  const total = props.parts.reduce((a, v) => {
+    return a + v.exercises
+  }, 0)
+
   return (
     <div>
-      <p>
-        Number of exercises{' '}
-        {props.part1.exercises + props.part2.exercises + props.part3.exercises}
-      </p>
+      <p>Total number of exercises: {total}</p>
     </div>
   )
 }
