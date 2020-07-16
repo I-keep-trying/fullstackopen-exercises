@@ -1,0 +1,21 @@
+title Untitled
+
+browser->server: POST Request with form data in body
+
+server->browser: Response Headers with 302 redirect
+
+browser->server: GET Request https://fullstack-exampleapp.herokuapp.com/notes
+
+server->browser: HTML-code
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+server->browser: main.css
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/main.js
+
+server->browser: main.js
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/data.json
+
+server->browser: [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...]

@@ -1,0 +1,19 @@
+https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRXhlcmNpc2UgMC41OiBTaW5nbGUgUGFnZSBBcHAKCmJyb3dzZXItPnNlcnZlcjogR0VUIFJlcXVlc3QgdG8gaHR0cHM6Ly9mdWxsc3RhY2stZXhhbXBsZWFwcC5oZXJva3VhcHAuY29tL3NwYQoKAEEGLS0-AFIHOiBIVE1MIHdpdGggJ25vdGVzX2Zvcm0nIGZvcm0gZm9yIHRleHQgaW5wdXQgYW5kIHN1Ym1pdCBidXR0b24AfiIvbWFpbi5jc3MAZxQAEgoAJiFzcGEuanMsIGNvbm5lYwCBdgVIb3N0OiAAgVciAIFhFABHCHRvIGV4ZWN1dGUgeGh0dHAAgloFcmVzcG9uc2UAghAGZGF0YS5qc29uAIF6BVBPU1QAgVMFbmV3X25vdGVfc3BhIHRvIACDGgYAgmRNAHEJAIMjFACBDQpbeyJjb250ZW50IjoiAINJBWlzIGVhc3kiLCJkYXRlIjoiMjAxOS0wNS0yM1QxNzozMDozMS4wOThaIn0sLi4uXQ&s=omegapple
+
+title Exercise 0.5: Single Page App
+
+browser->server: GET Request to https://fullstack-exampleapp.herokuapp.com/spa
+
+server-->browser: HTML with 'notes_form' form for text input and submit button
+
+browser->server: GET Request to /main.css
+
+server-->browser: main.css
+
+browser->server: GET Request to /spa.js, connect to Host: fullstack-exampleapp.herokuapp.com
+
+server-->browser: spa.js, to execute xhttp GET response with data.json and POST to /new_note_spa to server
+
+browser->server: GET Request to https://fullstack-exampleapp.herokuapp.com/data.json
+
+server-->browser: data.json [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...]

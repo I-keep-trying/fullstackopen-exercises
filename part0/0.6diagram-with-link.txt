@@ -1,0 +1,7 @@
+https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRXhlcmNpc2UgMC42OiBOZXcgTm90ZSwgU2luZ2xlIFBhZ2UgQXBwCgpicm93c2VyLT5zZXJ2ZXI6IFBPU1QgUmVxdWVzdCB3aXRoIHBheWxvYWQge2NvbnRlbnQ6ICJuZXcgbm90ZSIsIGRhdGU6ICIyMDIwLTA3LTE2VDE1OjI0OjU4LjQyMVoifQoKAFUGLS0-AGYHOiBSZXNwb25zZSBIZWFkZXJzAGMGc3RhdHVzIDIwMSBDcmVhdGVkIGFuZCB7Im1lc3NhZ2UiOiJub3RlIGMAFwYifQoKCgoK&s=omegapple
+
+title Exercise 0.6: New Note, Single Page App
+
+browser->server: POST Request with payload {content: "new note", date: "2020-07-16T15:24:58.421Z"}
+
+server-->browser: Response Headers with status 201 Created and {"message":"note created"}

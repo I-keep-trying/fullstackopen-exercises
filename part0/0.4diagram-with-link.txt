@@ -1,0 +1,23 @@
+https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgRXhlcmNpc2UgMC40OiBOZXcgTm90ZQoKYnJvd3Nlci0-c2VydmVyOiBQT1NUIFJlcXVlc3Qgd2l0aCBmb3JtIGRhdGEgaW4gYm9keQoKACcGLT4ANwc6IFJlc3BvbnNlIEhlYWRlcnMANAYzMDIgcmVkaXJlY3QAWBNHRQBgCmh0dHBzOi8vZnVsbHN0YWNrLWV4YW1wbGVhcHAuaGVyb2t1YXBwLmNvbS9ub3RlcwBxE0hUTUwtY29kAIFCFEdFVAA3LG1haW4uY3MAUhQAEQoAIEVqAEsZagAgQ2RhdGEuanNvbgCDIBNbeyJjb250ZW50IjoiSFRNTCBpcyBlYXN5IiwiZGF0ZSI6IjIwMTktMDUtMjNUMTc6MzA6MzEuMDk4WiJ9LC4uLl0&s=omegapple
+
+title Exercise 0.4: New Note
+
+browser->server: POST Request with form data in body
+
+server->browser: Response Headers with 302 redirect
+
+browser->server: GET Request https://fullstack-exampleapp.herokuapp.com/notes
+
+server->browser: HTML-code
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/main.css
+
+server->browser: main.css
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/main.js
+
+server->browser: main.js
+
+browser->server: GET https://fullstack-exampleapp.herokuapp.com/data.json
+
+server->browser: [{"content":"HTML is easy","date":"2019-05-23T17:30:31.098Z"},...]
