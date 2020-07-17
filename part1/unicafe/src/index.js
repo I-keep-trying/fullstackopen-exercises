@@ -6,32 +6,30 @@ const Button = (props) => {
   return <button onClick={props.onClick}>{props.text}</button>
 }
 
+const Statistic = ({ text, text2, value }) => {
+  return (
+    <>
+      <tr>
+        <td>
+          {text}: {value} {text2}
+        </td>
+      </tr>
+    </>
+  )
+}
+
 const Statistics = ({ good, neutral, bad, avg, all, positive }) => {
   return (
     <>
       <h3>statistics</h3>
       <table width="50%" border="0px">
         <tbody>
-          <tr>
-            <td>Good: {good}</td>
-          </tr>
-          <tr>
-            <td>Neutral: {neutral}</td>
-          </tr>
-          <tr>
-            <td>Bad: {bad}</td>
-          </tr>
-          <tr>
-            <td>
-              <h4>Total Votes: {all}</h4>
-            </td>
-          </tr>
-          <tr>
-            <td>Average: {avg()}</td>
-          </tr>
-          <tr>
-            <td>Positive: {positive()} %</td>
-          </tr>
+          <Statistic text="good" value={good} />
+          <Statistic text="neutral" value={neutral} />
+          <Statistic text="bad" value={bad} />
+          <Statistic text="Total Votes" value={all} />
+          <Statistic text="Average" value={avg()} />
+          <Statistic text="Positive " value={positive()} text2="%" />
         </tbody>
       </table>
     </>
