@@ -6,6 +6,37 @@ const Button = (props) => {
   return <button onClick={props.onClick}>{props.text}</button>
 }
 
+const Statistics = ({ good, neutral, bad, avg, all, positive }) => {
+  return (
+    <>
+      <h3>statistics</h3>
+      <table width="50%" border="0px">
+        <tbody>
+          <tr>
+            <td>Good: {good}</td>
+          </tr>
+          <tr>
+            <td>Neutral: {neutral}</td>
+          </tr>
+          <tr>
+            <td>Bad: {bad}</td>
+          </tr>
+          <tr>
+            <td>
+              <h4>Total Votes: {all}</h4>
+            </td>
+          </tr>
+          <tr>
+            <td>Average: {avg()}</td>
+          </tr>
+          <tr>
+            <td>Positive: {positive()} %</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  )
+}
 const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
@@ -39,7 +70,7 @@ const App = () => {
     if (all === 0) {
       return 0
     } else {
-      return ((good / all)*100).toFixed(2)
+      return ((good / all) * 100).toFixed(2)
     }
   }
 
@@ -49,37 +80,14 @@ const App = () => {
       <Button onClick={handleGood} text="good" />
       <Button onClick={handleNeutral} text="neutral" />
       <Button onClick={handleBad} text="bad" />
-      <h3>statistics</h3>
-      <table width="50%" border="0px">
-        <tbody>
-          <tr>
-            <td>Good: {good}</td>
-          </tr>
-          <tr>
-            <td>Neutral: {neutral}</td>
-          </tr>
-          <tr>
-            <td>Bad: {bad}</td>
-          </tr>
-          <tr>
-            <td><h4>
-            Total Votes: {all}
-            </h4>
-             
-            </td>
-          </tr>
-          <tr>
-            <td >
-              Average: {avg()}
-            </td>
-          </tr>
-          <tr>
-            <td >
-              Positive: {positive()} %
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Statistics
+        good={good}
+        neutral={neutral}
+        bad={bad}
+        all={all}
+        avg={avg}
+        positive={positive}
+      />
     </div>
   )
 }
