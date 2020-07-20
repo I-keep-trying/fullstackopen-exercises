@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Header = ({course}) => {
-  console.log('Header props', course.name)
 
   return (
     <div>
