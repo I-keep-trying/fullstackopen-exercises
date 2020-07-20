@@ -1,11 +1,27 @@
 Fullstackopen Exercise Submissions
 
-[Part 0](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part0)
+# [Part 0](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part0)
 
-[Part 1](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1)
+# [Part 1](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1)
 
-[Part 2](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2)
+## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/anecdotes)
+## [course info](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/course-info-app)
+## [unicafe](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/unicafe)
+# [Part 2](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2)
 
 Part 2 Note: I did not push 2.5 because the previous exercises already had this requirement.
+## [course info](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/course-info)
+## [notes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/notes)
+## [phonebook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/phonebook)
+
+# [Part 3]
+
+# [Part 4]
+
+# [Part 5]
+
+# [Part 6]
+
+# [Part 7]
 
 
