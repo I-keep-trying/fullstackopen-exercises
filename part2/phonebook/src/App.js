@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Filter from './Filter'
+import PersonForm from './PersonForm'
+import Persons from './Persons'
 import './App.css'
 
 function App() {
@@ -49,47 +52,18 @@ function App() {
       <header className="App-header">
         <h1>Phonebook</h1>
       </header>
-      filter shown with{' '}
-      <input
-        value={searchTerm}
-        onChange={handleSearchInput}
-        placeholder="search..."
+      <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
+      <h3>Add a new</h3>
+
+      <PersonForm
+        addPerson={addPerson}
+        handleNameInput={handleNameInput}
+        handleNumberInput={handleNumberInput}
+        newName={newName}
+        newNumber={newNumber}
       />
-      <form onSubmit={addPerson}>
-        <h3>Add a new</h3>
-        <div>
-          name:{' '}
-          <input
-            placeholder="add name..."
-            value={newName}
-            onChange={handleNameInput}
-          />
-          <br />
-          number:{' '}
-          <input
-            placeholder="add number..."
-            value={newNumber}
-            onChange={handleNumberInput}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
       <h3>Numbers</h3>
-      {persons
-        .filter((person) => {
-          if (!searchTerm) return person
-          if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-            return person
-          }
-          return false
-        })
-        .map((person) => (
-          <div key={person.name}>
-            {person.name} {person.number}{' '}
-          </div>
-        ))}
+      <Persons persons={persons} searchTerm={searchTerm} />
     </div>
   )
 }
