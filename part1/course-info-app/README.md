@@ -1,38 +1,11 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) version 16.13.1.
+Fullstackopen Exercise Submissions
 
-Easier to clone a boilerplate than doing npx etc...
+[Part 0](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part0)
 
-commmonmark markdown syntax reference:
+[Part 1](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1)
 
-_Italic_
+[Part 2](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2)
 
-**Bold**
+Part 2 Note: I did not push 2.5 because the previous exercises already had this requirement.
 
-# Heading 1
 
-## Heading 2
-
-[Link](http://a.com)
-![Image](http://url/a.png)
-
-> Blockquote
-
-- List
-- List
-- List
-
-1. One
-2. Two
-3. Three
-
-Horizontal Rule
-
----
-
-`Inline code` with backticks
-
-```
-# code block
-print '3 backticks or'
-print 'indent 4 spaces'
-```
