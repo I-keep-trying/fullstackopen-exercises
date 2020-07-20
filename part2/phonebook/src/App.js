@@ -11,12 +11,22 @@ function App() {
       name: newName,
     }
 
-    setPersons(persons.concat(nameObject))
+    const isDuplicate = () => {
+      persons.find(
+        (person) => person.name.toLowerCase() === nameObject.toLowerCase()
+      )
+    }
+
+    if (isDuplicate) {
+      alert(`${nameObject.name} is already in the phonebook `)
+    } else {
+      setPersons(persons.concat(nameObject))
+    }
+
     setNewName('')
   }
 
   const handleNameInput = (event) => {
-    console.log(event.target.value)
     setNewName(event.target.value)
   }
 
