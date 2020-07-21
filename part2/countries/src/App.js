@@ -17,6 +17,11 @@ function App() {
     })
   }, [])
 
+  /*   useEffect(() => {
+    axios.get(`http://api.weatherstack.com/current?access_key=${process.env.WEATHER_KEY}&query=New York`).then((response) => {
+      setCountries(response.data)
+    })
+  }, []) */
   const handleSearchInput = (event) => {
     event.preventDefault()
 
@@ -27,6 +32,7 @@ function App() {
     if (country.name.toLowerCase().startsWith(searchTerm.toLowerCase())) {
       return country
     }
+    return null
   })
 
   const countryDetail = () => {
