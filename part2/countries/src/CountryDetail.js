@@ -6,16 +6,20 @@ const CountryDetail = ({ country }) => {
       <div>
         <h2>{country.name}</h2>
       </div>
-      {country.capital}
+      Capital: {country.capital}
       <br />
-      {country.population}
+      Population: {country.population.toLocaleString()}
       <br />
       <h3>Languages: </h3>
       <div>
         {country.languages.map((language) => (
-          <div>{language.name}</div>
+          <div key={language.name}>
+            {' -'} {language.name}
+          </div>
         ))}
       </div>
+      <br />
+      <img src={country.flag} alt="country flag" />
     </div>
   )
 }

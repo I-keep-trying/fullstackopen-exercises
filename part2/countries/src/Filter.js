@@ -3,7 +3,7 @@ import React from 'react'
 const Filter = ({searchTerm, handleSearchInput}) => {
     return (
         <>
-          filter shown with{' '}
+          find countries: {' '}
       <input
         value={searchTerm}
         onChange={handleSearchInput}
@@ -14,3 +14,5 @@ const Filter = ({searchTerm, handleSearchInput}) => {
 }
 
 export default Filter
+
+//Åland Islands

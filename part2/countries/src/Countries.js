@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Countries = ({ countries2 }) => {
+const Countries = ({ content }) => {
 
-  return <>{countries2()}</>
+  return <>{content()}</>
 }
 
 export default Countries

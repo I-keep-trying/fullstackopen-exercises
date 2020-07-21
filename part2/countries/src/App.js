@@ -24,22 +24,18 @@ function App() {
   }
 
   const filteredCountries = countries.filter((country) => {
-    if (!searchTerm) return country
     if (country.name.toLowerCase().startsWith(searchTerm.toLowerCase())) {
       return country
     }
-    return false
   })
 
-  const countryDetail = () =>
-    filteredCountries.map((country) => {
+  const countryDetail = () => {
+    return filteredCountries.map((country) => {
       return <CountryDetail key={country.alpha2Code} country={country} />
     })
-
-  const handleClick = () => {
-    return countryDetail()
   }
-  const countries2 = () => {
+
+  const content = () => {
     if (filteredCountries.length > 10 && !searchTerm) {
       return <div> Search for a country</div>
     } else if (filteredCountries.length === 0) {
@@ -50,13 +46,13 @@ function App() {
       return countryDetail()
     } else {
       return filteredCountries.map((country) => {
+        const handleShow = () => {
+          setSearchTerm(country.name)
+        }
         return (
           <div key={country.alpha2Code}>
-            <Country
-              country={country}
-              countryDetail={countryDetail}
-              filteredCountries={filteredCountries}
-            />
+            <Country country={country} />
+            <Button onClick={handleShow} text="show" />
           </div>
         )
       })
@@ -69,7 +65,7 @@ function App() {
       <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
       <br />
 
-      <Countries countries2={countries2} />
+      <Countries content={content} />
     </div>
   )
 }
