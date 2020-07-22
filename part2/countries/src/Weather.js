@@ -2,23 +2,10 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Weather = ({ country }) => {
-  console.log('country', country)
-  const [weather, setWeather] = useState([])
-  const uri = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_KEY}&query=${country.name}`
-  const encoded = encodeURI(uri)
-  console.log('encoded', encoded)
 
-  useEffect(() => {
-    console.log('encoded', encoded)
-    axios.get(encoded).then((response) => {
-      console.log('response.data', response)
-      setWeather(response.data)
-    })
-  }, [encoded, setWeather])
-  console.log('weather', weather)
   return (
     <div>
-      <h2>{weather.location.name}</h2>
+      <h2></h2>
     </div>
     /*  <div>
       <div>

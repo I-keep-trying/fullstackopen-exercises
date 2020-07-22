@@ -1,33 +1,7 @@
-html { box-sizing: border-box; }
-html *,
-html *:before,
-html *:after { box-sizing: inherit; }
 
-body {
-  max-width: 42em;
-  padding: 2em;
-  margin: 0 auto;
-  color: #161616;
-  font-family: 'Roboto', sans-serif;
-  text-align: center;
-  background-color: currentColor;
-}
-
-h1 {
-  margin-bottom: 1.375em;
-  color: #fff;
-  font-weight: 100;
-  font-size: 2em;
-  text-transform: uppercase;
-}
-p,
-a {
-  color: rgba(255,255,255,0.3);
-  font-size: small;
-}
-p { margin: 1.375rem 0; }
 
 .icon {
+  background-color: currentColor;
   position: relative;
   display: inline-block;
   width: 12em;
@@ -218,7 +192,6 @@ p { margin: 1.375rem 0; }
   left: 50%;
   margin: -1.025em 0 0 -1.0125em;
   color: #fff;
-  list-height: 1em;
   opacity: 0.2;
   animation: spin 8s linear infinite reverse;
 }
@@ -241,6 +214,423 @@ p { margin: 1.375rem 0; }
   animation: spin 16s linear infinite reverse;
 }
 
+/* Added from other codepen */
+
+.sky-gradient {
+  /* can be treated like a fallback*/
+  background-color: lightblue;
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(lightblue, white);
+}
+
+.sky-solid {
+  /* can be treated like a fallback*/
+  background-color: lightblue;
+}
+
+.sun-exp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.25em;
+  height: 3.25em;
+  margin-left: -1.625em;
+  margin-top: -1.625em;
+  background-color: yellow;
+  border-radius: 50%;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.2));
+}
+
+.bolt-exp {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 1.5em;
+  height: 1.9em;
+  background-color: currentColor;
+  color: #fff;
+  transform: skewX(-20deg);
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+}
+
+.bolt-exp::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 1.5em;
+  height: 1.3em;
+  background-color: currentColor;
+  margin: 0.75em 0 0 0;
+}
+
+.bolt-exp::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 1.2em;
+  height: 1.3em;
+  background-color: currentColor;
+  margin: 2em 0 0 0.75em;
+}
+
+.rays-exp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -3.5em;
+  width: 0.375em;
+  height: 1.125em;
+  margin-left: -0.1875em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+}
+
+.rays-exp::before,
+.rays-exp::after {
+  content: "";
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  display: block;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(60deg);
+  transform-origin: 50% 3.5em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+}
+
+.rays-exp:before {
+  transform: rotate(120deg);
+}
+
+.cloud-exp {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 3.6875em;
+  height: 3.6875em;
+  margin: -1.84375em;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: -2.1875em 0.6875em 0 -0.6875em #fff, 2.0625em 0.9375em 0 -0.9375em #fff;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+}
+
+.cloud-exp:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -0.5em;
+  display: block;
+  width: 4.5625em;
+  height: 1em;
+  background: #fff;
+}
+
+.cloud-exp2 + .sun-exp {
+  margin: -2.5em 0.5em;
+}
+
+.cloud-exp2 {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 3.6875em;
+  height: 3.6875em;
+  margin: -1.84375em;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: -2.1875em 0.6875em 0 -0.3125em #fff, 2.0625em 0.9375em 0 -0.5625em #fff;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+}
+
+.cloud-exp2:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -0.5em;
+  display: block;
+  width: 4.5625em;
+  height: 2.25em;
+  display: block;
+  background: #fff;
+  box-shadow: 0 0.4375em 0 -0.0625em #fff;
+}
+
+.cloud-exp3 {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 4em;
+  height: 4em;
+  margin-left: -2em;
+  margin-top: -2em;
+  color: #fff;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: -2em 0.25em 0 -0.5em currentColor, 2em 0.5em 0 -0.75em currentColor, 3.2em 0.75em 0 -1em currentColor;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.2));
+}
+
+.cloud-exp3:after {
+  content: "";
+  position: absolute;
+  bottom: -0.1em;
+  left: -0.75em;
+  display: block;
+  width: 6.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.cloud-exp3:nth-child(2) {
+  z-index: 0;
+  opacity: 0.5;
+  transform: scale(0.75) translate(2em, -2.5em);
+}
+
+
+.broken-clouds > .cloud-exp3 {
+  left: 5.5em;
+}
+
+.rays-exp1a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -3.5em;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(0deg);
+  transform-origin: 50% 3.5em;
+  margin-left: -0.1875em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+  filter: drop-shadow(12px 10px 10px black);
+}
+
+.rays-exp1a::after {
+  content: "";
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  display: block;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(90deg);
+  transform-origin: 50% 3.5em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+}
+
+.rays-exp1b {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -3.5em;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(45deg);
+  transform-origin: 50% 3.5em;
+  margin-left: -0.1875em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+  filter: drop-shadow(12px 10px 10px black);
+}
+
+.rays-exp1b::after {
+  content: "";
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  display: block;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(90deg);
+  transform-origin: 50% 3.5em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+}
+
+.rays-exp2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -3.5em;
+  margin-left: -0.1875em;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(15deg);
+  transform-origin: 50% 3.5em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+}
+
+.rays-exp2::before,
+.rays-exp2::after {
+  content: "";
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  display: block;
+  width: 0.375em;
+  height: 1.125em;
+  transform: rotate(60deg);
+  transform-origin: 50% 3.5em;
+  background: yellow;
+  border-radius: 0.25em;
+  box-shadow: 0 5.875em yellow;
+}
+
+.rays-exp2:before {
+  transform: rotate(120deg);
+}
+
+/* Adjust sun and cloud positions for partly sunny */
+.sky-gradient .cloud-exp3 {
+  margin-top: -0.7em;
+  margin-left: -3em;
+}
+
+.cloud-exp3 + .sun-exp {
+  margin-top: -2em;
+  margin-left: -0.5em;
+}
+
+.sky-gradient-overcast {
+  /* can be treated like a fallback*/
+  background-color: dimgray;
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(dimgray, lightgray);
+}
+
+.sky-gradient-overcast .cloud-exp3,
+.sky-gradient-overcast .cloud-exp3::before,
+.sky-gradient-overcast .cloud-exp3::after {
+  color: gainsboro;
+  background: gainsboro;
+}
+
+.sky-gradient-overcast .cloud-exp3 {
+  margin-top: -1.5em;
+  margin-left: -2.25em;
+}
+
+.sky-gradient-night {
+  /* can be treated like a fallback*/
+  background-color: midnightblue;
+  /* will be "on top", if browser supports it */
+  background-image: linear-gradient(#001a4d, gray);
+}
+
+.sky-gradient-night .cloud-exp3,
+.sky-gradient-night .cloud-exp3::before,
+.sky-gradient-night .cloud-exp3::after {
+  color: #001a4d;
+  background: #001a4d;
+  opacity: 0.9;
+}
+
+.moon-exp {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.25em;
+  height: 3.25em;
+  margin-left: -1.625em;
+  margin-top: -1.625em;
+  background-color: lemonchiffon;
+  border-radius: 50%;
+  filter: drop-shadow(12px 10px 10px rgba(255, 255, 200, 0.3));
+}
+
+/* Adjusts the position of the moon in the night sky when hidden by cloud */
+/* Adjusts the position of the cloud in the night sky background */
+/* Descendant combinator 
+   Pattern: E F
+   Matches any F element that is a sescendant (inside) of an E element
+*/
+.sky-gradient-night .cloud-exp3 {
+  margin-top: -1.5em;
+  margin-left: -2.5em;
+}
+
+/* Next sibling cominator 
+   Pattern: E + F
+   The selector matches if E and F share the same parent and E immediately
+   precedes F. Meaning it selects all F elements that are placed immediately
+   after E elements.
+ */
+.cloud-exp3 + .moon-exp {
+  margin-top: -2.25em;
+  margin-left: 0.5em;
+  filter: drop-shadow(12px 10px 10px rgba(255, 255, 200, 0.3));
+}
+
+.shower-rain > .cloud-exp3 {
+  left: 5.5em;
+  top: 4.5em;
+}
+
+.rain-day > .cloud-exp3,
+.rain-night > .cloud-exp3,
+.thunderstorm > .cloud-exp3,
+.flurries > .cloud-exp3,
+.mist > .cloud-exp3 {
+  margin-top: -1.5em;
+  margin-left: -2.25em;
+  left: 5.5em;
+  top: 4.5em;
+}
+
+.rain-day > .sun-exp {
+  transform: scale(0.75) translate(0.9em, -0.5em);
+}
+
+.rain-night > .rain {
+  opacity: 0.6;
+}
+
+.bolt-exp2:nth-child(2) {
+  transform: scale(0.5) translate(4em, 0em) skewX(-25deg);
+}
+
+.drops:after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  width: 0.5em;
+  height: 0.5em;
+  margin: -1.2em 0 0 -2.75em;
+  background: rgba(0, 160, 231, 0.4);
+  border-radius: 50%;
+  box-shadow: 1em 0em 0 0em rgba(0, 160, 231, 0.4), 2em 0em 0 0em rgba(0, 160, 231, 0.4), 3em 0em 0 0em rgba(0, 160, 231, 0.4), 4em 0em 0 0em rgba(0, 160, 231, 0.4), 0em 1em 0 0em rgba(0, 160, 231, 0.7), 1em 1em 0 0em rgba(0, 160, 231, 0.7), 2em 1em 0 0em rgba(0, 160, 231, 0.7), 3em 1em 0 0em rgba(0, 160, 231, 0.7), 4em 1em 0 0em rgba(0, 160, 231, 0.7), 0em 2em 0 0em #00a0e7, 1em 2em 0 0em #00a0e7, 2em 2em 0 0em #00a0e7, 3em 2em 0 0em #00a0e7, 4em 2em 0 0em #00a0e7;
+  filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.3));
+}
+
+/* end of insert */
 
 /* Animations */ 
 

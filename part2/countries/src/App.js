@@ -11,17 +11,24 @@ function App() {
   const [countries, setCountries] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
+
+  /*   const uri = `http://api.weatherstack.com/current?access_key=${process.env.REACT_APP_WEATHER_KEY}&query=${country.name}`
+  const encoded = encodeURI(uri)
+  console.log('encoded', encoded) */
+
+  /*   useEffect(() => {
+    axios.get(encoded).then((response) => {
+      console.log('response.data', response)
+      setWeather(response.data)
+    })
+  }, [encoded, setWeather]) */
+
   useEffect(() => {
     axios.get('https://restcountries.eu/rest/v2/all').then((response) => {
       setCountries(response.data)
     })
   }, [])
 
-  /*   useEffect(() => {
-    axios.get(`http://api.weatherstack.com/current?access_key=${process.env.WEATHER_KEY}&query=New York`).then((response) => {
-      setCountries(response.data)
-    })
-  }, []) */
   const handleSearchInput = (event) => {
     event.preventDefault()
 
@@ -35,9 +42,16 @@ function App() {
     return null
   })
 
+
   const countryDetail = () => {
     return filteredCountries.map((country) => {
-      return <CountryDetail key={country.alpha2Code} country={country} />
+    
+      return (
+        <CountryDetail
+          key={country.alpha2Code}
+          country={country}
+        />
+      )
     })
   }
 
@@ -55,6 +69,7 @@ function App() {
         const handleShow = () => {
           setSearchTerm(country.name)
         }
+
         return (
           <div key={country.alpha2Code}>
             <Country country={country} />

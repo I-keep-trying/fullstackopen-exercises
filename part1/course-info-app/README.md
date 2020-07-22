@@ -5,14 +5,22 @@ Fullstackopen Exercise Submissions
 # [Part 1](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1)
 
 ## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/anecdotes)
+
 ## [course info](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/course-info-app)
+
 ## [unicafe](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/unicafe)
+
 # [Part 2](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2)
 
 Part 2 Note: I did not push 2.5 because the previous exercises already had this requirement.
+
 ## [course info](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/course-info)
+
 ## [notes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/notes)
+
 ## [phonebook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/phonebook)
+
+## [countries](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/countries)
 
 # [Part 3]
 
@@ -23,5 +31,3 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 # [Part 6]
 
 # [Part 7]
-
-
