@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import Note from './components/Note'
+import noteService from './services/notes'
 import './App.css'
 
 const App = (props) => {
@@ -9,10 +9,8 @@ const App = (props) => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    console.log('effect')
-    axios.get('http://localhost:3006/notes').then((response) => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
+    noteService.getAll().then((initialNotes) => {
+      setNotes(initialNotes)
     })
   }, [])
 
@@ -24,9 +22,10 @@ const App = (props) => {
       important: Math.random() < 0.5,
       id: notes.length + 1,
     }
-
-    setNotes(notes.concat(noteObject))
-    setNewNote('')
+    noteService.create(noteObject).then((returnedNote) => {
+      setNotes(notes.concat(returnedNote))
+      setNewNote('')
+    })
   }
 
   const handleNoteChange = (event) => {
@@ -38,6 +37,16 @@ const App = (props) => {
     ? notes
     : notes.filter((note) => note.important === true)
 
+  const toggleImportanceOf = (id) => {
+    const url = `http://localhost:3006/notes/${id}`
+    const note = notes.find((n) => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    noteService.update(id, changedNote).then((returnedNote) => {
+      setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
+    })
+  }
+
   return (
     <div className="App">
       <h1 className="App-header">Notes</h1>
@@ -47,9 +56,19 @@ const App = (props) => {
         </button>
       </div>
       <ul>
-        {notesToShow.map((note) => (
-          <Note key={note.id} note={note} />
-        ))}
+        <div>
+          Key: <strong>important</strong> | not important
+        </div>
+        <br />
+        <div>
+          {notesToShow.map((note) => (
+            <Note
+              key={note.id}
+              note={note}
+              toggleImportance={() => toggleImportanceOf(note.id)}
+            />
+          ))}
+        </div>
       </ul>
       <form onSubmit={addNote}>
         <input
