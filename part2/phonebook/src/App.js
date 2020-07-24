@@ -3,6 +3,7 @@ import axios from 'axios'
 import Filter from './Filter'
 import PersonForm from './PersonForm'
 import Persons from './Persons'
+import personService from './services/persons'
 import './App.css'
 
 function App() {
@@ -12,9 +13,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:3005/persons').then((response) => {
-      setPersons(response.data)
-    })
+    personService.getAll().then((initialPersons) => setPersons(initialPersons))
   }, [])
 
   const addPerson = (e) => {
@@ -24,22 +23,14 @@ function App() {
       number: newNumber,
     }
 
-    /*  axios
-    .post('http://localhost:3005/persons', nameObject)
-    .then(response => {
-      console.log(response)
-    }) */
-
     const isDuplicate = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     )
     isDuplicate
       ? alert(`${newName} is already in the phonebook `)
-      : axios
-          .post('http://localhost:3005/persons', nameObject)
-          .then((response) => {
-            setPersons([...persons, response.data])
-          })
+      : personService.create(nameObject).then((returnedPerson) => {
+          setPersons([...persons, returnedPerson])
+        })
 
     setNewName('')
     setNewNumber('')
