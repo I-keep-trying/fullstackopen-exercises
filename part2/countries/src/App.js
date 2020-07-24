@@ -5,6 +5,7 @@ import Country from './Country'
 import CountryDetail from './CountryDetail'
 import Filter from './Filter'
 import Button from './Button'
+import Weather from './Weather'
 import './App.css'
 
 function App() {
@@ -30,16 +31,9 @@ function App() {
     return null
   })
 
-
   const countryDetail = () => {
     return filteredCountries.map((country) => {
-    
-      return (
-        <CountryDetail
-          key={country.alpha2Code}
-          country={country}
-        />
-      )
+      return <CountryDetail key={country.alpha2Code} country={country} />
     })
   }
 
@@ -70,11 +64,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Countries Of The World</header>
+       <div className="AppBody">
+       <header className="App-header">Countries Of The World</header>
       <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
       <br />
 
       <Countries content={content} />
+       </div>
+    
     </div>
   )
 }

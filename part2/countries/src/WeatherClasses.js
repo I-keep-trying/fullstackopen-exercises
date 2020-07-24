@@ -1,34 +1,28 @@
-<h1>Animated Weather Icons</h1>
+import React from 'react'
 
-{# 1 #}
-<div class="icon sky-gradient rain-day">
-    <div classname=""></div>
-    <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="rain-day"></div>
-        <div classname=""></div>
+export const sunShower = (
+  <div classname="icon sun-shower">
+    <div classname="cloud"></div>
+    <div classname="sun">
+      <div classname="rays"></div>
+      <div classname=""></div>
     </div>
-    <div class="sun-exp">
-        <div class="rays-exp2"></div>
+    <div classname="rain"></div>
+  </div>
+)
+
+export const thunderStorm = (
+  <div classname="icon thunder-storm">
+    <div classname="cloud"></div>
+    <div classname="lightning">
+      <div classname="bolt"></div>
+      <div classname="bolt"></div>
     </div>
-</div>
+    <div classname=""></div>
+  </div>
+)
 
- <div class="icon sky-gradient rain-day">
-        rain-day
-        <div classname=""></div>
-        <div classname=""></div>
-        <div class="cloud-exp3">
-          <div class="rain"></div>
-          <div classname=""></div>
-        </div>
-        <div class="cloud-exp3"></div>
-        <div class="sun-exp">
-          <div class="cloud-exp3"></div>
-          <div class="rays-exp2"></div>
-        </div>
-      </div>
-
-{# 2 #}
+/* 
 <div classname="icon cloudy">
     <div classname=""></div>
     <div classname=""></div>
@@ -39,7 +33,6 @@
     <div classname=""></div>
 </div>
 
-{# 3 #}
 <div classname="icon partly cloudy">
     <div classname="cloud"></div>
     <div classname="cloud"></div>
@@ -60,24 +53,24 @@
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-overcast thunderstorm">
-    <div class="cloud-exp3">
-        <div class="lightning">
-            <div class="bolt-exp2"></div>
-            <div class="bolt-exp2"></div>
-        </div>
+<div classname="icon sunny">
+    <div classname=""></div>
+    <div classname=""></div>
+    <div classname="sun">
+        <div classname="rays"></div>
+        <div classname=""></div>
     </div>
-    <div class="cloud-exp3"></div>
+    <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-overcast flurries">
-    <div class="cloud-exp3">
-        <div class="snow">
-            <div class="flake"></div>
-            <div class="flake"></div>
-        </div>
+<div classname="icon rainy">
+    <div classname="cloud"></div>
+    <div classname="rain"></div>
+    <div classname="">
+        <div classname=""></div>
+        <div classname=""></div>
     </div>
-    <div class="cloud-exp3"></div>
+    <div classname=""></div>
 </div>
 
 <div class="icon sky-gradient">
@@ -110,7 +103,6 @@
     <div classname=""></div>
 </div>
 
-{# night #}
 <div class="icon sky-gradient-night">
     <div class="moon-exp"></div>
     <div classname=""></div>
@@ -129,28 +121,6 @@
         <div classname=""></div>
     </div>
     <div classname=""></div>
-</div>
-
-<div class="icon sky-gradient-night rain-night">
-    <div classname=""></div>
-    <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="rain"></div>
-        <div classname=""></div>
-    </div>
-    <div class="cloud-exp3"></div>
-    <div class="moon-exp"></div>
-</div>
-
-
-
-<div class="icon sky-gradient-overcast mist">
-    <div classname=""></div>
-    <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="drops"></div>
-    </div>
-    <div class="cloud-exp3"></div>
 </div>
 
 <div class="icon sky-gradient-overcast broken-clouds">
@@ -173,50 +143,24 @@
     <div class="cloud-exp3"></div>
 </div>
 
-
-
-
-
-
-
-{# ??? #}
-
-{# <div classname="icon sunny">
+<div class="icon sky-gradient-night rain-night">
     <div classname=""></div>
     <div classname=""></div>
-    <div classname="sun">
-        <div classname="rays"></div>
+    <div class="cloud-exp3">
+        <div class="rain"></div>
         <div classname=""></div>
     </div>
-    <div classname=""></div>
-</div> #}
+    <div class="moon-exp"></div>
+</div>
 
-{# <div classname="icon rainy">
-    <div classname="cloud"></div>
-    <div classname="rain"></div>
-    <div classname="">
-        <div classname=""></div>
-        <div classname=""></div>
-    </div>
+<div class="icon sky-gradient-overcast mist">
     <div classname=""></div>
-</div> #}
+    <div classname=""></div>
+    <div class="cloud-exp3">
+        <div class="drops"></div>
+    </div>
+    <div class="cloud-exp3"></div>
+</div>
 
-{# <div classname="icon sun-shower">
-    <div classname="cloud"></div>
-    <div classname=""></div>
-    <div classname="sun">
-        <div classname="rays"></div>
-        <div classname=""></div>
-    </div>
-    <div classname="rain"></div>
-</div> #}
 
-{# <div classname="icon thunder-storm">
-    <div classname="cloud"></div>
-    <div classname=""></div>
-    <div classname="lightning">
-        <div classname="bolt"></div>
-        <div classname="bolt"></div>
-    </div>
-    <div classname=""></div>
-</div> #}
+*/
