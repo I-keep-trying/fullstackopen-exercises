@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Persons = ({ persons, searchTerm }) => {
+const Persons = ({ persons, searchTerm, deletePerson }) => {
   const personSearch = persons.filter((person) => {
     if (!searchTerm) return person
     if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -9,13 +9,20 @@ const Persons = ({ persons, searchTerm }) => {
     return false
   })
 
+  const handleDelete = (person) => {
+    window.confirm(`Delete ${person.name}? `)
+    deletePerson(person.id)
+  }
   return (
     <>
-      {personSearch.map((person) => (
-        <div key={person.name}>
-          {person.name} {person.number}{' '}
-        </div>
-      ))}
+      {personSearch.map((person) => {
+        return (
+          <div key={person.name}>
+            {person.name} {person.number}{' '}
+            <button onClick={() => handleDelete(person)}>delete</button>
+          </div>
+        )
+      })}
     </>
   )
 }
