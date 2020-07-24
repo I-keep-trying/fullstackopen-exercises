@@ -12,9 +12,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
-    console.log('effect')
     axios.get('http://localhost:3005/persons').then((response) => {
-      console.log('promise fulfilled')
       setPersons(response.data)
     })
   }, [])
@@ -26,12 +24,22 @@ function App() {
       number: newNumber,
     }
 
+    /*  axios
+    .post('http://localhost:3005/persons', nameObject)
+    .then(response => {
+      console.log(response)
+    }) */
+
     const isDuplicate = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     )
     isDuplicate
       ? alert(`${newName} is already in the phonebook `)
-      : setPersons([...persons, nameObject])
+      : axios
+          .post('http://localhost:3005/persons', nameObject)
+          .then((response) => {
+            setPersons([...persons, response.data])
+          })
 
     setNewName('')
     setNewNumber('')
