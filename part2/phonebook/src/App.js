@@ -15,7 +15,7 @@ function App() {
     personService.getAll().then((initialPersons) => setPersons(initialPersons))
   }, [])
 
-  const addPerson = (e) => {
+  const addPerson = (e, id) => {
     e.preventDefault()
     const nameObject = {
       name: newName,
@@ -25,12 +25,43 @@ function App() {
     const isDuplicate = persons.some(
       (person) => person.name.toLowerCase() === newName.toLowerCase()
     )
-    isDuplicate
-      ? alert(`${newName} is already in the phonebook `)
-      : personService.create(nameObject).then((returnedPerson) => {
-          setPersons([...persons, returnedPerson])
-        })
+    const personToUpdate = persons.find(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    )
+    const updatedPerson = { ...personToUpdate, number: newNumber }
+    if (isDuplicate) {
+      if (
+        window.confirm(
+          `${newName} is already in the phonebook, replace number? `
+        )
+      ) {
+        personService
+          .update(personToUpdate.id, updatedPerson)
+          .then((returnedPerson) => {
+            persons.find((person) => {
+              if (person.id === returnedPerson.id) {
+                const p = { ...person, number: returnedPerson.number }
+                setPersons(
+                  persons.map((person) => (person.id !== p.id ? person : p))
+                )
+                setNewName('')
+                setNewNumber('')
+                return
+              }
 
+              return
+            })
+          })
+
+        return
+      }
+      setNewName('')
+      setNewNumber('')
+      return
+    }
+    personService.create(nameObject).then((returnedPerson) => {
+      setPersons([...persons, returnedPerson])
+    })
     setNewName('')
     setNewNumber('')
   }

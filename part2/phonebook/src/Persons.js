@@ -10,8 +10,10 @@ const Persons = ({ persons, searchTerm, deletePerson }) => {
   })
 
   const handleDelete = (person) => {
-    window.confirm(`Delete ${person.name}? `)
-    deletePerson(person.id)
+    if (window.confirm(`Delete ${person.name}? `)) {
+      deletePerson(person.id)
+    }
+    return
   }
   return (
     <>

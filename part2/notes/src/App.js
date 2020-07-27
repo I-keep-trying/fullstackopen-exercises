@@ -40,8 +40,9 @@ const App = (props) => {
   const toggleImportanceOf = (id) => {
     const url = `http://localhost:3006/notes/${id}`
     const note = notes.find((n) => n.id === id)
+    console.log('note.find', note)
     const changedNote = { ...note, important: !note.important }
-
+console.log('changedNote', changedNote)
     noteService
       .update(id, changedNote)
       .then((returnedNote) => {
