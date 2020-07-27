@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import Filter from './Filter'
-import PersonForm from './PersonForm'
-import Persons from './Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
+import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 import './App.css'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [searchTerm, setSearchTerm] = useState('')
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => setPersons(initialPersons))
@@ -38,6 +40,7 @@ function App() {
         personService
           .update(personToUpdate.id, updatedPerson)
           .then((returnedPerson) => {
+            console.log('returnedPerson', returnedPerson)
             persons.find((person) => {
               if (person.id === returnedPerson.id) {
                 const p = { ...person, number: returnedPerson.number }
@@ -46,11 +49,29 @@ function App() {
                 )
                 setNewName('')
                 setNewNumber('')
-                return
+                setMessage({
+                  text: `${newName} has been updated `,
+                  type: 'message',
+                })
+                setTimeout(() => {
+                  setMessage(null)
+                }, 5000)
+                return null
               }
 
-              return
+              return null
             })
+          })
+          .catch((error) => {
+            console.log('personToUpdate.name', personToUpdate.name)
+            console.log('error', error)
+            setMessage({
+              text: `${personToUpdate.name} already deleted from server `,
+              type: 'error',
+            })
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
           })
 
         return
@@ -64,6 +85,10 @@ function App() {
     })
     setNewName('')
     setNewNumber('')
+    setMessage({ text: `${newName} has been added. `, type: 'message' })
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
   }
 
   const deletePerson = (id) => {
@@ -90,6 +115,7 @@ function App() {
       <header className="App-header">
         <h1>Phonebook</h1>
       </header>
+      <Notification message={message} />
       <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
       <h3>Add a new</h3>
 
@@ -105,6 +131,7 @@ function App() {
         persons={persons}
         searchTerm={searchTerm}
         deletePerson={deletePerson}
+        setMessage={setMessage}
       />
     </div>
   )

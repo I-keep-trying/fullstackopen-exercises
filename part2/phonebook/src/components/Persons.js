@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Persons = ({ persons, searchTerm, deletePerson }) => {
+const Persons = ({ persons, searchTerm, deletePerson, setMessage }) => {
   const personSearch = persons.filter((person) => {
     if (!searchTerm) return person
     if (person.name.toLowerCase().includes(searchTerm.toLowerCase())) {
@@ -12,6 +12,7 @@ const Persons = ({ persons, searchTerm, deletePerson }) => {
   const handleDelete = (person) => {
     if (window.confirm(`Delete ${person.name}? `)) {
       deletePerson(person.id)
+      setMessage({ text: `${person.name} has been deleted.`, type: 'message' })
     }
     return
   }
