@@ -13,6 +13,9 @@ const Persons = ({ persons, searchTerm, deletePerson, setMessage }) => {
     if (window.confirm(`Delete ${person.name}? `)) {
       deletePerson(person.id)
       setMessage({ text: `${person.name} has been deleted.`, type: 'message' })
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     }
     return
   }

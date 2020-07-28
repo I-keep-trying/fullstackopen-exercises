@@ -2,6 +2,13 @@
   text-align: left;
 }
 
+.AppBody {
+  text-align: left;
+  padding-left: 1em;
+  padding-right: 1em;
+
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -22,6 +29,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-left: 0.5em;
 }
 
 .App-link {

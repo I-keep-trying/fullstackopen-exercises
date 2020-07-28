@@ -66,7 +66,7 @@ function App() {
             console.log('personToUpdate.name', personToUpdate.name)
             console.log('error', error)
             setMessage({
-              text: `${personToUpdate.name} already deleted from server `,
+              text: `${personToUpdate.name} has already been removed from server `,
               type: 'error',
             })
             setTimeout(() => {
@@ -115,24 +115,26 @@ function App() {
       <header className="App-header">
         <h1>Phonebook</h1>
       </header>
-      <Notification message={message} />
-      <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
-      <h3>Add a new</h3>
+      <div className="AppBody">
+        <Notification message={message} />
+        <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
+        <h3>Add a new</h3>
 
-      <PersonForm
-        addPerson={addPerson}
-        handleNameInput={handleNameInput}
-        handleNumberInput={handleNumberInput}
-        newName={newName}
-        newNumber={newNumber}
-      />
-      <h3>Numbers</h3>
-      <Persons
-        persons={persons}
-        searchTerm={searchTerm}
-        deletePerson={deletePerson}
-        setMessage={setMessage}
-      />
+        <PersonForm
+          addPerson={addPerson}
+          handleNameInput={handleNameInput}
+          handleNumberInput={handleNumberInput}
+          newName={newName}
+          newNumber={newNumber}
+        />
+        <h3>Numbers</h3>
+        <Persons
+          persons={persons}
+          searchTerm={searchTerm}
+          deletePerson={deletePerson}
+          setMessage={setMessage}
+        />
+      </div>
     </div>
   )
 }

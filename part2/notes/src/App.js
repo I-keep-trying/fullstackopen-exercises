@@ -60,35 +60,37 @@ const App = (props) => {
   return (
     <div className="App">
       <h1 className="App-header">Notes</h1>
-      <div>
-        <Notification message={errorMessage} />
-        <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
-        </button>
+      <div className="AppBody">
+        <div>
+          <Notification message={errorMessage} />
+          <button onClick={() => setShowAll(!showAll)}>
+            show {showAll ? 'important' : 'all'}
+          </button>
+        </div>
+        <ul>
+          <div>
+            Key: <strong>important</strong> | not important
+          </div>
+          <br />
+          <div>
+            {notesToShow.map((note) => (
+              <Note
+                key={note.id}
+                note={note}
+                toggleImportance={() => toggleImportanceOf(note.id)}
+              />
+            ))}
+          </div>
+        </ul>
+        <form onSubmit={addNote}>
+          <input
+            placeholder="a new note..."
+            value={newNote}
+            onChange={handleNoteChange}
+          />
+          <button type="submit">save</button>
+        </form>
       </div>
-      <ul>
-        <div>
-          Key: <strong>important</strong> | not important
-        </div>
-        <br />
-        <div>
-          {notesToShow.map((note) => (
-            <Note
-              key={note.id}
-              note={note}
-              toggleImportance={() => toggleImportanceOf(note.id)}
-            />
-          ))}
-        </div>
-      </ul>
-      <form onSubmit={addNote}>
-        <input
-          placeholder="a new note..."
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">save</button>
-      </form>
     </div>
   )
 }
