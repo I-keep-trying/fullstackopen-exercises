@@ -1,39 +1,39 @@
 {
   "request": {
     "type": "City",
-    "query": "London, United Kingdom",
+    "query": "Thong United, Vietnam",
     "language": "en",
     "unit": "m"
   },
   "location": {
-    "name": "London",
-    "country": "United Kingdom",
-    "region": "City of London, Greater London",
-    "lat": "51.517",
-    "lon": "-0.106",
-    "timezone_id": "Europe/London",
-    "localtime": "2020-07-21 21:23",
-    "localtime_epoch": 1595366580,
-    "utc_offset": "1.0"
+    "name": "Thong United",
+    "country": "Vietnam",
+    "region": "",
+    "lat": "9.933",
+    "lon": "106.067",
+    "timezone_id": "Asia/Ho_Chi_Minh",
+    "localtime": "2020-07-28 21:22",
+    "localtime_epoch": 1595971320,
+    "utc_offset": "7.0"
   },
   "current": {
-    "observation_time": "08:23 PM",
-    "temperature": 19,
-    "weather_code": 113,
+    "observation_time": "02:22 PM",
+    "temperature": 28,
+    "weather_code": 116,
     "weather_icons": [
-      "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0001_sunny.png"
+      "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
     ],
-    "weather_descriptions": ["Sunny"],
-    "wind_speed": 6,
-    "wind_degree": 40,
-    "wind_dir": "NE",
-    "pressure": 1025,
-    "precip": 0,
-    "humidity": 43,
-    "cloudcover": 0,
-    "feelslike": 19,
-    "uv_index": 5,
-    "visibility": 10,
-    "is_day": "yes"
+    "weather_descriptions": ["Partly cloudy"],
+    "wind_speed": 10,
+    "wind_degree": 218,
+    "wind_dir": "SW",
+    "pressure": 1008,
+    "precip": 0.3,
+    "humidity": 82,
+    "cloudcover": 64,
+    "feelslike": 33,
+    "uv_index": 1,
+    "visibility": 9,
+    "is_day": "no"
   }
 }

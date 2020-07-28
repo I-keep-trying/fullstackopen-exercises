@@ -4,13 +4,14 @@
 
 .AppBody {
   text-align: left;
+  padding-left: 1em;
+
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -27,6 +28,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-left: 0.5em;
 }
 
 .App-link {
@@ -45,4 +47,6 @@
 img {
   height: 40%;
   width: 40%;
+  filter: drop-shadow(0 0 0.25rem #a8a8a8);
 }
+

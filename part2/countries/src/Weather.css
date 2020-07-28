@@ -12,9 +12,11 @@
 .icon {
   position: relative;
   display: inline-block;
-  width: 12em;
+  width: 20em;
   height: 10em;
   margin: 0em 0em 5em;
+  padding-left: 0.5em;
+  filter: drop-shadow(0 0 0.25rem #a8a8a8);
 
   font-size: 1em; /* control icon size here */
 }
@@ -33,6 +35,7 @@
     0 0 0 0.375em #fff, -2.1875em 0.6875em 0 -0.3125em #fff,
     2.0625em 0.9375em 0 -0.5625em #fff;
   filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+  animation: cloud 1s linear infinite;
 }
 .cloud:after {
   content: '';
@@ -44,6 +47,7 @@
   height: 1em;
   background: #fff;
   box-shadow: 0 0.4375em 0 -0.0625em #fff;
+  animation: cloud 1s linear infinite;
 }
 .cloud:nth-child(2) {
   z-index: 0;
@@ -53,7 +57,7 @@
     -2.1875em 0.6875em 0 -0.3125em #fff, 2.0625em 0.9375em 0 -0.5625em #fff;
   opacity: 0.3;
   transform: scale(0.5) translate(6em, -3em);
-  animation: cloud 4s linear infinite;
+  animation: cloud 1s linear infinite;
 }
 .cloud:nth-child(2):after {
   background: #fff;
@@ -66,7 +70,6 @@
   width: 2.5em;
   height: 2.5em;
   margin: -1.25em;
-  background: currentColor;
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em #fff;
   animation: spin 12s infinite linear;
@@ -92,7 +95,6 @@
   display: block;
   width: 0.375em;
   height: 1.125em;
-  transform: rotate(60deg);
   transform-origin: 50% 3.25em;
   background: #fff;
   border-radius: 0.25em;
@@ -297,6 +299,7 @@
   border-radius: 0.25em;
   box-shadow: 0 5.875em yellow;
   filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.4));
+  animation: rays 1s infinite linear;
 }
 
 .rays-exp::before,
@@ -390,8 +393,7 @@
   background: #ffffff;
   opacity: 0.5;
   border-radius: 50%;
-  box-shadow: -2em 0.25em 0 -0.5em currentColor,
-    2em 0.5em 0 -0.75em currentColor, 3.2em 0.75em 0 -1em currentColor;
+  box-shadow: -2em 0.25em 0 -0.5em, 2em 0.5em 0 -0.75em, 3.2em 0.75em 0 -1em;
   filter: drop-shadow(12px 10px 10px rgba(0, 0, 0, 0.2));
 }
 
@@ -413,9 +415,9 @@
   transform: scale(0.75) translate(2em, -2.5em);
 }
 
-.broken-clouds > .cloud-exp3 {
+/* .broken-clouds > .cloud-exp3 {
   left: 5.5em;
-}
+} */
 
 .rays-exp1a {
   position: absolute;
@@ -551,19 +553,19 @@
 }
 
 .sky-gradient-night {
+  color: gainsboro;
   /* can be treated like a fallback*/
   background-color: midnightblue;
   /* will be "on top", if browser supports it */
   background-image: linear-gradient(#001a4d, gray);
 }
 
-.sky-gradient-night .cloud-exp3,
+/* .sky-gradient-night .cloud-exp3,
 .sky-gradient-night .cloud-exp3::before,
 .sky-gradient-night .cloud-exp3::after {
-  color: #001a4d;
   background: #001a4d;
   opacity: 0.9;
-}
+} */
 
 .moon-exp {
   position: absolute;
@@ -582,14 +584,14 @@
 /* Adjusts the position of the cloud in the night sky background */
 /* Descendant combinator 
    Pattern: E F
-   Matches any F element that is a sescendant (inside) of an E element
+   Matches any F element that is a descendant (inside) of an E element
 */
 .sky-gradient-night .cloud-exp3 {
   margin-top: -1.5em;
   margin-left: -2.5em;
 }
 
-/* Next sibling cominator 
+/* Next sibling combinator 
    Pattern: E + F
    The selector matches if E and F share the same parent and E immediately
    precedes F. Meaning it selects all F elements that are placed immediately
@@ -602,7 +604,7 @@
 }
 
 .shower-rain > .cloud-exp3 {
-  left: 5.5em;
+
   top: 4.5em;
 }
 
@@ -613,7 +615,6 @@
 .mist > .cloud-exp3 {
   margin-top: -1.5em;
   margin-left: -2.25em;
-  left: 5.5em;
   top: 4.5em;
 }
 
@@ -662,7 +663,16 @@
   }
 }
 
-@keyframes cloud-exp3 {
+@keyframes rays {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes cloud {
   0% {
     opacity: 0.5;
   }

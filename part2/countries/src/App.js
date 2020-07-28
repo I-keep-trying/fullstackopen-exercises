@@ -5,8 +5,8 @@ import Country from './Country'
 import CountryDetail from './CountryDetail'
 import Filter from './Filter'
 import Button from './Button'
-import Weather from './Weather'
 import './App.css'
+import './Weather.css'
 
 function App() {
   const [countries, setCountries] = useState([])
@@ -64,14 +64,12 @@ function App() {
 
   return (
     <div className="App">
-       <div className="AppBody">
-       <header className="App-header">Countries Of The World</header>
-      <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
-      <br />
-
-      <Countries content={content} />
-       </div>
-    
+      <header className="App-header">Countries Of The World</header>
+      <div className="AppBody">
+        <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
+      
+        <Countries content={content} />
+      </div>
     </div>
   )
 }

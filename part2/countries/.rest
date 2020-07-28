@@ -1,7 +1,7 @@
 GET https://restcountries.eu/rest/v2/all HTTP/1.1
 
 ###
-GET http://api.weatherstack.com/current?access_key=902ac71540d0f6394305d2fe2d655813&query=Armenia HTTP/1.1
+GET http://api.weatherstack.com/current?access_key=902ac71540d0f6394305d2fe2d655813&query=19.2823,166.6470&units=f HTTP/1.1
 
 ###
 GET http://openweathermap.org/img/wn/04d@2x.png HTTP/1.1
