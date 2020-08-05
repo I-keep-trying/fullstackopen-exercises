@@ -22,15 +22,11 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [countries](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/countries)
 
-# [Part 3](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part3/)
-
-## [hello/notes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part3/hello)
+# [Part 3](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part3/hello)
 
 ## [phonebook](https://github.com/I-keep-trying/fullstack-exercise3-phonebook)
 
-# [Part 4](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4)
-
-## [blog list](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4/blog-list)
+# [Part 4]
 
 # [Part 5]
 
