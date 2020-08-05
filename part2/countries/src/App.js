@@ -43,7 +43,7 @@ function App() {
     } else if (filteredCountries.length === 0) {
       return <div>No matches, try again</div>
     } else if (filteredCountries.length > 10 && searchTerm) {
-      alert('More than 10 results, please adjust criteria')
+      return <div>More than 10 results, please adjust criteria</div>
     } else if (filteredCountries.length === 1) {
       return countryDetail()
     } else {
@@ -67,7 +67,7 @@ function App() {
       <header className="App-header">Countries Of The World</header>
       <div className="AppBody">
         <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
-      
+
         <Countries content={content} />
       </div>
     </div>

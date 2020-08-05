@@ -1,0 +1,14 @@
+GET http://localhost:3009/api/notes
+###
+GET http://localhost:3009/api/notes/2
+
+###
+DELETE http://localhost:3009/api/notes/3
+###
+POST http://localhost:3009/api/notes
+Content-Type: application/json
+
+{
+    "content": "hello",
+    "important": true
+}

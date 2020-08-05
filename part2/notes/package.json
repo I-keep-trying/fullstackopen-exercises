@@ -16,6 +16,7 @@
     "eject": "react-scripts eject",
     "git": "git add . && git commit -m updates && git push origin master"
   },
+  "proxy": "http://localhost:3010",
   "eslintConfig": {
     "extends": "react-app"
   },

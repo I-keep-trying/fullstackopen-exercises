@@ -93,10 +93,8 @@ function App() {
     }
     personService.create(nameObject).then((returnedPerson) => {
       const returnedError = returnedPerson.errors
-      console.log('returnedError', returnedError)
       if (returnedError) {
         if (returnedError.name && returnedError.number) {
-          console.log('returnedError', returnedError)
           setMessage({
             text: `${returnedError.name.properties.message}, and ${returnedError.number.properties.message} `,
             type: 'error',
@@ -106,7 +104,6 @@ function App() {
           }, 5000)
           return
         } else if (returnedError.name) {
-          console.log('returnedError.name', returnedError.name)
           setMessage({
             text: `${returnedError.name.properties.message} `,
             type: 'error',
@@ -116,7 +113,6 @@ function App() {
           }, 5000)
           return
         } else if (returnedError.number) {
-          console.log('returnedError.number', returnedError.number)
           setMessage({
             text: `${returnedError.number.properties.message} `,
             type: 'error',

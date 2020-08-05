@@ -9,3 +9,7 @@
 /part2/help-input-blank.txt
 
 /part2/countries/countries-all.js
+
+/part2/phonebook/node_modules
+/part3/hello/node_modules
+/part3/notes

@@ -11,7 +11,10 @@ const CountryDetail = ({ country }) => {
   const coordinates = () => {
     return country.latlng[0] + ',' + country.latlng[1]
   }
- 
+  console.log(
+    'process.env.REACT_APP_WEATHER_KEY',
+    process.env.REACT_APP_WEATHER_KEY
+  )
   useEffect(() => {
     const uri = `http://api.weatherstack.com/current?access_key=${
       process.env.REACT_APP_WEATHER_KEY
@@ -46,7 +49,11 @@ const CountryDetail = ({ country }) => {
       <h2>{country.name}</h2>
       <div>
         <h3>
-          <a href="https://en.wikipedia.org/wiki/Exonym_and_endonym">
+          <a
+            href="https://en.wikipedia.org/wiki/Exonym_and_endonym"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             Endonym:
           </a>{' '}
           {country.nativeName}

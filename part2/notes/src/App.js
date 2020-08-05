@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 import Notification from './components/Notification'
+import logo from './note-icon.png'
 import './App.css'
 
 const App = (props) => {
@@ -59,7 +60,10 @@ const App = (props) => {
 
   return (
     <div className="App">
-      <h1 className="App-header">Notes</h1>
+      
+      <h1 className="App-header">
+      <img src={logo} className="App-logo" />
+        Notes</h1>
       <div className="AppBody">
         <div>
           <Notification message={errorMessage} />
