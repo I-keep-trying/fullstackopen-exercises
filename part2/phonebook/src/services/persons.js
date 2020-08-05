@@ -1,6 +1,13 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3005/persons'
+const baseUrl = '/api/persons'
+const infoUrl = '/api/info'
 
+const getInfo = () => {
+  const request = axios.get(infoUrl)
+  return request.then((response) => {
+    return response.data
+  })
+}
 const getAll = () => {
   const request = axios.get(baseUrl)
   return request.then((response) => response.data)
@@ -26,4 +33,5 @@ export default {
   create,
   update,
   deleteRecord,
+  getInfo,
 }

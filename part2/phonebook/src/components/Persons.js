@@ -23,7 +23,7 @@ const Persons = ({ persons, searchTerm, deletePerson, setMessage }) => {
     <>
       {personSearch.map((person) => {
         return (
-          <div key={person.name}>
+          <div key={person.id}>
             {person.name} {person.number}{' '}
             <button onClick={() => handleDelete(person)}>delete</button>
           </div>

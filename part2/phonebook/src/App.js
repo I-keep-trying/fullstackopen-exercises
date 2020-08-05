@@ -4,6 +4,7 @@ import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
 import Notification from './components/Notification'
+import logo from './phonebook.png'
 import './App.css'
 
 function App() {
@@ -22,6 +23,16 @@ function App() {
     const nameObject = {
       name: newName,
       number: newNumber,
+    }
+    if (newName.length === 0 || newNumber.length === 0) {
+      setMessage({
+        text: `Please enter both a name and a number.`,
+        type: 'error',
+      })
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+      return null
     }
 
     const isDuplicate = persons.some(
@@ -81,14 +92,53 @@ function App() {
       return
     }
     personService.create(nameObject).then((returnedPerson) => {
+      const returnedError = returnedPerson.errors
+      console.log('returnedError', returnedError)
+      if (returnedError) {
+        if (returnedError.name && returnedError.number) {
+          console.log('returnedError', returnedError)
+          setMessage({
+            text: `${returnedError.name.properties.message}, and ${returnedError.number.properties.message} `,
+            type: 'error',
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          return
+        } else if (returnedError.name) {
+          console.log('returnedError.name', returnedError.name)
+          setMessage({
+            text: `${returnedError.name.properties.message} `,
+            type: 'error',
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          return
+        } else if (returnedError.number) {
+          console.log('returnedError.number', returnedError.number)
+          setMessage({
+            text: `${returnedError.number.properties.message} `,
+            type: 'error',
+          })
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          return
+        }
+        return
+      }
       setPersons([...persons, returnedPerson])
+      setNewName('')
+      setNewNumber('')
+      setMessage({
+        text: `${returnedPerson.name} has been added. `,
+        type: 'message',
+      })
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
     })
-    setNewName('')
-    setNewNumber('')
-    setMessage({ text: `${newName} has been added. `, type: 'message' })
-    setTimeout(() => {
-      setMessage(null)
-    }, 5000)
   }
 
   const deletePerson = (id) => {
@@ -113,7 +163,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Phonebook</h1>
+        <h1>
+          {' '}
+          <img src={logo} className="App-logo" alt="phonebook" />
+          Phonebook
+        </h1>
       </header>
       <div className="AppBody">
         <Notification message={message} />
