@@ -3,9 +3,6 @@ GET http://localhost:3007/api/blogs
 POST http://localhost:3007/api/blogs
 Content-Type: application/json
 
-{
-    "title": "We want a shrubbery!!",
-    "author": "The Knights Who Say Ni",
-    "url": "example.com",
-    "likes":0
-}
+{"title": "TDD harms architecture", "author": "Robert C. Martin", "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html", "likes": 0}
+###
+
