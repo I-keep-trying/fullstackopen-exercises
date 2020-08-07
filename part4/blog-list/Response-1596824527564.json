@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Donut cotton candy jelly beans",
+    "author": "cupcake",
+    "url": "example.com",
+    "likes": 0,
+    "id": "5f2ae1f48502ed2cc4f1a7af"
+  },
+  {
+    "title": "We want a shrubbery!!",
+    "author": "The Knights Who Say Ni",
+    "url": "example.com",
+    "likes": 0,
+    "id": "5f2ae6e82c276b2adcd5ea5d"
+  },
+  {
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "id": "5f2af98575031132c47d94cb"
+  },
+  {
+    "title": "Go To Statement Considered Harmful",
+    "author": "Edsger W. Dijkstra",
+    "url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
+    "likes": 5,
+    "id": "5f2af99275031132c47d94cc"
+  },
+  {
+    "title": "Canonical string reduction",
+    "author": "Edsger W. Dijkstra",
+    "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+    "likes": 12,
+    "id": "5f2af99f75031132c47d94cd"
+  },
+  {
+    "title": "First class tests",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+    "likes": 10,
+    "id": "5f2af9ad75031132c47d94ce"
+  },
+  {
+    "title": "TDD harms architecture",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+    "likes": 0,
+    "id": "5f2af9b775031132c47d94cf"
+  },
+  {
+    "title": "TDD harms architecture",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+    "likes": 0,
+    "id": "5f2d7a52cebc5629a83e7dec"
+  },
+  {
+    "title": "TDD harms architecture",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+    "likes": 0,
+    "id": "5f2d903ddd69a82c2cb0581b"
+  },
+  {
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "id": "5f2d93324ecb7c1720f95cad"
+  }
+]

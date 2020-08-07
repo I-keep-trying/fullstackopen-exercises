@@ -1,7 +1,7 @@
 const dummy = blogs => {
   return (blogs.length + 1) / (blogs.length + 1)
 }
-
+/* 
 const totalLikes = blogs => {
   const reduced = blogs.reduce((acc, item) => {
     return acc + item.likes
@@ -75,13 +75,13 @@ return result
 
 }
 
-
+ */
 
 module.exports = {
   dummy,
-  totalLikes,
+/*   totalLikes,
   mostLikes,
   mostBlogsAuthor,
   mostBlogsAuthorDetails,
   mostLikesAuthor
-}
+ */}

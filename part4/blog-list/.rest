@@ -1,8 +1,15 @@
 GET http://localhost:3007/api/blogs
 ###
+GET http://localhost:3007/api/blogs/5f2ae6e82c276b2adcd5ea5d
+###
 POST http://localhost:3007/api/blogs
 Content-Type: application/json
 
-{"title": "TDD harms architecture", "author": "Robert C. Martin", "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html", "likes": 0}
+{
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70
+    }
 ###
 

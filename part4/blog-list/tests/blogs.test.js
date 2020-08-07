@@ -8,7 +8,7 @@ describe('dummy', () => {
     expect(result).toBe(1)
   })
 })
-
+/* 
 const blogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -101,3 +101,4 @@ describe('author with most likes and total number of likes', () => {
     expect(result.author).toBe('Michael Chan')
   })
 })
+ */
