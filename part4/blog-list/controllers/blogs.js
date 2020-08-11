@@ -15,15 +15,6 @@ blogsRouter.get('/:id', async (request, response) => {
   }
 })
 
-/* This works but no 'newBlog' object, idk why???
- blogsRouter.post('/', (request, response) => {
-  const blog = new Blog(request.body)
-
-  blog.save().then(result => {
-    response.status(201).json(result)
-  })
-}) */
-
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
@@ -44,13 +35,34 @@ blogsRouter.delete('/:id', async (request, response) => {
 
 blogsRouter.put('/:id', async (request, response) => {
   const body = request.body
-
+  console.log('body', body)
   const blog = {
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes || 0,
+    likes: body.likes + 1,
   }
+
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
+    new: true,
+  })
+  response.json(updatedBlog)
+})
+
+blogsRouter.patch('/:id', async (request, response) => {
+  if (Object.keys(request.body).length === 0) {
+    return response.status(400).send('content missing').end()
+  }
+
+  let blog = await Blog.findById(request.params.id)
+  blog = blog.toObject()
+
+  Object.keys(blog).forEach(key => {
+    let value = request.body[key]
+    if (value) {
+      blog[key] = value
+    }
+  })
 
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
     new: true,

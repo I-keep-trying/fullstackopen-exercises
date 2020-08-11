@@ -8,7 +8,7 @@ describe('dummy', () => {
     expect(result).toBe(1)
   })
 })
-/* 
+
 const blogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -96,9 +96,7 @@ describe('author with most blogs also number of blogs', () => {
 describe('author with most likes and total number of likes', () => {
   test('author with most likes & how many', () => {
     const result = listHelper.mostLikesAuthor(blogs)
-    console.log('result', result)
     expect(result.likes).toBe(70)
     expect(result.author).toBe('Michael Chan')
   })
 })
- */

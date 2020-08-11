@@ -1,7 +1,7 @@
 const dummy = blogs => {
   return (blogs.length + 1) / (blogs.length + 1)
 }
-/* 
+
 const totalLikes = blogs => {
   const reduced = blogs.reduce((acc, item) => {
     return acc + item.likes
@@ -70,18 +70,17 @@ const grouped = groupBy(blogs, 'author', 'likes')
 const result = grouped.reduce((acc, item) => {
   return acc.likes > item.likes ? acc : item
 }, 0)
-console.log('result', result)
 return result
 
 }
 
- */
+
 
 module.exports = {
   dummy,
-/*   totalLikes,
+  totalLikes,
   mostLikes,
   mostBlogsAuthor,
   mostBlogsAuthorDetails,
   mostLikesAuthor
- */}
+}

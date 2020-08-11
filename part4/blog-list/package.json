@@ -6,7 +6,22 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/blog_api.test.js"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/blogs.test.js",
+    "test0": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/blog_api.test.js",
+    "test00": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"total likes\"",
+    "test01": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"most liked blog\"",
+    "test02": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"author with most blogs\"",
+    "test03": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"author with most blogs also number of blogs\"",
+    "test04": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"author with most likes and total number of likes\"",
+    "test1": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"blogs are returned as json\"",
+    "test2": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"all blogs are returned\"",
+    "test3": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a specific blog is within the returned blogs\"",
+    "test4": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a valid blog can be added\"",
+    "test5": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"blog without title or url is not added\"",
+    "test6": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a specific blog can be viewed\"",
+    "test7": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a blog can be deleted\"",
+    "test8": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"id, not _id\"",
+    "test9": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"blog without likes defaults to 0\""
   },
   "author": "",
   "license": "ISC",
