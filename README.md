@@ -26,7 +26,9 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [phonebook](https://github.com/I-keep-trying/fullstack-exercise3-phonebook)
 
-# [Part 4]
+# [Part 4](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4)
+
+## [blog-list](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4/blog-list)
 
 # [Part 5]
 
