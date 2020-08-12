@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Donut cotton candy jelly beans",
+    "author": "cupcake",
+    "url": "example.com",
+    "likes": 0,
+    "user": {
+      "username": "cupcake",
+      "name": "cupcake",
+      "id": "5f3412bb03204f0f6c3d3007"
+    },
+    "id": "5f3415a2a981520154a167c7"
+  },
+  {
+    "title": "We want FIVE shrubbery!!",
+    "author": "Wendy Woberts",
+    "url": "example99.com",
+    "likes": 76,
+    "user": {
+      "username": "Wendy_Woberts",
+      "name": "Wendy Woberts",
+      "id": "5f3412df73cdcf0facb13f2b"
+    },
+    "id": "5f3415f7de19c933f8eabe9d"
+  },
+  {
+    "title": "Canonical string reduction",
+    "author": "Edsger W. Dijkstra",
+    "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+    "likes": 12,
+    "user": {
+      "username": "Edsger_W_Dijkstra",
+      "name": "Edsger W. Dijkstra",
+      "id": "5f3411ede7136c2c942e82b3"
+    },
+    "id": "5f34167f74c36712bc95190b"
+  },
+  {
+    "title": "Go To Statement Considered Harmful",
+    "author": "Edsger W. Dijkstra",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "Edsger_W_Dijkstra",
+      "name": "Edsger W. Dijkstra",
+      "id": "5f3411ede7136c2c942e82b3"
+    },
+    "id": "5f3416f62ed50415e0f302e3"
+  },
+  {
+    "title": "First class tests",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
+    "likes": 10,
+    "user": {
+      "username": "Robert_C_Martin",
+      "name": "Robert C. Martin",
+      "id": "5f3411bee7136c2c942e82b2"
+    },
+    "id": "5f341731f8e79f3074bc3526"
+  },
+  {
+    "title": "TDD harms architecture",
+    "author": "Robert C. Martin",
+    "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+    "likes": 0,
+    "user": {
+      "username": "Robert_C_Martin",
+      "name": "Robert C. Martin",
+      "id": "5f3411bee7136c2c942e82b2"
+    },
+    "id": "5f34173ef8e79f3074bc3527"
+  },
+  {
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "id": "5f341bd55493932820cd4af8"
+  },
+  {
+    "title": "React patterns",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "id": "5f3428e4e9b6552d586b7147"
+  },
+  {
+    "title": "React patterns0000",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "id": "5f342986d6b05f1cb8e38555"
+  },
+  {
+    "title": "React patterns1111",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "id": "5f3429b8d6b05f1cb8e38556"
+  },
+  {
+    "title": "eat dessert first",
+    "author": "cupcake",
+    "url": "https://reactpatterns.com/",
+    "likes": 70,
+    "user": {
+      "username": "cupcake",
+      "name": "cupcake",
+      "id": "5f3412bb03204f0f6c3d3007"
+    },
+    "id": "5f3430a5f221ea26347e5f6d"
+  }
+]

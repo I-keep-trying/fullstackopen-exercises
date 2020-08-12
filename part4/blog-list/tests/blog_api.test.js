@@ -32,7 +32,7 @@ test('a specific blog is within the returned blogs', async () => {
   const contents = response.body.map(r => r.title)
   expect(contents).toContain('React patterns')
 })
-
+//1 - test4
 test('a valid blog can be added', async () => {
   const newBlog = {
     title: 'Canonical string reduction',
@@ -40,8 +40,14 @@ test('a valid blog can be added', async () => {
     url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
     likes: 12,
   }
-
-  await api
+  const user = {
+    "username": "Test_User",
+    "password":"password"
+  }
+  const response = await api.post('/api/login').set('Content-Type','application/json').send(user)
+console.log('request',response.body)
+  //console.log('user login',user.body)
+/*   await api
     .post('/api/blogs')
     .send(newBlog)
     .expect(200)
@@ -51,9 +57,9 @@ test('a valid blog can be added', async () => {
   expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
   const contents = blogsAtEnd.map(n => n.title)
-  expect(contents).toContain('Canonical string reduction')
+  expect(contents).toContain('Canonical string reduction') */
 })
-
+//2 - test5
 test('blog without title or url is not added', async () => {
   const newBlog = {
     author: 'Robert C. Martin',
@@ -77,7 +83,7 @@ test('a specific blog can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
   expect(resultBlog.body).toEqual(blogToView)
 })
-
+//3 - test7
 test('a blog can be deleted', async () => {
   const blogsAtStart = await helper.blogsInDb()
   const blogToDelete = blogsAtStart[0]
@@ -98,7 +104,7 @@ test('id, not _id', async () => {
 
   expect(response.body[0].id).toBeDefined()
 })
-
+//4 - test9
 test('blog without likes defaults to 0', async () => {
   const newBlog = {
     title: 'Canonical string reduction',
