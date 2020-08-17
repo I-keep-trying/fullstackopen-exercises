@@ -30,7 +30,9 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [blog-list](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4/blog-list)
 
-# [Part 5]
+# [Part 5](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part5)
+
+## [Blog List]()
 
 # [Part 6]
 

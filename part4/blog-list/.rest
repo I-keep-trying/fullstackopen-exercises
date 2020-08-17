@@ -58,3 +58,9 @@ Content-Type: application/json
 }
 ###
 DELETE http://localhost:3007/api/users/5f33072f1cefa21fd03775b8
+###
+    "username": "Robert_C_Martin",
+    "username": "Edsger_W_Dijkstra",
+    "username": "cupcake",
+    "username": "Wendy_Woberts",
+    "username": "Michael_Chan",

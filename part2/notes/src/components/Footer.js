@@ -1,16 +1,17 @@
 import React from 'react'
 
 const Footer = () => {
-  const footerStyle = {
-    color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16,
-  }
-
   return (
-    <div style={footerStyle}>
-      <br />
-      <em>Note app, Andrea Crego 2020</em>
+    <div className="App-footer">
+      Developed by Andrea Crego 2020
+      <a
+        href="https://github.com/I-keep-trying/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {' '}
+        <i style={{ color: 'white' }} className="fab fa-github"></i>
+      </a>
     </div>
   )
 }
