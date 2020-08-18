@@ -42,7 +42,6 @@ function App() {
         password,
       })
       window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
-
       blogService.setToken(user.token)
       setUser(user)
       setErrorMessage({ text: `Welcome, ${user.name}!`, type: 'info' })
@@ -73,7 +72,7 @@ function App() {
 
   const addBlog = (blogObject) => {
     blogFormRef.current.toggleVisibility()
-    blogService.create(blogObject).then((returnedBlog) => {
+    return blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog))
       setErrorMessage({
         text: `Success! ${returnedBlog.title} by ${returnedBlog.author} has been added. `,
@@ -86,7 +85,7 @@ function App() {
   }
 
   const blogForm = () => (
-    <Togglable buttonLabel="Add blog" ref={blogFormRef}>
+    <Togglable buttonLabel="Add blog" cancel="cancel" ref={blogFormRef}>
       <BlogForm createBlog={addBlog} />
     </Togglable>
   )
@@ -100,6 +99,41 @@ function App() {
       setErrorMessage(null)
     }, 5000)
   }
+  const addLike = (id) => {
+    const blog = blogs.find((b) => b.id === id)
+
+    const updatedBlog = { id: blog.id, likes: blog.likes + 1 }
+    blogService.update(updatedBlog).then((returnedBlog) => {
+      return setBlogs(
+        blogs.map((blog) => (blog.id !== id ? blog : returnedBlog))
+      )
+    })
+  }
+
+  const removeBlog = (id) => {
+    const blog = blogs.find((b) => b.id === id)
+    const blogObject = { id: blog.id }
+
+    if (blog.user.id !== user.id) {
+      setErrorMessage({
+        text: `Only authorized user permitted to delete. User '${user.name}' not authorized. `,
+        type: 'info',
+      })
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      return
+    }
+    if (window.confirm(`Are you sure you want to delete ${blog.title}?`)) {
+      blogService
+        .deleteBlog(blogObject)
+        .then(setBlogs(blogs.filter((blog) => blog.id !== id)))
+    }
+  }
+
+  const sortedBlogs = blogs.sort((a, b) => {
+    return b.likes - a.likes
+  })
 
   return (
     <div className="App">
@@ -120,9 +154,16 @@ function App() {
           </div>
         )}
         <br />
+
         <ul>
-          {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
+          {sortedBlogs.map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              user={user}
+              addLike={() => addLike(blog.id)}
+              removeBlog={() => removeBlog(blog.id)}
+            />
           ))}
         </ul>
       </div>

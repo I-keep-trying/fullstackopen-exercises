@@ -80,6 +80,35 @@ const App = (props) => {
       })
   }
 
+  const toggleImportanceOf2 = (id) => {
+    console.log('notes', notes)
+    const note = notes.find((n) => n.id === id)
+    console.log('note', note)
+    const changedNote = { id: note.id, important: !note.important }
+    noteService
+      .updatePatch(changedNote)
+      .then((returnedNote) => {
+        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
+        setErrorMessage({
+          text: `Note '${note.content}' was successfully updated`,
+          type: 'info',
+        })
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+      })
+      .catch((error) => {
+        setErrorMessage({
+          text: `Note '${note.content}' was already removed from server`,
+          type: 'info',
+        })
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
+        setNotes(notes.filter((n) => n.id !== id))
+      })
+  }
+
   const loginForm = () => (
     <Togglable buttonLabel="login">
       <LoginForm
@@ -150,7 +179,7 @@ const App = (props) => {
               <Note
                 key={note.id}
                 note={note}
-                toggleImportance={() => toggleImportanceOf(note.id)}
+                toggleImportance={() => toggleImportanceOf2(note.id)}
               />
             ))}
           </div>

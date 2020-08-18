@@ -28,9 +28,16 @@ const update = (newObject) => {
   return request.then((response) => response.data)
 }
 
+const updatePatch = (newObject) => {
+  console.log('newObject', newObject)
+  const request = axios.patch(`${baseUrl}/${newObject.id}`, newObject)
+  return request.then((response) => response.data)
+}
+
 export default {
   getAll,
   create,
   update,
   setToken,
+  updatePatch
 }

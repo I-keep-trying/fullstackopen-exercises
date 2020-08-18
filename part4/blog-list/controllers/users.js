@@ -14,6 +14,7 @@ usersRouter.get('/', async (request, response) => {
 usersRouter.get('/:id', async (request, response) => {
   const user = await User.findById(request.params.id)
   if (user) {
+    console.log('user',user)
     response.json(user)
   } else {
     response.status(404).end()
@@ -22,7 +23,6 @@ usersRouter.get('/:id', async (request, response) => {
 
 usersRouter.post('/', async (request, response) => {
   const body = request.body
-  console.log('new user', body.password.length)
   if (body.password.length < 3) {
     return response.json('password must be longer than 3 characters').end()
   }
@@ -35,7 +35,6 @@ usersRouter.post('/', async (request, response) => {
     passwordHash,
   })
   const savedUser = await user.save()
-
   response.json(savedUser)
 })
 

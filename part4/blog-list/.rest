@@ -1,14 +1,15 @@
 GET http://localhost:3007/api/blogs
 ###
-GET http://localhost:3007/api/blogs/5f2af99275031132c47d94cc
+GET http://localhost:3007/api/blogs/5f3415a2a981520154a167c7
 ###
-DELETE http://localhost:3007/api/blogs/5f3430a5f221ea26347e5f6d
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN1cGNha2UiLCJpZCI6IjVmMzQxMmJiMDMyMDRmMGY2YzNkMzAwNyIsImlhdCI6MTU5NzI0ODE5NX0.wXqVRNR6g5EJHQHok_2yp3eQEpd8GPUelm_hfGuV4Yg
+DELETE http://localhost:3007/api/blogs/5f3ac5a5c735ee2fcc0b65c1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RfVXNlciIsImlkIjoiNWYzNDNkMDA5MGM2YzEzMWEwNzI5YjlmIiwiaWF0IjoxNTk3NjkwNjQ1fQ.wBva3ADDQin98H5ku64roRexsskVk0qnG8cmPagLJ3o
+
 
 ###
 POST http://localhost:3007/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN1cGNha2UiLCJpZCI6IjVmMzQxMmJiMDMyMDRmMGY2YzNkMzAwNyIsImlhdCI6MTU5NzI0ODE5NX0.wXqVRNR6g5EJHQHok_2yp3eQEpd8GPUelm_hfGuV4Yg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RfVXNlciIsImlkIjoiNWYzNDNkMDA5MGM2YzEzMWEwNzI5YjlmIiwiaWF0IjoxNTk3NzU4MDE0fQ.AJC4XYcpxIyGoZwtcPLYwXv_sXUspMO64fzKNsbmruI
 
 {
  "title": "eat dessert first",
@@ -29,12 +30,11 @@ Content-Type: application/json
     }
 ###
 
-PATCH http://localhost:3007/api/blogs/5f2ae6e82c276b2adcd5ea5d
+PATCH http://localhost:3007/api/blogs/5f3415a2a981520154a167c7
 Content-Type: application/json
 
 {
-   "title": "We want FIVE shrubbery!!",
-   "author":"Wendy Woberts"
+   "author":"cupcake"
     }
 ###
 POST http://localhost:3007/api/users
@@ -47,7 +47,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3007/api/users
+GET http://localhost:3007/api/users/5f3412bb03204f0f6c3d3007
 ###
 POST http://localhost:3007/api/login
 Content-Type: application/json
@@ -57,7 +57,7 @@ Content-Type: application/json
     "password":"password"
 }
 ###
-DELETE http://localhost:3007/api/users/5f33072f1cefa21fd03775b8
+DELETE http://localhost:3007/api/users/
 ###
     "username": "Robert_C_Martin",
     "username": "Edsger_W_Dijkstra",
