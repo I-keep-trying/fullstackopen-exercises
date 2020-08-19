@@ -128,6 +128,13 @@ function App() {
       blogService
         .deleteBlog(blogObject)
         .then(setBlogs(blogs.filter((blog) => blog.id !== id)))
+      setErrorMessage({
+        text: `Blog ${blog.title} has been deleted. `,
+        type: 'info',
+      })
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 

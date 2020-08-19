@@ -23,13 +23,11 @@ const create = async (newObject) => {
 }
 
 const update = (newObject) => {
-  console.log('newObject', newObject)
   const request = axios.put(`${baseUrl}/${newObject.id}`, newObject)
   return request.then((response) => response.data)
 }
 
 const updatePatch = (newObject) => {
-  console.log('newObject', newObject)
   const request = axios.patch(`${baseUrl}/${newObject.id}`, newObject)
   return request.then((response) => response.data)
 }

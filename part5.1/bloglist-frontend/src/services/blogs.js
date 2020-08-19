@@ -4,7 +4,6 @@ const loginUrl = '/api/login'
 
 const login = async (credentials) => {
   const response = await axios.post(loginUrl, credentials)
-  console.log('response',response.data)
   return response.data
 }
 
@@ -21,11 +20,9 @@ const getAll = () => {
 }
 
 const getOne = (blogObject) => {
-  console.log('blogObject',`${baseUrl}/${blogObject.id}`)
   const request = axios.get(`${baseUrl}/${blogObject.id}`)
 
   return request.then((response) => {
-    console.log('response.data',response.data)
     return response.data})
 }
 
@@ -35,7 +32,6 @@ const create = async (newObject) => {
   }
 
   const response = await axios.post(baseUrl, newObject, config)
-  console.log('create blog response',response.data)
   return response.data
 }
 

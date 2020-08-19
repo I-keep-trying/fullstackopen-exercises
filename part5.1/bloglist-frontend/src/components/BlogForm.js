@@ -29,7 +29,7 @@ const BlogForm = ({ createBlog }) => {
   let userInputKeys = Object.keys(userInput)
 
   return (
-    <div>
+    <div className="formDiv">
       <form onSubmit={addBlog}>
         {userInputKeys.map((string, i) => {
           return (

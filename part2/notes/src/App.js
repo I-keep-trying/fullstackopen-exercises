@@ -11,7 +11,7 @@ import NoteForm from './components/NoteForm'
 import logo from './note-icon.png'
 import './App.css'
 
-const App = (props) => {
+const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -62,28 +62,6 @@ const App = (props) => {
 
   const toggleImportanceOf = (id) => {
     const note = notes.find((n) => n.id === id)
-    const changedNote = { ...note, important: !note.important }
-    noteService
-      .update(changedNote)
-      .then((returnedNote) => {
-        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
-      })
-      .catch((error) => {
-        setErrorMessage({
-          text: `Note '${note.content}' was already removed from server`,
-          type: 'info',
-        })
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
-        setNotes(notes.filter((n) => n.id !== id))
-      })
-  }
-
-  const toggleImportanceOf2 = (id) => {
-    console.log('notes', notes)
-    const note = notes.find((n) => n.id === id)
-    console.log('note', note)
     const changedNote = { id: note.id, important: !note.important }
     noteService
       .updatePatch(changedNote)
@@ -97,7 +75,7 @@ const App = (props) => {
           setErrorMessage(null)
         }, 5000)
       })
-      .catch((error) => {
+      .catch(() => {
         setErrorMessage({
           text: `Note '${note.content}' was already removed from server`,
           type: 'info',
@@ -179,7 +157,7 @@ const App = (props) => {
               <Note
                 key={note.id}
                 note={note}
-                toggleImportance={() => toggleImportanceOf2(note.id)}
+                toggleImportance={() => toggleImportanceOf(note.id)}
               />
             ))}
           </div>
