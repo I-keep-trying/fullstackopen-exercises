@@ -75,7 +75,7 @@ function App() {
     return blogService.create(blogObject).then((returnedBlog) => {
       setBlogs(blogs.concat(returnedBlog))
       setErrorMessage({
-        text: `Success! ${returnedBlog.title} by ${returnedBlog.author} has been added. `,
+        text: `Success! "${returnedBlog.title}" by ${returnedBlog.author} has been added. `,
         type: 'info',
       })
       setTimeout(() => {
@@ -101,7 +101,6 @@ function App() {
   }
   const addLike = (id) => {
     const blog = blogs.find((b) => b.id === id)
-
     const updatedBlog = { id: blog.id, likes: blog.likes + 1 }
     blogService.update(updatedBlog).then((returnedBlog) => {
       return setBlogs(
@@ -114,9 +113,11 @@ function App() {
     const blog = blogs.find((b) => b.id === id)
     const blogObject = { id: blog.id }
 
-    if (blog.user.id !== user.id) {
+    const blogUser = blog.user.id === undefined ? blog.user : blog.user.id
+
+    if (blogUser !== user.id) {
       setErrorMessage({
-        text: `Only authorized user permitted to delete. User '${user.name}' not authorized. `,
+        text: `Only authorized user permitted to delete. `,
         type: 'info',
       })
       setTimeout(() => {
@@ -129,7 +130,7 @@ function App() {
         .deleteBlog(blogObject)
         .then(setBlogs(blogs.filter((blog) => blog.id !== id)))
       setErrorMessage({
-        text: `Blog ${blog.title} has been deleted. `,
+        text: `Blog "${blog.title}" has been deleted. `,
         type: 'info',
       })
       setTimeout(() => {
@@ -154,7 +155,7 @@ function App() {
           loginForm()
         ) : (
           <div>
-            <i>{user.name} is logged in </i>
+            <i>User {user.name} is logged in </i>
             <button onClick={handleLogout}>logout</button>
 
             {blogForm()}

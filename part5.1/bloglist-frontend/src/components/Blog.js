@@ -4,7 +4,7 @@ import Togglable from './Togglable'
 
 const Blog = ({ blog, addLike, removeBlog, user }) => {
   return (
-    <li className="blog-detail">
+    <li id="blog-title" className="blog-detail">
       <a
         className="App-link"
         href={blog.url}

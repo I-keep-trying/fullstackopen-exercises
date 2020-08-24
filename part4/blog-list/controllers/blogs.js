@@ -25,13 +25,13 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
   const user = await User.findById(decodedToken.id)
-  
+console.log('user',user)
   const blog = new Blog({
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes || 0,
-    user: user
+    user: user,
   })
   const savedBlog = await blog.save()
   user.blogs = user.blogs.concat(savedBlog._id)
@@ -44,8 +44,23 @@ blogsRouter.delete('/:id', async (request, response) => {
   const decodedToken = jwt.verify(token, process.env.SECRET)
   const user = await User.findById(decodedToken.id)
   const blogToRemove = await Blog.findById(request.params.id)
+  const removeFromUser = user.blogs.filter(
+    blog => blog.toString() !== request.params.id
+  )
+  if (blogToRemove === null) {
+    if (user._id.toString() === blogToRemove.user.toString()) {
+      response.json('unauthorized user')
+    } else {
+      user.blogs = removeFromUser
+      await user.save()
+      response.status(204).end()
+      return
+    }
+  }
   if (user._id.toString() === blogToRemove.user.toString()) {
     await Blog.findByIdAndRemove(request.params.id)
+    user.blogs = removeFromUser
+    await user.save()
   } else {
     response.json('unauthorized user')
   }
@@ -53,12 +68,16 @@ blogsRouter.delete('/:id', async (request, response) => {
 })
 
 blogsRouter.put('/:id', async (request, response) => {
+  const token = request.token
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  const user = await User.findById(decodedToken.id)
   const body = request.body
   const blog = {
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes + 1,
+    user: user,
   }
 
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
@@ -68,14 +87,39 @@ blogsRouter.put('/:id', async (request, response) => {
 })
 
 blogsRouter.patch('/:id', async (request, response) => {
+ 
   if (Object.keys(request.body).length === 0) {
     return response.status(400).send('content missing').end()
   }
 
-  response.json(
-    await Blog.findByIdAndUpdate(request.params.id, request.body, { new: true })
-  )
-  
+  let blog = await Blog.findById(request.params.id)
+  blog = blog.toObject()
+console.log('blog',blog)
+  Object.keys(blog).forEach(key => {
+    let value = request.body[key]
+    if (value) {
+      blog[key] = value
+    }
+  })
+
+  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
+    new: true,
+  })
+  console.log('updatedBlog', updatedBlog)
+  response.json(updatedBlog)
 })
+
+/* blogsRouter.patch('/:id', async (request, response) => {
+  if (Object.keys(request.body).length === 0) {
+    return response.status(400).send('content missing').end()
+  }
+  const updatedBlog = await Blog.findByIdAndUpdate(
+    request.params.id,
+    request.body,
+    { new: true }
+  )
+
+  response.json(updatedBlog)
+}) */
 
 module.exports = blogsRouter

@@ -23,11 +23,15 @@ const BlogForm = ({ createBlog }) => {
       url: userInput.url,
       likes: 0,
     })
-    setUserInput(initialInput)
   }
 
   let userInputKeys = Object.keys(userInput)
-
+  const reset = () =>
+    setUserInput({
+      title: '',
+      author: '',
+      url: '',
+    })
   return (
     <div className="formDiv">
       <form onSubmit={addBlog}>
@@ -35,6 +39,7 @@ const BlogForm = ({ createBlog }) => {
           return (
             <div key={i}>
               <input
+                id={string}
                 placeholder={string.charAt(0).toUpperCase() + string.slice(1)}
                 name={string}
                 value={userInput.string}
@@ -46,6 +51,7 @@ const BlogForm = ({ createBlog }) => {
         })}
 
         <button type="submit">save</button>
+        <button onClick={reset}>reset</button>
       </form>
     </div>
   )

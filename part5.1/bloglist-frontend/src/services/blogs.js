@@ -15,29 +15,30 @@ const setToken = (newToken) => {
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-
   return request.then((response) => response.data)
 }
 
 const getOne = (blogObject) => {
   const request = axios.get(`${baseUrl}/${blogObject.id}`)
-
   return request.then((response) => {
-    return response.data})
+    return response.data
+  })
 }
 
 const create = async (newObject) => {
   const config = {
     headers: { Authorization: token },
   }
-
   const response = await axios.post(baseUrl, newObject, config)
   return response.data
 }
 
-const update = (changeObject) => {
-  const request = axios.patch(`${baseUrl}/${changeObject.id}`, changeObject)
-  return request.then((response) => response.data)
+const update = async (changeObject) => {
+  const response = await axios.patch(
+    `${baseUrl}/${changeObject.id}`,
+    changeObject
+  )
+  return response.data
 }
 
 const deleteBlog = (deleteObject) => {

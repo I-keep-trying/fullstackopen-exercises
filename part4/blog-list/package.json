@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/blogs.test.js",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
     "test0": "cross-env NODE_ENV=test jest --verbose --runInBand -- tests/blog_api.test.js",
     "test00": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"total likes\"",
     "test01": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"most liked blog\"",
@@ -21,7 +21,8 @@
     "test6": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a specific blog can be viewed\"",
     "test7": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"a blog can be deleted\"",
     "test8": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"id, not _id\"",
-    "test9": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"blog without likes defaults to 0\""
+    "test9": "cross-env NODE_ENV=test jest --verbose --runInBand -t \"blog without likes defaults to 0\"",
+    "start:test": "cross-env NODE_ENV=test node index.js"
   },
   "author": "",
   "license": "ISC",

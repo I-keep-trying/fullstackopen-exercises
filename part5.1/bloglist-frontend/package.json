@@ -16,7 +16,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "git": "git add . && git commit -m updates && git push origin master",
-    "eslint": "eslint ."
+    "eslint": "eslint .",
+    "cypress:open": "cypress open"
   },
   "proxy": "http://localhost:3007",
   "eslintConfig": {
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.3",
     "@testing-library/react": "^10.4.8",
+    "cypress": "^5.0.0",
     "eslint-plugin-jest": "^23.20.0"
   }
 }

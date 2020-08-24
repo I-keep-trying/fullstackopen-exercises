@@ -2,21 +2,32 @@ import React from 'react'
 
 const BlogDetail = ({ blog, addLike, removeBlog, user }) => {
   const showDeleteButton = () => {
-    if (user === null || user.id !== blog.user.id) {
+    const blogUser = blog.user.id === undefined ? blog.user : blog.user.id
+
+    if (user === null || user.id !== blogUser) {
       return <div></div>
-    } else if (user.id === blog.user.id) {
-      return <button onClick={removeBlog}>delete</button>
+    } else if (user.id === blogUser) {
+      return (
+        <button id="delete" onClick={removeBlog}>
+          delete
+        </button>
+      )
     }
   }
   return (
-    <div data-testid='author'>
+    <div data-testid="author">
       Author: {blog.author}
       <br />
-      Url: {blog.url}
-      <br />
-      Likes: {blog.likes} <button onClick={addLike}>like</button>
+      <div>Url: {blog.url}</div>
+      <div id="likes">
+        Likes: {blog.likes}
+        <div>
+          <button id="add-like" onClick={addLike}>
+            like
+          </button>
+        </div>
+      </div>
       {showDeleteButton()}
-      
     </div>
   )
 }
