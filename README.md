@@ -34,6 +34,8 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [Blog List](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part5.1/bloglist-frontend)
 
-# [Part 6]
+# [Part 6](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6)
+
+## [redux counter](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-counter)
 
 # [Part 7]
