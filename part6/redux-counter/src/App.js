@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { createStore } from 'redux'
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const noteReducer = (state = [], action) => {
+  if (action.type === 'NEW_NOTE') {
+    state.push(action.data)
+    return state
+  }
+
+  return state
 }
 
-export default App;
+export const store = createStore(noteReducer)
+
+store.dispatch({
+  type: 'NEW_NOTE',
+  data: {
+    content: 'the app state is in redux store',
+    important: true,
+    id: 1,
+  },
+})
+
+store.dispatch({
+  type: 'NEW_NOTE',
+  data: {
+    content: 'state changes are made with actions',
+    important: false,
+    id: 2,
+  },
+})
+
+export function App() {
+  return (
+    <div className="App">
+      <header className="App-header">Counter App</header>
+      <div>
+        <ul>
+          {store.getState().map((note) => (
+            <li key={note.id}>
+              {note.content}{' '}
+              <strong>{note.important ? 'important' : ''}</strong>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
+//export default App
