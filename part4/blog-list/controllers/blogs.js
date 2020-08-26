@@ -9,7 +9,11 @@ blogsRouter.get('/', async (request, response) => {
 })
 
 blogsRouter.get('/:id', async (request, response) => {
-  const blog = await Blog.findById(request.params.id).populate('user')
+  const blog = await Blog.findById(request.params.id).populate('user', {
+    username: 1,
+    name: 1,
+    id: 1,
+  })
   if (blog) {
     response.json(blog)
   } else {
@@ -25,7 +29,6 @@ blogsRouter.post('/', async (request, response) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
   const user = await User.findById(decodedToken.id)
-console.log('user',user)
   const blog = new Blog({
     title: body.title,
     author: body.author,
@@ -87,14 +90,18 @@ blogsRouter.put('/:id', async (request, response) => {
 })
 
 blogsRouter.patch('/:id', async (request, response) => {
- 
   if (Object.keys(request.body).length === 0) {
     return response.status(400).send('content missing').end()
   }
 
-  let blog = await Blog.findById(request.params.id)
+  let blog = await Blog.findById(request.params.id).populate('user', {
+    username: 1,
+    name: 1,
+    id: 1,
+  })
+  console.log('blog', blog)
+
   blog = blog.toObject()
-console.log('blog',blog)
   Object.keys(blog).forEach(key => {
     let value = request.body[key]
     if (value) {
@@ -104,6 +111,10 @@ console.log('blog',blog)
 
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
     new: true,
+  }).populate('user', {
+    username: 1,
+    name: 1,
+    id: 1,
   })
   console.log('updatedBlog', updatedBlog)
   response.json(updatedBlog)

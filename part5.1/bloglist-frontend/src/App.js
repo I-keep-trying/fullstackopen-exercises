@@ -112,10 +112,8 @@ function App() {
   const removeBlog = (id) => {
     const blog = blogs.find((b) => b.id === id)
     const blogObject = { id: blog.id }
-
-    const blogUser = blog.user.id === undefined ? blog.user : blog.user.id
-
-    if (blogUser !== user.id) {
+    //This actually should not happen since the delete button is hidden
+    if (blog.user.id !== user.id) {
       setErrorMessage({
         text: `Only authorized user permitted to delete. `,
         type: 'info',
@@ -155,9 +153,8 @@ function App() {
           loginForm()
         ) : (
           <div>
-            <i>User {user.name} is logged in </i>
+            User <i> {user.name} </i>is logged in{' '}
             <button onClick={handleLogout}>logout</button>
-
             {blogForm()}
           </div>
         )}

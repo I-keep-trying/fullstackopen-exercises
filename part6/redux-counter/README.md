@@ -31,8 +31,16 @@ Horizontal Rule
 
 `Inline code` with backticks
 
-```
+```js
 # code block
 print '3 backticks or'
 print 'indent 4 spaces'
 ```
+
+<mark>Highlight text</mark>
+<pre><code>
+//alternative code block
+    function main(){ 
+        __config_bash
+    }
+</code></pre>

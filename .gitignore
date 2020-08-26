@@ -17,3 +17,12 @@
 /part4/blog-list/node_modules
 /part4/blog-list/.env
 /part4/blog-list/Response*
+
+/part5/blog-list-front-end2/node_modules
+
+/part5.1/blog-list-frontend/node_modules
+
+/part6/redux-counter/node_modules
+/part6/redux-counter/MOVETHISDIRECTORY
+
+/part6/unicafe-redux/node_modules
