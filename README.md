@@ -37,6 +37,9 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 # [Part 6](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6)
 
 ## [redux counter](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-counter) - also notes
+
 ## [unicafe-redux](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/unicafe-redux)
+
+## [redux-anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-anecdotes)
 
 # [Part 7]
