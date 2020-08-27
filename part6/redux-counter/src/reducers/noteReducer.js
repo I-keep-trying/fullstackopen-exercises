@@ -1,6 +1,19 @@
-import { createStore } from 'redux'
+const generateId = () => Number((Math.random() * 1000000).toFixed(0))
 
-const noteReducer = (state = [], action) => {
+const initialState = [
+  {
+    content: 'reducer defines how redux store works',
+    important: true,
+    id: generateId(),
+  },
+  {
+    content: 'state of store can contain any data',
+    important: false,
+    id: generateId(),
+  },
+]
+
+const noteReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'NEW_NOTE': {
       return [...state, action.data]
@@ -8,7 +21,6 @@ const noteReducer = (state = [], action) => {
     case 'TOGGLE_IMPORTANCE': {
       const id = action.data.id
       const noteToChange = state.find((n) => n.id === id)
-      console.log('noteToChange', noteToChange)
       const changedNote = {
         ...noteToChange,
         important: !noteToChange.important,
@@ -20,24 +32,22 @@ const noteReducer = (state = [], action) => {
   }
 }
 
-export const store = createStore(noteReducer)
+export const createNote = (content) => {
+  return {
+    type: 'NEW_NOTE',
+    data: {
+      content,
+      important: false,
+      id: generateId(),
+    },
+  }
+}
 
-store.dispatch({
-  type: 'NEW_NOTE',
-  data: {
-    content: 'the app state is in redux store',
-    important: true,
-    id: 1,
-  },
-})
-
-store.dispatch({
-  type: 'NEW_NOTE',
-  data: {
-    content: 'state changes are made with actions',
-    important: false,
-    id: 2,
-  },
-})
+export const toggleImportanceOf = (id) => {
+  return {
+    type: 'TOGGLE_IMPORTANCE',
+    data: { id },
+  }
+}
 
 export default noteReducer

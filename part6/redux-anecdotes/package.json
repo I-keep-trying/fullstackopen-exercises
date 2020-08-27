@@ -1,9 +1,11 @@
 {
-  "name": "react-boilerplate",
+  "name": "redux-anecdotes",
   "version": "0.1.0",
   "private": true,
-  "repository": "https://github.com/I-keep-trying/create-react-app-boilerplate",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^10.4.9",
+    "@testing-library/user-event": "^12.1.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
@@ -11,11 +13,10 @@
     "redux": "^4.0.5"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "git": "git add . && git commit -m updates && git push origin master"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,7 +34,6 @@
     ]
   },
   "devDependencies": {
-    "deep-freeze": "0.0.1",
     "redux-devtools-extension": "^2.13.8"
   }
 }
