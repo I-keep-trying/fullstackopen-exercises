@@ -4,24 +4,25 @@ const notificationReducer = (state = null, action) => {
       return action.notification
     }
     case 'UNSET_NOTIFICATION': {
-    return null
+      return null
     }
     default:
       return state
   }
 }
 
-export const notificationChange = notification => {
-  return {
-    type: 'SET_NOTIFICATION',
-    notification,
-  }
-}
-
-export const dismissNotificationChange = notification => {
-  return {
-    type: 'UNSET_NOTIFICATION',
-    notification,
+export const notificationChange = (notification, time) => {
+  return async dispatch => {
+    dispatch({
+      type: 'SET_NOTIFICATION',
+      notification,
+      time,
+    })
+    setTimeout(() => {
+      dispatch({
+        type: 'UNSET_NOTIFICATION',
+      })
+    }, time * 200)
   }
 }
 
