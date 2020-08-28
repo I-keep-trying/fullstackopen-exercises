@@ -2,15 +2,13 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Notification = () => {
-  const notification = useSelector(/* something here */)
-  const style = {
-    border: 'solid',
-    padding: 10,
-    borderWidth: 1
-  }
+  const notification = useSelector(state => {
+    return state.notifications
+  })
+
   return (
-    <div style={style}>
-    {notification}
+    <div className={notification === null ? 'none' : 'info'}>
+      {notification}
     </div>
   )
 }

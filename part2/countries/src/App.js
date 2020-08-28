@@ -24,12 +24,11 @@ function App() {
     setSearchTerm(event.target.value)
   }
 
-  const filteredCountries = countries.filter((country) => {
-    if (country.name.toLowerCase().startsWith(searchTerm.toLowerCase())) {
-      return country
-    }
-    return null
-  })
+  const filteredCountries = countries.filter((country) =>
+    country.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      ? country
+      : null
+  )
 
   const countryDetail = () => {
     return filteredCountries.map((country) => {
