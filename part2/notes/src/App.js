@@ -8,6 +8,8 @@ import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
 import NoteForm from './components/NoteForm'
 
+import { ToastContainer, toast } from 'react-toastify'
+
 import logo from './note-icon.png'
 import './App.css'
 
@@ -46,13 +48,11 @@ const App = () => {
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
       noteService.setToken(user.token)
       setUser(user)
+      toast(`Welcome, ${user.name}!`)
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage({ text: 'Wrong credentials', type: 'error' })
-      setTimeout(() => {
-        setErrorMessage(null)
-      }, 5000)
+      toast.error('Wrong credentials')
     }
   }
 
@@ -67,22 +67,11 @@ const App = () => {
       .updatePatch(changedNote)
       .then((returnedNote) => {
         setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
-        setErrorMessage({
-          text: `Note '${note.content}' was successfully updated`,
-          type: 'info',
-        })
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
+        toast(`Note '${note.content}' was successfully updated`)
       })
       .catch(() => {
-        setErrorMessage({
-          text: `Note '${note.content}' was already removed from server`,
-          type: 'info',
-        })
-        setTimeout(() => {
-          setErrorMessage(null)
-        }, 5000)
+        toast.error(`Note '${note.content}' was already removed from server`)
+
         setNotes(notes.filter((n) => n.id !== id))
       })
   }
@@ -103,16 +92,14 @@ const App = () => {
     window.localStorage.removeItem('loggedNoteappUser')
     noteService.setToken('')
     setUser(null)
-    setErrorMessage({ text: 'Logged out', type: 'info' })
-    setTimeout(() => {
-      setErrorMessage(null)
-    }, 5000)
+    toast('Successfully logged out')
   }
 
   const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility()
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote))
+      toast('Note created')
     })
   }
 
@@ -121,16 +108,16 @@ const App = () => {
       <NoteForm createNote={addNote} />
     </Togglable>
   )
-
   return (
     <div className="App">
       <h1 className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         Notes
       </h1>
+
       <div className="AppBody">
         <div>
-          <Notification message={errorMessage} />
+          <ToastContainer />
           {user === null ? (
             loginForm()
           ) : (

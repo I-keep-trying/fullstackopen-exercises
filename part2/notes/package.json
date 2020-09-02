@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "animate.css": "^4.1.0",
     "axios": "^0.19.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.1",
+    "react-toastify": "^6.0.8"
   },
   "scripts": {
     "start": "set PORT=3002 && react-scripts start",
