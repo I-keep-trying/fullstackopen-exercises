@@ -42,6 +42,6 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [redux-anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-anecdotes)
 
-# [Part 7]
+# Part 7
 
-## [anecdotes]
+## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/anecdotes)
