@@ -44,4 +44,4 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 # Part 7
 
-## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part1/anecdotes)
+## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/anecdotes-react-router)

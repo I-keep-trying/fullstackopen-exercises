@@ -99,8 +99,8 @@ const Anecdotes = ({ anecdotes, message }) => {
   )
 }
 
-const CreateNew = ({ anecdotes, setAnecdotes, setMessage, message }) => {
-  const history = useHistory()
+const CreateNew = ({ anecdotes, setAnecdotes, setMessage }) => {
+  let history = useHistory()
   const initialInput = {
     content: '',
     author: '',
