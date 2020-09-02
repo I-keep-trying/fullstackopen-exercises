@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState, useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,15 +17,15 @@ const Home = () => (
   <div>
     <h2>Anecdotes App</h2>
     <div>
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500s, when an unknown printer took a galley of type and scrambled it to
-      make a type specimen book. It has survived not only five centuries, but
-      also the leap into electronic typesetting, remaining essentially
-      unchanged. It was popularised in the 1960s with the release of Letraset
-      sheets containing Lorem Ipsum passages, and more recently with desktop
-      publishing software like Aldus PageMaker including versions of Lorem
-      Ipsum.
+      Hydrogen atoms billions upon billions Hypatia tingling of the spine
+      extraordinary claims require extraordinary evidence extraplanetary. Rig
+      Veda vanquish the impossible corpus callosum muse about are creatures of
+      the cosmos invent the universe. Citizens of distant epochs of brilliant
+      syntheses with pretty stories for which there's little good evidence
+      encyclopaedia galactica two ghostly white figures in coveralls and helmets
+      are softly dancing the only home we've ever known and billions upon
+      billions upon billions upon billions upon billions upon billions upon
+      billions.
     </div>
   </div>
 )
@@ -58,12 +57,13 @@ const About = () => (
 const Anecdote = ({ anecdotes }) => {
   const id = useParams().id
   const anecdote = anecdotes.find((n) => n.id === Number(id))
-  console.log('anecdote',anecdote)
+  console.log('anecdote', anecdote)
   return (
     <div>
       <h2>
         <a href={anecdote.info}>
-          {'"'}{anecdote.content}
+          {'"'}
+          {anecdote.content}
           {'"'}{' '}
         </a>{' '}
         has {anecdote.votes} votes.
@@ -127,6 +127,7 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, message }) => {
     e.preventDefault()
     console.log('add anecdote', anecdote)
     setAnecdotes(anecdotes.concat(anecdote))
+    console.log('history', history)
     history.push('/anecdotes')
     setMessage({
       text: `A new anecdote "${anecdote.content}" was created!`,
@@ -202,11 +203,12 @@ const App = () => {
     },
   ])
   const [message, setMessage] = useState(null)
+
   return (
     <div className="App">
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>Blog List</h1>
+        <h1>Anecdote App</h1>
       </div>
       <div className="AppBody">
         <Router>
@@ -240,4 +242,4 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
