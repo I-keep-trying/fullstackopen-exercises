@@ -38,9 +38,9 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
     }, 5000)
   }
 
+  // Mapping over the <input> 
   return (
     <div>
-      <h2>Add Anecdote</h2>
       <form onSubmit={addNew}>
         {userInputKeys.map((_, i) => {
           return (

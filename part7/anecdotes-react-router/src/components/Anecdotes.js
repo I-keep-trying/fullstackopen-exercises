@@ -11,7 +11,6 @@ const Anecdotes = ({ anecdotes, message, setLocation }) => {
   return (
     <div>
       <Message message={message} />
-      <h2>Anecdotes</h2>
 
       <ul>
         {anecdotes.map((anecdote) => (

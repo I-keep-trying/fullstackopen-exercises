@@ -51,11 +51,12 @@ const App = () => {
   return (
     <div className="App">
       <div className="App-header">
+        <Menu />
+
         <img src={logo} className="App-logo" alt="logo" />
         {setTitle()}
       </div>
       <div className="AppBody">
-        <Menu />
         <Switch>
           <Route path="/anecdotes/:id">
             <Anecdote anecdotes={anecdotes} />

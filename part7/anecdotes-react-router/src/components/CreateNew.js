@@ -49,7 +49,6 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
 
   return (
     <div>
-      <h2>Add Anecdote</h2>
       <form onSubmit={addNew}>
         <input {...content} />
         <br />

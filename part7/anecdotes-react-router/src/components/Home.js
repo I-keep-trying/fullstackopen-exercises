@@ -9,7 +9,6 @@ const Home = ({ setLocation }) => {
 
   return (
     <div>
-      <h2>Anecdotes App</h2>
       <div>
         Hydrogen atoms billions upon billions Hypatia tingling of the spine
         extraordinary claims require extraordinary evidence extraplanetary. Rig
