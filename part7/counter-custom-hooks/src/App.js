@@ -16,7 +16,7 @@ const useField = (type) => {
 }
 
 const App = () => {
-/*   const [name, setName] = useState('')
+  /*   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
   const [height, setHeight] = useState('') */
   const name = useField('text')
@@ -26,18 +26,10 @@ const App = () => {
     <div>
       <form>
         name:
-        <input
-          type={name.type}
-          value={name.value}
-          onChange={name.onChange}
-        />
+        <input {...name} />
         <br />
         birthdate:
-        <input
-          type={born.type}
-          value={born.value}
-          onChange={born.onChange}
-        />
+        <input type={born.type} value={born.value} onChange={born.onChange} />
         <br />
         height:
         <input

@@ -33,7 +33,6 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
     votes: 0,
     id: Date.now(),
   }
-  console.log('addNew',anecdote)
 
   const addNew = (e) => {
     e.preventDefault()
@@ -52,19 +51,11 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
     <div>
       <h2>Add Anecdote</h2>
       <form onSubmit={addNew}>
-        <input
-          type={content.type}
-          value={content.value}
-          onChange={content.onChange}
-        />
+        <input {...content} />
         <br />
-        <input
-          type={author.type}
-          value={author.value}
-          onChange={author.onChange}
-        />
+        <input {...author} />
         <br />
-        <input type={info.type} value={info.value} onChange={info.onChange} />
+        <input {...info} />
         <br />
         <button type="submit">save</button>
       </form>
