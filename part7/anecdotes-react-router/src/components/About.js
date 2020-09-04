@@ -5,7 +5,7 @@ const About = ({ setLocation }) => {
   let history = useHistory()
   useEffect(() => {
     setLocation(history.location.pathname)
-  }, [setLocation])
+  }, [setLocation, history])
 
   return (
     <div>

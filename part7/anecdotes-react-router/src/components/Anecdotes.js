@@ -7,7 +7,7 @@ const Anecdotes = ({ anecdotes, message, setLocation }) => {
 
   useEffect(() => {
     setLocation(history.location.pathname)
-  }, [setLocation])
+  }, [setLocation, history])
   return (
     <div>
       <Message message={message} />

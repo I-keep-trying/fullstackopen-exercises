@@ -1,39 +1,43 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
+const useFormInput = (type) => {
+  const [value, setValue] = useState('')
+
+  const onChange = (event) => {
+    setValue(event.target.value)
+  }
+
+  return {
+    type,
+    value,
+    onChange,
+  }
+}
+
 const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
   let history = useHistory()
 
   useEffect(() => {
     setLocation(history.location.pathname)
-  }, [setLocation])
+  }, [setLocation, history])
 
-  const initialInput = {
-    content: '',
-    author: '',
-    info: '',
-  }
-  const [userInput, setUserInput] = useState(initialInput)
+  const content = useFormInput('text')
+  const author = useFormInput('text')
+  const info = useFormInput('text')
 
-  const handleChange = (evt) => {
-    const { name, value } = evt.target
-
-    setUserInput({ ...userInput, [name]: value })
-  }
-
-  const id = Date.now()
   const anecdote = {
-    content: userInput.content,
-    author: userInput.author,
-    info: userInput.info,
+    content: content.value,
+    author: author.value,
+    info: info.value,
     votes: 0,
-    id: id,
+    id: Date.now(),
   }
-
+  console.log('addNew',anecdote)
 
   const addNew = (e) => {
     e.preventDefault()
-    setAnecdotes(anecdotes.concat(anecdote))
+    setAnecdotes([...anecdotes, anecdote])
     history.push('/anecdotes')
     setMessage({
       text: `A new anecdote "${anecdote.content}" was created!`,
@@ -44,26 +48,24 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
     }, 5000)
   }
 
-  let userInputKeys = Object.keys(userInput)
-
   return (
     <div>
       <h2>Add Anecdote</h2>
       <form onSubmit={addNew}>
-        {userInputKeys.map((string, i) => {
-          return (
-            <div key={i}>
-              <input
-                placeholder={string.charAt(0).toUpperCase() + string.slice(1)}
-                name={string}
-                value={userInput.string}
-                onChange={handleChange}
-              />
-              <br />
-            </div>
-          )
-        })}
-
+        <input
+          type={content.type}
+          value={content.value}
+          onChange={content.onChange}
+        />
+        <br />
+        <input
+          type={author.type}
+          value={author.value}
+          onChange={author.onChange}
+        />
+        <br />
+        <input type={info.type} value={info.value} onChange={info.onChange} />
+        <br />
         <button type="submit">save</button>
       </form>
     </div>
