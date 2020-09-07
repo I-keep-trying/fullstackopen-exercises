@@ -1,27 +1,18 @@
 import React, { useState } from 'react'
-//import { useField } from './hooks.js'
-
-const useField = (type) => {
-  const [value, setValue] = useState('')
-
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
-
-  return {
-    type,
-    value,
-    onChange,
-  }
-}
+import { useField } from './hooks.js'
+import Form from './Form2'
 
 const App = () => {
-  /*   const [name, setName] = useState('')
-  const [born, setBorn] = useState('')
-  const [height, setHeight] = useState('') */
   const name = useField('text')
   const born = useField('date')
   const height = useField('number')
+
+  const resetForm = (e) => {
+    e.preventDefault()
+    name.onReset()
+    born.onReset()
+    height.onReset()
+  }
   return (
     <div>
       <form>
@@ -29,18 +20,27 @@ const App = () => {
         <input {...name} />
         <br />
         birthdate:
-        <input type={born.type} value={born.value} onChange={born.onChange} />
+        <input
+          type={born.type}
+          value={born.value}
+          onChange={born.onChange}
+          onReset={born.onReset}
+        />
         <br />
         height:
         <input
           type={height.type}
           value={height.value}
           onChange={height.onChange}
+          onReset={height.onReset}
         />
+        <button onClick={resetForm}>reset</button>
       </form>
       <div>
         {name.value} {born.value} {height.value}
       </div>
+      <hr />
+      <Form />
     </div>
   )
 }

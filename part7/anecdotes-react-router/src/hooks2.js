@@ -7,9 +7,13 @@ export const useFormInput = (type) => {
     setValue(event.target.value)
   }
 
+  const onReset = (e) => {
+      setValue(e.target.reset())
+  }
   return {
     type,
     value,
     onChange,
+    onReset
   }
 }

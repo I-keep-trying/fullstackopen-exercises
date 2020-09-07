@@ -30,20 +30,23 @@ const App = () => {
   ])
   const [message, setMessage] = useState(null)
   const [location, setLocation] = useState('/')
+
+  const [formData, setFormData] = useState({})
+
   let history = useHistory()
 
   useEffect(() => {
     history.push('/')
   }, [history])
 
-  const setTitle = () => {
-    if (history.location.pathname === '/') {
+  const getTitle = () => {
+    if (location === '/') {
       return <h1>Anecdote App</h1>
-    } else if (history.location.pathname === '/anecdotes') {
+    } else if (location === '/anecdotes') {
       return <h1>Anecdotes List</h1>
-    } else if (history.location.pathname === '/create') {
+    } else if (location === '/create') {
       return <h1>Add New Anecdote</h1>
-    } else if (history.location.pathname === '/about') {
+    } else if (location === '/about') {
       return <h1>About Anecdotes</h1>
     }
   }
@@ -54,13 +57,14 @@ const App = () => {
         <Menu />
 
         <img src={logo} className="App-logo" alt="logo" />
-        {setTitle()}
+        {getTitle()}
       </div>
       <div className="AppBody">
         <Switch>
           <Route path="/anecdotes/:id">
             <Anecdote anecdotes={anecdotes} />
           </Route>
+
           <Route path="/anecdotes">
             <Anecdotes
               anecdotes={anecdotes}
@@ -68,6 +72,7 @@ const App = () => {
               setLocation={setLocation}
             />
           </Route>
+
           <Route path="/create">
             <CreateNew
               anecdotes={anecdotes}
@@ -77,15 +82,18 @@ const App = () => {
               setLocation={setLocation}
             />
           </Route>
+
           <Route path="/about">
             <About setLocation={setLocation} />
           </Route>
+
           <Route path="/">
             <Home setLocation={setLocation} />
           </Route>
         </Switch>
       </div>
-      <Footer />
+      {/*       <Footer />
+       */}{' '}
     </div>
   )
 }

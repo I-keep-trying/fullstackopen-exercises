@@ -4,33 +4,26 @@ import { useField } from '../hooks'
 
 const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
   let history = useHistory()
-
+  // Sets the page title using pathname
   useEffect(() => {
     setLocation(history.location.pathname)
   }, [setLocation, history])
 
   const fieldProps = useField('text')
   const handleChange = fieldProps.onChange
-  const userInput = fieldProps.userInput
-  const userInputKeys = fieldProps.inputKeys
-  const inputValues = fieldProps.inputValues
+  const anecdote = fieldProps.userInput
+  const userInputKeys = fieldProps.inputKeys //  Object.keys for field names and placeholder
+  const inputValues = fieldProps.inputValues //  Object.values for placing values
+  const resetForm = fieldProps.onReset
 
-  const resetInput = useField('reset')
-
-  const anecdote = {
-    content: userInput.content,
-    author: userInput.author,
-    info: userInput.info,
-    votes: 0,
-  }
-  const inputParams = Object.keys(anecdote)
 
   const addNew = (e) => {
     e.preventDefault()
-    setAnecdotes([...anecdotes, anecdote])
+    const newAnecdote = { ...anecdote, votes: 0, id: Date.now() }
+    setAnecdotes([...anecdotes, newAnecdote])
     history.push('/anecdotes')
     setMessage({
-      text: `A new anecdote "${anecdote.content}" was created!`,
+      text: `A new anecdote "${newAnecdote.content}" was created!`,
       type: 'info',
     })
     setTimeout(() => {
@@ -41,16 +34,16 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
   // Mapping over the <input> 
   return (
     <div>
-      <form onSubmit={addNew}>
+      <form>
         {userInputKeys.map((_, i) => {
           return (
             <div key={i}>
               <input
                 placeholder={
-                  inputParams[i].charAt(0).toUpperCase() +
-                  inputParams[i].slice(1)
+                  userInputKeys[i].charAt(0).toUpperCase() +
+                  userInputKeys[i].slice(1)
                 }
-                name={inputParams[i]}
+                name={userInputKeys[i]}
                 value={inputValues[i]}
                 onChange={handleChange}
               />
@@ -59,8 +52,8 @@ const CreateNew = ({ anecdotes, setAnecdotes, setMessage, setLocation }) => {
           )
         })}
 
-        <button type="submit">save</button>
-        <input type={resetInput.type} value="reset"></input>
+        <button onClick={addNew}>save</button>
+        <button onClick={resetForm}>reset</button>
       </form>
     </div>
   )
