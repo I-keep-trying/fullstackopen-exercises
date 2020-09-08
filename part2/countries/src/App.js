@@ -5,6 +5,7 @@ import Country from './Country'
 import CountryDetail from './CountryDetail'
 import Filter from './Filter'
 import Button from './Button'
+import Footer from './Footer'
 import logo from './globe1.png'
 
 import './App.css'
@@ -16,6 +17,7 @@ function App() {
 
   useEffect(() => {
     axios.get('https://restcountries.eu/rest/v2/all').then((response) => {
+      console.log('response.data', response.data)
       setCountries(response.data)
     })
   }, [])
@@ -66,13 +68,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-        Countries Of The World</header>
+        <img src={logo} className="App-logo" alt="logo" />
+        Countries Of The World
+      </header>
       <div className="AppBody">
         <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
 
         <Countries content={content} />
       </div>
+      <Footer />
     </div>
   )
 }

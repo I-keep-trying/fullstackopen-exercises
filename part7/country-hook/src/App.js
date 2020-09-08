@@ -10,7 +10,7 @@ const useField = (type) => {
   const onChange = (event) => {
     setValue(event.target.value)
   }
-
+ 
   return {
     type,
     value,
@@ -19,35 +19,43 @@ const useField = (type) => {
 }
 
 const useCountry = (name) => {
-  const [country, setCountry] = useState(null)
+  const [country, setCountry] = useState('')
 
   useEffect(() => {
-    axios.get(`https://restcountries.eu/rest/v2/name/${country}?fullText=true`).then((response) => {
-      setCountry(response.data)
-    })
-  }, [country])
+    axios
+      .get(`https://restcountries.eu/rest/v2/name/${name}?fullText=true`)
+      .then((response) => {
+        setCountry(response.data)
+      })
+      .catch((e) => {
+        setCountry(e.response.data)
+      })
+  }, [name])
 
   return country
 }
 
 const Country = ({ country }) => {
   if (!country) {
-    return null
-  }
-
-  if (!country.found) {
     return <div>not found...</div>
   }
 
+  if (country.status === 404) {
+    return (
+      <div>
+        {country.status} {country.message}{' '}
+      </div>
+    )
+  }
   return (
     <div>
-      <h3>{country.data.name} </h3>
-      <div>capital {country.data.capital} </div>
-      <div>population {country.data.population}</div>
+      <h3>{country[0].name} </h3>
+      <div>capital {country[0].capital} </div>
+      <div>population {country[0].population}</div>
       <img
-        src={country.data.flag}
+        src={country[0].flag}
         height="100"
-        alt={`flag of ${country.data.name}`}
+        alt={`flag of ${country[0].name}`}
       />
     </div>
   )
