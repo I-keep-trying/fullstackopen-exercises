@@ -28,7 +28,7 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 # [Part 4](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4)
 
-## [blog-list](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4/blog-list)
+## [blog-list backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part4/blog-list)
 
 # [Part 5](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part5.1/)
 
@@ -42,7 +42,9 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [redux-anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-anecdotes)
 
-# Part 7
+## [notes-connect](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/notes-connect)
+
+# [Part 7](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7)
 
 ## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/anecdotes-react-router)
 

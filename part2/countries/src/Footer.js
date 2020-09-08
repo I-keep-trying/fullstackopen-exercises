@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="App-footer">
       Developed by Andrea Crego 2020
       <a
-        href="https://github.com/I-keep-trying/"
+        href="https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part2/countries"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -13,7 +13,7 @@ const Footer = () => {
         <i style={{ color: 'white' }} className="fab fa-github"></i>
       </a>
       <br />
-      Anecdote app for{' '}
+      Countries app for{' '}
       <a href="https://studies.helsinki.fi/courses/cur/hy-CUR-136379894">
         Full Stack Web Development{' '}
       </a>
