@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Weather.css'
 
 const Weather = ({ weather, setUnit, unit }) => {
+  const [tempDisplay, setTempDisplay] = useState('C')
+  const [windDisplay, setWindDisplay] = useState('kph')
   /* I know there must be a better way to do this, but this works for now */
   const localTime = () => {
     const t = weather.location.localtime_epoch
@@ -17,11 +19,15 @@ const Weather = ({ weather, setUnit, unit }) => {
   const f = (e) => {
     e.preventDefault()
     setUnit('f')
+    setTempDisplay('F')
+    setWindDisplay('mph')
   }
 
   const m = (e) => {
     e.preventDefault()
     setUnit('m')
+    setTempDisplay('C')
+    setWindDisplay('kph')
   }
 
   const units = () => {
@@ -61,12 +67,12 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
 
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -86,6 +92,7 @@ const Weather = ({ weather, setUnit, unit }) => {
         <br />
         <div className="icon sky-gradient-night">
           {/* night */}
+          <h3 className="weather-title"> Current Weather</h3>
           <div className="moon-exp"></div>
           <div className=""></div>
           <div className="">
@@ -94,8 +101,8 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className=""></div>
           <div className="weather-data">
-            <div>Temperature: {weather.current.temperature} C</div>
-            <div>Wind: {weather.current.wind_speed} kph </div>
+            <div>Temperature: {weather.current.temperature} {tempDisplay}</div>
+            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
@@ -131,11 +138,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -164,7 +171,7 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>Temperature: {weather.current.temperature} C</div>
-            <div>Wind: {weather.current.wind_speed} kph </div>
+            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
@@ -197,11 +204,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -235,7 +242,7 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className="weather-data">
             <div>Temperature: {weather.current.temperature} C</div>
-            <div>Wind: {weather.current.wind_speed} kph </div>
+            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
@@ -259,11 +266,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -291,11 +298,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -328,11 +335,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -367,11 +374,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div classname=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -400,11 +407,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -436,11 +443,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -476,11 +483,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -517,11 +524,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -550,11 +557,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -583,11 +590,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -623,11 +630,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -664,11 +671,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className="cloud-exp3"></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -697,11 +704,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
@@ -731,11 +738,11 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>
-              Temperature: {weather.current.temperature} {units()}
+              Temperature: {weather.current.temperature} {tempDisplay}
             </div>
             <div>Humidity: {weather.current.humidity} %</div>
             <div>
-              Wind: {weather.current.wind_speed} {windSpeed()}
+              Wind: {weather.current.wind_speed} {windDisplay}
             </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>

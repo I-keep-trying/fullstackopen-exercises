@@ -5,6 +5,8 @@ import Country from './Country'
 import CountryDetail from './CountryDetail'
 import Filter from './Filter'
 import Button from './Button'
+import logo from './globe1.png'
+
 import './App.css'
 import './Weather.css'
 
@@ -63,7 +65,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">Countries Of The World</header>
+      <header className="App-header">
+      <img src={logo} className="App-logo" alt="logo" />
+        Countries Of The World</header>
       <div className="AppBody">
         <Filter searchTerm={searchTerm} handleSearchInput={handleSearchInput} />
 

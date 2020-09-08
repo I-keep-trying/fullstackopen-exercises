@@ -11,10 +11,7 @@ const CountryDetail = ({ country }) => {
   const coordinates = () => {
     return country.latlng[0] + ',' + country.latlng[1]
   }
-  console.log(
-    'process.env.REACT_APP_WEATHER_KEY',
-    process.env.REACT_APP_WEATHER_KEY
-  )
+
   useEffect(() => {
     const uri = `http://api.weatherstack.com/current?access_key=${
       process.env.REACT_APP_WEATHER_KEY

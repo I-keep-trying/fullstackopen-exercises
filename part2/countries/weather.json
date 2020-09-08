@@ -1,39 +1,39 @@
 {
   "request": {
-    "type": "City",
-    "query": "Thong United, Vietnam",
+    "type": "LatLon",
+    "query": "Lat 33.00 and Lon 65.00",
     "language": "en",
     "unit": "m"
   },
   "location": {
-    "name": "Thong United",
-    "country": "Vietnam",
-    "region": "",
-    "lat": "9.933",
-    "lon": "106.067",
-    "timezone_id": "Asia/Ho_Chi_Minh",
-    "localtime": "2020-07-28 21:22",
-    "localtime_epoch": 1595971320,
-    "utc_offset": "7.0"
+    "name": "Tachiray",
+    "country": "Afghanistan",
+    "region": "Helmand",
+    "lat": "32.986",
+    "lon": "65.001",
+    "timezone_id": "Asia/Kabul",
+    "localtime": "2020-09-08 00:09",
+    "localtime_epoch": 1599523740,
+    "utc_offset": "4.50"
   },
   "current": {
-    "observation_time": "02:22 PM",
-    "temperature": 28,
-    "weather_code": 116,
+    "observation_time": "07:39 PM",
+    "temperature": 17,
+    "weather_code": 113,
     "weather_icons": [
-      "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0004_black_low_cloud.png"
+      "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0008_clear_sky_night.png"
     ],
-    "weather_descriptions": ["Partly cloudy"],
-    "wind_speed": 10,
-    "wind_degree": 218,
-    "wind_dir": "SW",
-    "pressure": 1008,
-    "precip": 0.3,
-    "humidity": 82,
-    "cloudcover": 64,
-    "feelslike": 33,
+    "weather_descriptions": ["Clear"],
+    "wind_speed": 4,
+    "wind_degree": 85,
+    "wind_dir": "E",
+    "pressure": 1010,
+    "precip": 0,
+    "humidity": 20,
+    "cloudcover": 0,
+    "feelslike": 17,
     "uv_index": 1,
-    "visibility": 9,
+    "visibility": 10,
     "is_day": "no"
   }
 }
