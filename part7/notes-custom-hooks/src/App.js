@@ -35,12 +35,12 @@ const useResource = (baseUrl) => {
 
   useEffect(() => {
     const result = axios.get(baseUrl)
-    return result.then((response) => setResources(response.data))
+     result.then((response) => setResources(response.data))
   }, [baseUrl])
 
   const create = (resource) => {
     const response = axios.post(baseUrl, resource)
-    return response.then((response) => {
+     response.then((response) => {
       setResources([...resources, response.data])
     })
   }
