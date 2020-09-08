@@ -10,7 +10,7 @@ const Footer = () => {
         rel="noopener noreferrer"
       >
         {' '}
-        <i style={{ color: 'white' }} class="fab fa-github"></i>
+        <i style={{ color: 'white' }} className="fab fa-github"></i>
       </a>
       <br />
       Counter app for{' '}

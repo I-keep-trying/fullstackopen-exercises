@@ -73,28 +73,28 @@ export const thunderStorm = (
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient">
+<div className="icon sky-gradient">
     <div classname=""></div>
     <div classname=""></div>
-    <div class="sun-exp">
-        <div class="rays-exp2"></div>
+    <div className="sun-exp">
+        <div className="rays-exp2"></div>
         <div classname=""></div>
     </div>
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient">
-    <div class="cloud-exp3"></div>
+<div className="icon sky-gradient">
+    <div className="cloud-exp3"></div>
     <div classname=""></div>
-    <div class="sun-exp">
-        <div class="rays-exp2"></div>
+    <div className="sun-exp">
+        <div className="rays-exp2"></div>
         <div classname=""></div>
     </div>
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-overcast">
-    <div class="cloud-exp3"></div>
+<div className="icon sky-gradient-overcast">
+    <div className="cloud-exp3"></div>
     <div classname=""></div>
     <div classname="">
         <div classname=""></div>
@@ -103,8 +103,8 @@ export const thunderStorm = (
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-night">
-    <div class="moon-exp"></div>
+<div className="icon sky-gradient-night">
+    <div className="moon-exp"></div>
     <div classname=""></div>
     <div classname="">
         <div classname=""></div>
@@ -113,9 +113,9 @@ export const thunderStorm = (
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-night">
-    <div class="cloud-exp3"></div>
-    <div class="moon-exp"></div>
+<div className="icon sky-gradient-night">
+    <div className="cloud-exp3"></div>
+    <div className="moon-exp"></div>
     <div classname="">
         <div classname=""></div>
         <div classname=""></div>
@@ -123,9 +123,9 @@ export const thunderStorm = (
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-overcast broken-clouds">
-    <div class="cloud-exp3"></div>
-    <div class="cloud-exp3"></div>
+<div className="icon sky-gradient-overcast broken-clouds">
+    <div className="cloud-exp3"></div>
+    <div className="cloud-exp3"></div>
     <div classname="">
         <div classname=""></div>
         <div classname=""></div>
@@ -133,33 +133,33 @@ export const thunderStorm = (
     <div classname=""></div>
 </div>
 
-<div class="icon sky-gradient-overcast shower-rain">
+<div className="icon sky-gradient-overcast shower-rain">
     <div classname=""></div>
     <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="rain"></div>
+    <div className="cloud-exp3">
+        <div className="rain"></div>
         <div classname=""></div>
     </div>
-    <div class="cloud-exp3"></div>
+    <div className="cloud-exp3"></div>
 </div>
 
-<div class="icon sky-gradient-night rain-night">
+<div className="icon sky-gradient-night rain-night">
     <div classname=""></div>
     <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="rain"></div>
+    <div className="cloud-exp3">
+        <div className="rain"></div>
         <div classname=""></div>
     </div>
-    <div class="moon-exp"></div>
+    <div className="moon-exp"></div>
 </div>
 
-<div class="icon sky-gradient-overcast mist">
+<div className="icon sky-gradient-overcast mist">
     <div classname=""></div>
     <div classname=""></div>
-    <div class="cloud-exp3">
-        <div class="drops"></div>
+    <div className="cloud-exp3">
+        <div className="drops"></div>
     </div>
-    <div class="cloud-exp3"></div>
+    <div className="cloud-exp3"></div>
 </div>
 
 

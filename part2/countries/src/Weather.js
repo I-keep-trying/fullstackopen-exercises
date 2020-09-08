@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './Weather.css'
 
 const Weather = ({ weather, setUnit, unit }) => {
@@ -101,8 +101,12 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className=""></div>
           <div className="weather-data">
-            <div>Temperature: {weather.current.temperature} {tempDisplay}</div>
-            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
+            <div>
+              Temperature: {weather.current.temperature} {tempDisplay}
+            </div>
+            <div>
+              Wind: {weather.current.wind_speed} {windDisplay}{' '}
+            </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
@@ -171,13 +175,18 @@ const Weather = ({ weather, setUnit, unit }) => {
           <div className=""></div>
           <div className="weather-data">
             <div>Temperature: {weather.current.temperature} C</div>
-            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
+            <div>
+              Wind: {weather.current.wind_speed} {windDisplay}{' '}
+            </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
       </div>
     )
-  } else if ((code === 176 || code === 263 || code === 293) && weather.current.is_day === 'yes') {
+  } else if (
+    (code === 176 || code === 263 || code === 293) &&
+    weather.current.is_day === 'yes'
+  ) {
     return (
       <div>
         Local Time: {localTime()}
@@ -242,13 +251,18 @@ const Weather = ({ weather, setUnit, unit }) => {
           </div>
           <div className="weather-data">
             <div>Temperature: {weather.current.temperature} C</div>
-            <div>Wind: {weather.current.wind_speed} {windDisplay} </div>
+            <div>
+              Wind: {weather.current.wind_speed} {windDisplay}{' '}
+            </div>
             <div>Wind direction: {weather.current.wind_dir} </div>
           </div>
         </div>
       </div>
     )
-  } else if ((code === 122 || code === 260) && weather.current.is_day === 'yes') {
+  } else if (
+    (code === 122 || code === 260) &&
+    weather.current.is_day === 'yes'
+  ) {
     return (
       <div>
         Local Time: {localTime()}
@@ -356,9 +370,9 @@ const Weather = ({ weather, setUnit, unit }) => {
           <button onClick={f}>F</button>
         </div>
         <br />
-        <div class="icon sky-gradient-night thunderstorm">
+        <div className="icon sky-gradient-night thunderstorm">
           {/* thunderstorm night */}
-          <div class="cloud-exp3">
+          <div className="cloud-exp3">
             <div className="cloud-exp3">
               <div className="lightning">
                 <div className="bolt"></div>
@@ -385,7 +399,10 @@ const Weather = ({ weather, setUnit, unit }) => {
         </div>
       </div>
     )
-  } else if ((code === 179 || code === 227 || code === 230) && weather.current.is_day === 'yes') {
+  } else if (
+    (code === 179 || code === 227 || code === 230) &&
+    weather.current.is_day === 'yes'
+  ) {
     return (
       <div>
         Local Time: {localTime()}
@@ -454,14 +471,15 @@ const Weather = ({ weather, setUnit, unit }) => {
         </div>
       </div>
     )
-  } else if ((
-    code === 143 ||
-    code === 182 ||
-    code === 185 ||
-    code === 266 ||
-    code === 281 ||
-    code === 284
-  ) && weather.current.is_day === 'yes') {
+  } else if (
+    (code === 143 ||
+      code === 182 ||
+      code === 185 ||
+      code === 266 ||
+      code === 281 ||
+      code === 284) &&
+    weather.current.is_day === 'yes'
+  ) {
     return (
       <div>
         Local Time: {localTime()}
@@ -601,14 +619,15 @@ const Weather = ({ weather, setUnit, unit }) => {
         </div>
       </div>
     )
-  } else if ((
-    code === 296 ||
-    code === 299 ||
-    code === 302 ||
-    code === 305 ||
-    code === 308 ||
-    code === 311
-  ) && weather.current.is_day === 'yes') {
+  } else if (
+    (code === 296 ||
+      code === 299 ||
+      code === 302 ||
+      code === 305 ||
+      code === 308 ||
+      code === 311) &&
+    weather.current.is_day === 'yes'
+  ) {
     return (
       <div>
         Local Time: {localTime()}
