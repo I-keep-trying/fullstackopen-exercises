@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
@@ -27,6 +27,7 @@ function App() {
     blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
   }, [dispatch])
 
+  const blogs = useSelector((state) => state.blogs)
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
     if (loggedUserJSON) {
@@ -67,7 +68,7 @@ function App() {
 
   const blogForm = () => (
     <Togglable buttonLabel="Add blog" cancel="cancel" ref={blogFormRef}>
-      <NewBlog />
+      <NewBlog blogs={blogs} user={user} />
     </Togglable>
   )
 

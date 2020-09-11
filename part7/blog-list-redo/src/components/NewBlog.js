@@ -4,7 +4,7 @@ import { createBlog } from '../reducers/blogReducer'
 import blogService from '../services/blogs'
 import { notificationChange } from '../reducers/notificationReducer'
 
-const NewBlog = () => {
+const NewBlog = ({ blogs, user }) => {
   const dispatch = useDispatch()
 
   const addBlog = (e) => {
@@ -14,15 +14,19 @@ const NewBlog = () => {
       author: e.target.author.value,
       url: e.target.url.value,
       likes: 0,
+      user,
     }
     e.target.title.value = ''
     e.target.author.value = ''
     e.target.url.value = ''
-    dispatch(createBlog(newBlog))
+
     dispatch(
       notificationChange(`You added a blog titled "${newBlog.title} "`, 2000)
     )
-    blogService.create(newBlog)
+    blogService.create(newBlog).then((response) => {
+      dispatch(createBlog(response))
+    })
+    
   }
 
   return (

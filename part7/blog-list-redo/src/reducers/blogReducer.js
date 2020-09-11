@@ -10,6 +10,16 @@ const blogReducer = (state = [], action) => {
       const id = action.blog.id
       return state.map((blog) => (blog.id !== id ? blog : action.blog))
     }
+    case 'DELETE': {
+      const id = action.blog.id
+      console.log('delete blog reducer', action.blog)
+      console.log('delete blog state', state)
+      const filteredBlogs = state.filter((blog) =>
+        blog.id !== id ? blog : null
+      )
+      console.log('filteredBlogs', filteredBlogs)
+      return filteredBlogs
+    }
 
     default:
       return state
@@ -24,6 +34,8 @@ export const initializeBlogs = (blogs) => {
 }
 
 export const createBlog = (data) => {
+ //   blogService.create(newBlog)
+console.log('create blog action',data)
   return {
     type: 'NEW_BLOG',
     data,
@@ -39,6 +51,13 @@ export const likeBlog = (blog) => {
   }
 }
 
-
+export const deleteYourBlog = (blog) => {
+  console.log('blog action', blog)
+  blogService.deleteBlog(blog)
+  return {
+    type: 'DELETE',
+    blog,
+  }
+}
 
 export default blogReducer
