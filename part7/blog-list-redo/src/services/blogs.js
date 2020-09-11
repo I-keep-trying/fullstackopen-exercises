@@ -34,9 +34,11 @@ const create = async (newObject) => {
 }
 
 const update = async (changeObject) => {
+  // patch request {id: "5f455c901187c53d0cd22b97", likes: 22}
+  const likes = {likes: changeObject.likes}
   const response = await axios.patch(
     `${baseUrl}/${changeObject.id}`,
-    changeObject
+    likes
   )
   return response.data
 }

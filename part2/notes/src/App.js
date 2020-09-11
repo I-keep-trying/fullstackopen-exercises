@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react'
 import Note from './components/Note'
 import noteService from './services/notes'
 import loginService from './services/login'
-import Notification from './components/Notification'
 import Footer from './components/Footer'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
@@ -16,7 +15,6 @@ import './App.css'
 const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)

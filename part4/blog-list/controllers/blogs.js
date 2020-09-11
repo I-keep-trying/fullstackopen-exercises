@@ -89,7 +89,7 @@ blogsRouter.put('/:id', async (request, response) => {
   response.json(updatedBlog)
 })
 
-blogsRouter.patch('/:id', async (request, response) => {
+/* blogsRouter.patch('/:id', async (request, response) => {
   if (Object.keys(request.body).length === 0) {
     return response.status(400).send('content missing').end()
   }
@@ -118,9 +118,9 @@ blogsRouter.patch('/:id', async (request, response) => {
   })
   console.log('updatedBlog', updatedBlog)
   response.json(updatedBlog)
-})
+}) */
 
-/* blogsRouter.patch('/:id', async (request, response) => {
+blogsRouter.patch('/:id', async (request, response) => {
   if (Object.keys(request.body).length === 0) {
     return response.status(400).send('content missing').end()
   }
@@ -131,6 +131,6 @@ blogsRouter.patch('/:id', async (request, response) => {
   )
 
   response.json(updatedBlog)
-}) */
+})
 
 module.exports = blogsRouter

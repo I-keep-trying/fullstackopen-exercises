@@ -1,7 +1,5 @@
 import noteService from '../services/notes'
 
-const generateId = () => Number((Math.random() * 1000000).toFixed(0))
-
 const noteReducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_NOTE': {

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addVote } from '../reducers/anecdoteReducer'
 import { notificationChange } from '../reducers/notificationReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Anecdote = ({ anecdote, handleClick }) => {
   return (
@@ -13,10 +14,17 @@ const Anecdote = ({ anecdote, handleClick }) => {
 }
 
 const AnecdoteList = props => {
+  const anecdotes = useSelector(state =>
+    state.anecdotes
+      .filter(a => a.content.toLowerCase().includes(state.filter))
+      .sort((a, b) => {
+        return b.votes - a.votes
+      })
+  )
   return (
     <div style={{ marginBottom: '1em' }}>
       <ul>
-        {props.anecdotes.map(anecdote => {
+        {anecdotes.map(anecdote => {
           return (
             <Anecdote
               key={anecdote.id}

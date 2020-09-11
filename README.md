@@ -36,7 +36,7 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 # [Part 6](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6)
 
-## [redux counter](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-counter) - also notes
+## [redux notes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/redux-counter)
 
 ## [unicafe-redux](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part6/unicafe-redux)
 
@@ -49,3 +49,5 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 ## [anecdotes](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/anecdotes-react-router)
 
 ## [countries hook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/country-hook)
+
+## [blog list redux](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/blog-list-redo)

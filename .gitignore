@@ -1,8 +1,10 @@
-/part1/unicafe/node_modules
+*/*/node_modules
+*/*/.env
+
 /part1/unicafe/src/App.js
 /part1/unicafe/src/App2.js
 /part1/unicafe/src/App.css
-/part2/countries/.env
+
 /part2/countries/Multilingual_Weather_Conditions.csv
 /part2/countries/wwoConditionCodes.txt
 /part2/countries/wwoConditionCodes.xml
@@ -10,21 +12,8 @@
 
 /part2/countries/countries-all.js
 
-/part2/phonebook/node_modules
-/part3/hello/node_modules
 /part3/notes
 
-/part4/blog-list/node_modules
-/part4/blog-list/.env
 /part4/blog-list/Response*
 
-/part5/blog-list-front-end2/node_modules
-
-/part5.1/blog-list-frontend/node_modules
-
-/part6/redux-counter/node_modules
 /part6/redux-counter/MOVETHISDIRECTORY
-
-/part6/unicafe-redux/node_modules
-
-/part6/redux-anecdotes/node_modules
