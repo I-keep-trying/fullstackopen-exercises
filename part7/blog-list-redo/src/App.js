@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
-import { logoutUser } from './reducers/userReducer'
+import { logoutUser, getUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
@@ -21,15 +21,17 @@ function App() {
 
   useEffect(() => {
     blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
+    dispatch(getUser(user))
   }, [dispatch])
 
   const user = useSelector((state) => state.user)
   console.log('App.js user state', user)
 
-    useEffect(() => {
+      useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedInBlogAppUser')
     if (loggedUserJSON) {
       blogService.setToken(user.token)
+      
     }
   }, [user])
 
@@ -66,6 +68,7 @@ function App() {
           <div>
             User <i> {user.name} </i>is logged in{' '}
             <button onClick={handleLogout}>logout</button>
+            <button onClick={() => dispatch(getUser(user))}>get user</button>
             {blogForm()}
           </div>
         )}
