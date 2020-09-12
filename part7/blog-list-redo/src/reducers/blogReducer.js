@@ -12,12 +12,9 @@ const blogReducer = (state = [], action) => {
     }
     case 'DELETE': {
       const id = action.blog.id
-      console.log('delete blog reducer', action.blog)
-      console.log('delete blog state', state)
       const filteredBlogs = state.filter((blog) =>
         blog.id !== id ? blog : null
       )
-      console.log('filteredBlogs', filteredBlogs)
       return filteredBlogs
     }
 
@@ -34,8 +31,6 @@ export const initializeBlogs = (blogs) => {
 }
 
 export const createBlog = (data) => {
- //   blogService.create(newBlog)
-console.log('create blog action',data)
   return {
     type: 'NEW_BLOG',
     data,
@@ -52,7 +47,6 @@ export const likeBlog = (blog) => {
 }
 
 export const deleteYourBlog = (blog) => {
-  console.log('blog action', blog)
   blogService.deleteBlog(blog)
   return {
     type: 'DELETE',

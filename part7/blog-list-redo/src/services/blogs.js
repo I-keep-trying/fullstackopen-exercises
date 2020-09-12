@@ -30,7 +30,6 @@ const create = async (newObject) => {
     headers: { Authorization: token },
   }
   const response = await axios.post(baseUrl, newObject, config)
-  console.log('axios create new response', response.data)
   return response.data
 }
 
@@ -42,7 +41,6 @@ const update = async (changeObject) => {
 }
 
 const deleteBlog = (deleteObject) => {
-  console.log('axios delete request', deleteObject.id)
   const config = {
     headers: { Authorization: token },
   }

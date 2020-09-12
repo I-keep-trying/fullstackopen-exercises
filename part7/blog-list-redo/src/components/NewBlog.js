@@ -1,11 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import blogService from '../services/blogs'
 import { notificationChange } from '../reducers/notificationReducer'
 
-const NewBlog = ({ blogs, user }) => {
+const NewBlog = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
 
   const addBlog = (e) => {
     e.preventDefault()
@@ -26,7 +27,6 @@ const NewBlog = ({ blogs, user }) => {
     blogService.create(newBlog).then((response) => {
       dispatch(createBlog(response))
     })
-    
   }
 
   return (

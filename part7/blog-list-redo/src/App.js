@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
+import { logoutUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
@@ -9,17 +10,12 @@ import NewBlog from './components/NewBlog'
 import Togglable from './components/Togglable'
 import Footer from './components/Footer'
 
-import { notificationChange } from './reducers/notificationReducer'
-
 import logo from './blog-icon.png'
 
 import './App.css'
 
 function App() {
   const dispatch = useDispatch()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
 
   const blogFormRef = useRef()
 
@@ -27,55 +23,33 @@ function App() {
     blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
   }, [dispatch])
 
-  const blogs = useSelector((state) => state.blogs)
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-  }, [])
+  const user = useSelector((state) => state.user)
+  console.log('App.js user state', user)
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
-    try {
-      const user = await blogService.login({
-        username,
-        password,
-      })
-      window.localStorage.setItem('loggedBlogappUser', JSON.stringify(user))
+    useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedInBlogAppUser')
+    if (loggedUserJSON) {
       blogService.setToken(user.token)
-      setUser(user)
-      setUsername('')
-      setPassword('')
-    } catch (exception) {
-      dispatch(notificationChange('Wrong credentials', 2000))
     }
-  }
+  }, [user])
 
   const loginForm = () => (
     <Togglable buttonLabel="login">
-      <LoginForm
-        username={username}
-        password={password}
-        handleUsernameChange={({ target }) => setUsername(target.value)}
-        handlePasswordChange={({ target }) => setPassword(target.value)}
-        handleSubmit={handleLogin}
-      />
+      <LoginForm logout={handleLogout} />
     </Togglable>
   )
 
   const blogForm = () => (
     <Togglable buttonLabel="Add blog" cancel="cancel" ref={blogFormRef}>
-      <NewBlog blogs={blogs} user={user} />
+      <NewBlog />
     </Togglable>
   )
 
   const handleLogout = () => {
-    window.localStorage.removeItem('loggedBlogappUser')
+    console.log('logout happened', user)
+    window.localStorage.removeItem('loggedInBlogAppUser')
     blogService.setToken('')
-    setUser(null)
+    dispatch(logoutUser())
   }
 
   return (
