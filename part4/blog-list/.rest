@@ -12,10 +12,10 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RfVXNlciIsImlkIjoiNWYzNDNkMDA5MGM2YzEzMWEwNzI5YjlmIiwiaWF0IjoxNTk3NzgyMDAyfQ.x7VOZfITN2MIPvsocJ_HVhnpUhqX-Y8BRqkoV13ZK6o
 
 {
-    "title": "We want a shrubbery!!We want a shrubbery!!We want a shrubbery!!We want a shrubbery!!",
-    "author": "Michael Chan",
-    "url": "https://reactpatterns.com/",
-    "likes": 75
+        "author": "Michael Chan",
+         "likes": 75,
+    "title": "!!We want a shrubbery!!",       
+    "url": "https://reactpatterns.com/"
     }
 ###
 

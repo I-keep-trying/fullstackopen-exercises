@@ -1,31 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { logoutUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
-import Notification from './components/Notification'
 import LoginForm from './components/LoginForm'
 import NewBlog from './components/NewBlog'
 import Togglable from './components/Togglable'
 import Footer from './components/Footer'
+import { ToastContainer, toast } from 'react-toastify'
+import './ReactToastify.css'
 
 import logo from './blog-icon.png'
 
 import './App.css'
 
 function App() {
-  const [message, setMessage] = useState('')
-
   const dispatch = useDispatch()
 
   const blogFormRef = useRef()
 
   const user = useSelector((state) => state.user)
-const state = useSelector(state => state)
+  
   useEffect(() => {
-    console.log('useEffect state',state)
-    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))   
+    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
   }, [dispatch])
 
   const loginForm = () => (
@@ -44,6 +42,9 @@ const state = useSelector(state => state)
     window.localStorage.removeItem('loggedInBlogAppUser')
     blogService.setToken('')
     dispatch(logoutUser())
+    toast(`Goodbye, ${user.name}! Come back soon!`, {
+      autoClose: 2000,
+    })
   }
 
   return (
@@ -53,14 +54,14 @@ const state = useSelector(state => state)
         <h1>Blog List</h1>
       </div>{' '}
       <div className="AppBody">
-{/*         <Notification />
- */}        {user === null ? (
+        <ToastContainer pauseOnFocusLoss={false} />
+
+        {user === null ? (
           loginForm()
         ) : (
           <div>
             User <i> {user.name} </i>is logged in{' '}
             <button onClick={handleLogout}>logout</button>
-          
             {blogForm()}
           </div>
         )}

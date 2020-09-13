@@ -4,6 +4,8 @@ import Notes from './components/Notes'
 import NewNote from './components/NewNote'
 import noteService from './services/notes'
 import { initializeNotes } from './reducers/noteReducer'
+import { ToastContainer, toast } from 'react-toastify'
+import './ReactToastify.css'
 
 const App = () => {
   const dispatch = useDispatch()

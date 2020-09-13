@@ -3,7 +3,6 @@ import blogService from '../services/blogs'
 const blogReducer = (state = [], action) => {
   switch (action.type) {
     case 'INITIALIZE': {
-      console.log('INITIALIZE action',action)
       return action.data
     }
     case 'NEW_BLOG':
@@ -26,7 +25,6 @@ const blogReducer = (state = [], action) => {
 }
 
 export const initializeBlogs = (blogs) => {
-  console.log('initialize action creator', blogs)
   return {
     type: 'INITIALIZE',
     data: blogs,

@@ -1,8 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { likeBlog, deleteYourBlog } from '../reducers/blogReducer'
+import { toast } from 'react-toastify'
 
-const Blog = ({ blog, handleClick, deleteClick }) => {
+const Blog = ({ blog }) => {
   return (
     <li>
       Title: {blog.title}
@@ -23,32 +24,44 @@ const Blogs = ({ user }) => {
   const sortedBlogs = blogs.sort((a, b) => {
     return b.likes - a.likes
   })
-console.log('blogs component', sortedBlogs)
   const addLike = (blog) => {
-    console.log('addLike button clicked', blog.title)
     dispatch(likeBlog(blog))
+    toast(`You added 1 like to "${blog.title}". `, {
+      autoClose: 2000,
+    })
   }
 
   const removeBlog = (blog) => {
-    if (user.id === blog.user.id) {
-      if (window.confirm(`Are you sure you want to delete ${blog.title}?`)) {
+    if (user === null) {
+      toast('user null unauthorized', {
+        autoClose: 2000,
+      })
+      return
+    } else if (user.id === blog.user.id) {
+      if (window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
         dispatch(deleteYourBlog(blog))
+        toast(`Your blog, "${blog.title}", has been deleted. `, {
+          autoClose: 2000,
+        })
       }
     } else {
-      return
+      toast('user unauthorized', {
+        autoClose: 2000,
+      })
     }
   }
   return (
     <>
       {sortedBlogs.map((blog) => (
         <ul key={blog.id}>
-          <Blog
-            blog={blog}
-            handleClick={() => addLike(blog)}
-            deleteClick={() => removeBlog(blog)}
-          />
-          <button onClick={addLike}>like</button>
-          <button onClick={removeBlog}>delete</button>
+          <Blog blog={blog} />
+          <button onClick={() => addLike(blog)}>like</button>
+
+          {user === null || user.id !== blog.user.id ? (
+            <div></div>
+          ) : (
+            <button onClick={() => removeBlog(blog)}>delete</button>
+          )}
         </ul>
       ))}
     </>

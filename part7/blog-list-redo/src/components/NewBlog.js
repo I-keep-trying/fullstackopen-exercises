@@ -1,11 +1,11 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import blogService from '../services/blogs'
+import { toast } from 'react-toastify'
 
 const NewBlog = () => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
 
   const addBlog = (e) => {
     e.preventDefault()
@@ -14,15 +14,17 @@ const NewBlog = () => {
       author: e.target.author.value,
       url: e.target.url.value,
       likes: 0,
-      user,
+      // user,
     }
     e.target.title.value = ''
     e.target.author.value = ''
     e.target.url.value = ''
 
-    console.log('create new blog object from component', newBlog)
     blogService.create(newBlog).then((response) => {
       dispatch(createBlog(response))
+      toast(`A new blog, "${response.title}", has been added. `, {
+        autoClose: 2000,
+      })
     })
   }
 

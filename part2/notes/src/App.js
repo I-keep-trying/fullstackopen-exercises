@@ -8,6 +8,7 @@ import Togglable from './components/Togglable'
 import NoteForm from './components/NoteForm'
 
 import { ToastContainer, toast } from 'react-toastify'
+import './ReactToastify.css'
 
 import logo from './note-icon.png'
 import './App.css'

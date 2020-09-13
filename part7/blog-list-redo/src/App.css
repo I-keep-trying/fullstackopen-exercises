@@ -137,9 +137,8 @@ li {
 
 ol,
 ul {
-  margin: 0;
+  margin: 1.5em;
   padding: 0;
   list-style: none;
-  display: grid;
-  grid-gap: 1rem;
+
 }
