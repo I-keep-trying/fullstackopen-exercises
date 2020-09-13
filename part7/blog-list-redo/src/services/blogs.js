@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 const baseUrl = '/api/blogs'
 const loginUrl = '/api/login'
 
@@ -9,11 +10,17 @@ const login = async (credentials) => {
 
 let token = null
 
+
 const setToken = (newToken) => {
-  token = `bearer ${newToken}`
+let token = `bearer ${newToken}`
+console.log('token', token)
 }
 
 const getAll = () => {
+  console.log('getAll token', token)
+  // after initial login, token prints to console
+  // after any action that causes refresh, token prints null here, BUT store.subscribe
+  // still confirms token is retained in store.
   const request = axios.get(baseUrl)
   return request.then((response) => response.data)
 }
@@ -26,14 +33,20 @@ const getOne = (blogObject) => {
 }
 
 const create = async (newObject) => {
+ // console.log('create new blog token', token)
+// token is always 'null' here
   const config = {
     headers: { Authorization: token },
   }
+  console.log('axios post newObject', newObject)
+  console.log('axios post config', config)
   const response = await axios.post(baseUrl, newObject, config)
+  console.log('axios post response', response)
   return response.data
 }
 
 const update = async (changeObject) => {
+
   // patch request {id: "5f455c901187c53d0cd22b97", likes: 22}
   const likes = { likes: changeObject.likes }
   const response = await axios.patch(`${baseUrl}/${changeObject.id}`, likes)

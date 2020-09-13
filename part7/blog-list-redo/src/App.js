@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
-import { logoutUser, getUser } from './reducers/userReducer'
+import { logoutUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
 import Notification from './components/Notification'
@@ -15,25 +15,18 @@ import logo from './blog-icon.png'
 import './App.css'
 
 function App() {
+  const [message, setMessage] = useState('')
+
   const dispatch = useDispatch()
 
   const blogFormRef = useRef()
 
-  useEffect(() => {
-    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
-    dispatch(getUser(user))
-  }, [dispatch])
-
   const user = useSelector((state) => state.user)
-  console.log('App.js user state', user)
-
-      useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedInBlogAppUser')
-    if (loggedUserJSON) {
-      blogService.setToken(user.token)
-      
-    }
-  }, [user])
+const state = useSelector(state => state)
+  useEffect(() => {
+    console.log('useEffect state',state)
+    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))   
+  }, [dispatch])
 
   const loginForm = () => (
     <Togglable buttonLabel="login">
@@ -48,7 +41,6 @@ function App() {
   )
 
   const handleLogout = () => {
-    console.log('logout happened', user)
     window.localStorage.removeItem('loggedInBlogAppUser')
     blogService.setToken('')
     dispatch(logoutUser())
@@ -61,14 +53,14 @@ function App() {
         <h1>Blog List</h1>
       </div>{' '}
       <div className="AppBody">
-        <Notification />
-        {user === null ? (
+{/*         <Notification />
+ */}        {user === null ? (
           loginForm()
         ) : (
           <div>
             User <i> {user.name} </i>is logged in{' '}
             <button onClick={handleLogout}>logout</button>
-            <button onClick={() => dispatch(getUser(user))}>get user</button>
+          
             {blogForm()}
           </div>
         )}

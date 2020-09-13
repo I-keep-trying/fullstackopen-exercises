@@ -2,8 +2,10 @@ import blogService from '../services/blogs'
 
 const blogReducer = (state = [], action) => {
   switch (action.type) {
-    case 'INITIALIZE':
+    case 'INITIALIZE': {
+      console.log('INITIALIZE action',action)
       return action.data
+    }
     case 'NEW_BLOG':
       return [...state, action.data]
     case 'ADD_LIKE': {
@@ -24,6 +26,7 @@ const blogReducer = (state = [], action) => {
 }
 
 export const initializeBlogs = (blogs) => {
+  console.log('initialize action creator', blogs)
   return {
     type: 'INITIALIZE',
     data: blogs,
@@ -37,6 +40,7 @@ export const createBlog = (data) => {
   }
 }
 
+// blogReducer.js
 export const likeBlog = (blog) => {
   const likeBlog = { ...blog, likes: blog.likes + 1 }
   blogService.update(likeBlog)

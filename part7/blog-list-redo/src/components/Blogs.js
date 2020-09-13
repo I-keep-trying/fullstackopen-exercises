@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { likeBlog, deleteYourBlog } from '../reducers/blogReducer'
-import { notificationChange } from '../reducers/notificationReducer'
 
 const Blog = ({ blog, handleClick, deleteClick }) => {
   return (
@@ -13,8 +12,6 @@ const Blog = ({ blog, handleClick, deleteClick }) => {
       Url: {blog.url}
       <br />
       Likes: {blog.likes}
-      <button onClick={handleClick}>like</button>
-      <button onClick={deleteClick}>delete</button>
     </li>
   )
 }
@@ -22,23 +19,23 @@ const Blog = ({ blog, handleClick, deleteClick }) => {
 const Blogs = ({ user }) => {
   const dispatch = useDispatch()
   const blogs = useSelector((state) => state.blogs)
+
   const sortedBlogs = blogs.sort((a, b) => {
     return b.likes - a.likes
   })
-
-  const addLike = async (blog) => {
+console.log('blogs component', sortedBlogs)
+  const addLike = (blog) => {
+    console.log('addLike button clicked', blog.title)
     dispatch(likeBlog(blog))
-    dispatch(notificationChange(`You liked "${blog.title}"`, 2000))
   }
 
   const removeBlog = (blog) => {
     if (user.id === blog.user.id) {
       if (window.confirm(`Are you sure you want to delete ${blog.title}?`)) {
         dispatch(deleteYourBlog(blog))
-        dispatch(notificationChange('blog deleted', 2000))
       }
     } else {
-      dispatch(notificationChange('Unauthorized', 2000))
+      return
     }
   }
   return (
@@ -50,6 +47,8 @@ const Blogs = ({ user }) => {
             handleClick={() => addLike(blog)}
             deleteClick={() => removeBlog(blog)}
           />
+          <button onClick={addLike}>like</button>
+          <button onClick={removeBlog}>delete</button>
         </ul>
       ))}
     </>

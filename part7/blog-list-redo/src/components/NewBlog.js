@@ -2,7 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBlog } from '../reducers/blogReducer'
 import blogService from '../services/blogs'
-import { notificationChange } from '../reducers/notificationReducer'
 
 const NewBlog = () => {
   const dispatch = useDispatch()
@@ -21,9 +20,7 @@ const NewBlog = () => {
     e.target.author.value = ''
     e.target.url.value = ''
 
-    dispatch(
-      notificationChange(`You added a blog titled "${newBlog.title} "`, 2000)
-    )
+    console.log('create new blog object from component', newBlog)
     blogService.create(newBlog).then((response) => {
       dispatch(createBlog(response))
     })

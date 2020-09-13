@@ -1,11 +1,11 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { loginUser, getUser } from '../reducers/userReducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { loginUser } from '../reducers/userReducer'
 import blogService from '../services/blogs'
-import { notificationChange } from '../reducers/notificationReducer'
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user)
 
   const loginHandler = (e) => {
     e.preventDefault()
@@ -17,12 +17,19 @@ const LoginForm = () => {
     e.target.password.value = ''
 
     blogService.login(userData).then((response) => {
-      dispatch(loginUser(response))
-      dispatch(notificationChange(`Welcome, ${response.name} !`, 2000))
+      console.log('login response LoginForm', response)
+      /* 
+      id: "5f343d0090c6c131a0729b9f"
+      name: "test"
+      token: "eyJhbGciOiJIUzI1NiIsInR5c..."
+      username: "Test_User"
+      */
+      dispatch(loginUser(response)) 
       window.localStorage.setItem(
         'loggedInBlogAppUser',
         JSON.stringify(response.token)
       )
+      blogService.setToken(response.token)
     })
   }
   return (
