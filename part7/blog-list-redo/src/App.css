@@ -39,6 +39,18 @@
   flex-shrink: 0;
 }
 
+.App-menu {
+  background-color: #282c34;
+  min-height: 2vh;
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  padding-left: 0.5em;
+  flex-shrink: 0;
+}
 .App-footer {
   position: fixed;
   left: 0;
@@ -47,6 +59,29 @@
   background-color: #282c34;
   color: white;
   text-align: center;
+}
+
+.User {
+  color: DarkGray;
+  position: fixed;
+  right: 0.5rem;
+  top: 0;
+  text-align: right;
+}
+
+.LogInOut {
+  color: #0afbff;
+  position: fixed;
+  right: 0.5rem;
+  top: 2rem;
+  text-align: right;
+}
+
+.LogInOut:hover,
+.LogInOut:active {
+  cursor: pointer;
+  color: #0afbff;
+  text-decoration: none;
 }
 
 .blog-detail {
@@ -140,5 +175,4 @@ ul {
   margin: 1.5em;
   padding: 0;
   list-style: none;
-
 }
