@@ -1,20 +1,12 @@
 import React from 'react'
-//import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { likeBlog, deleteYourBlog } from '../reducers/blogReducer'
 import { toast } from 'react-toastify'
 
-export const Blog = ({ blog }) => {
-  /* 
-    author: "cupcake"
-id: "5f3ea774fd1f7135b834e725"
-likes: 50
-title: "We want a shrubbery!!"
-url: "www.website.com"
-    */
-  /*   const id = useParams().id
-  const blog = blogs.find((n) => n.id === Number(id)) */
-
+export const Blog = ({ blogs }) => {
+  const id = useParams().id
+  const blog = blogs.find((n) => n.id === Number(id))
   return (
     <div key={blog.id}>
       Title: {blog.title}
@@ -28,9 +20,10 @@ url: "www.website.com"
   )
 }
 
-const Blogs = ({ user }) => {
+const Blogs = ({ blogs, user }) => {
   const dispatch = useDispatch()
   const blogs = useSelector((state) => state.blogs)
+  console.log('blogs component', blogs)
   const sortedBlogs = blogs.sort((a, b) => {
     return b.likes - a.likes
   })
@@ -62,31 +55,17 @@ const Blogs = ({ user }) => {
   }
   return (
     <>
-      {/*       <ul>
+      <ul>
         {sortedBlogs.map((blog) => (
           <li key={blog.id}>
-            <Link to={`/blogs/${blog.id}`}>{blog.title} </Link>
+            <Blog blogs={blogs} />
           </li>
         ))}
-      </ul> */}
+      </ul>
+
       {/* 
 <Link to={`/blogs/${blog.id}`}>{blog.title} </Link>
 */}
-
-      {sortedBlogs.map((blog) => {
-        return (
-          <ul key={blog.id}>
-            <Blog blog={blog} blogs={sortedBlogs} />
-            <button onClick={() => addLike(blog)}>like</button>
-
-            {user === null || user.id !== blog.user.id ? (
-              <div>delete unauthorized</div>
-            ) : (
-              <button onClick={() => removeBlog(blog)}>delete</button>
-            )}
-          </ul>
-        )
-      })}
     </>
   )
 }

@@ -19,7 +19,7 @@ const NewBlog = () => {
     e.target.title.value = ''
     e.target.author.value = ''
     e.target.url.value = ''
-
+console.log('new blog object',newBlog)
     blogService.create(newBlog).then((response) => {
       dispatch(createBlog(response))
       toast(`A new blog, "${response.title}", has been added. `, {

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogReducer'
 import { logoutUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
+import Users from './components/Users'
 import blogService from './services/blogs'
 import LoginForm from './components/LoginForm'
 import NewBlog from './components/NewBlog'
@@ -20,11 +21,14 @@ function App() {
 
   const blogFormRef = useRef()
 
-  const user = useSelector((state) => state.user)
-  
+  const user = useSelector((state) => {
+    return state.user
+  })
+
   useEffect(() => {
     blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
   }, [dispatch])
+
 
   const loginForm = () => (
     <Togglable buttonLabel="login">
@@ -46,7 +50,7 @@ function App() {
       autoClose: 2000,
     })
   }
-
+  
   return (
     <div className="App">
       <div className="App-header">
@@ -67,6 +71,7 @@ function App() {
         )}
         <br />
         <Blogs user={user} />
+        <Users />
       </div>
       <Footer />
     </div>

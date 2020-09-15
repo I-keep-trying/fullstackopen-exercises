@@ -46,7 +46,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3007/api/users
+GET http://localhost:3007/api/users/
 ###
 POST http://localhost:3007/api/login
 Content-Type: application/json

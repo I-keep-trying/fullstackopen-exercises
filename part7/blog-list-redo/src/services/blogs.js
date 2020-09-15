@@ -3,14 +3,18 @@ import axios from 'axios'
 const baseUrl = '/api/blogs'
 const loginUrl = '/api/login'
 
+let token
+
+
 const login = async (credentials) => {
   const response = await axios.post(loginUrl, credentials)
+  window.localStorage.setItem(
+    'loggedInBlogAppUser',
+    JSON.stringify(response.data)
+  )
+  setToken(response.data.token)
   return response.data
 }
-
-let token = `bearer ${JSON.parse(
-  window.localStorage.getItem('loggedInBlogAppUser')
-)}`
 
 const setToken = (newToken) => {
   token = `bearer ${newToken}`
@@ -60,4 +64,5 @@ export default {
   login,
   setToken,
   deleteBlog,
+  token,
 }
