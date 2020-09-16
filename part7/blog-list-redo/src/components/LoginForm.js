@@ -1,16 +1,18 @@
 import React, { useRef } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { loginUser, logoutUser } from '../reducers/userReducer'
 import blogService from '../services/blogs'
 import { toast } from 'react-toastify'
 import NewBlog from '../components/NewBlog'
 import Togglable from '../components/Togglable'
 
-const LoginForm = ({ user }) => {
+const LoginForm = () => {
   const dispatch = useDispatch()
-
+  const history = useHistory()
   const blogFormRef = useRef()
 
+  const user = useSelector(state => state.user)
   const loginHandler = (e) => {
     e.preventDefault()
     const userData = {
@@ -27,6 +29,7 @@ const LoginForm = ({ user }) => {
         autoClose: 2000,
       })
     })
+    history.push('/')
   }
 
   const handleLogout = () => {
@@ -48,28 +51,26 @@ const LoginForm = ({ user }) => {
     <div>
       {user === null ? (
         <div>
-        <h2>Login</h2>
+          <h2>Login</h2>
 
-        <form onSubmit={loginHandler}>
-          <div>
-            <label>username</label>
-            <input name="username" />
-            Test_User
-          </div>
-          <div>
-            <label>password</label>
-            <input name="password" type="password" />
-            password
-          </div>
-          <button id="login-button" type="submit">
-            Login
-          </button>
-        </form>
-      </div>
-      ) : (
-        <div>
-          {blogForm()}
+          <form onSubmit={loginHandler}>
+            <div>
+              <label>username</label>
+              <input name="username" />
+              Test_User
+            </div>
+            <div>
+              <label>password</label>
+              <input name="password" type="password" />
+              password
+            </div>
+            <button id="login-button" type="submit">
+              Login
+            </button>
+          </form>
         </div>
+      ) : (
+        <div>{blogForm()}</div>
       )}
     </div>
   )

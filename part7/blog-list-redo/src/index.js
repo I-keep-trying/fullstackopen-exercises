@@ -1,4 +1,4 @@
-import React from 'react'
+/* import React from 'react'
 import { PersistGate } from 'redux-persist/integration/react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -13,12 +13,12 @@ ReactDOM.render(
     </PersistGate>
   </Provider>,
   document.getElementById('root')
-)
+) */
 
-/* import React from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import App from './App'
+import App from './App1'
 import { store } from './store1'
 import './index.css'
 
@@ -27,4 +27,4 @@ ReactDOM.render(
     <App />
   </Provider>,
   document.getElementById('root')
-) */
+)

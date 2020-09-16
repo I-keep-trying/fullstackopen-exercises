@@ -1,15 +1,17 @@
-//import blogService from '../services/blogs'
+import blogService from '../services/blogs'
 import axios from 'axios'
 
 export const initialState = {
   loading: false,
   hasErrors: false,
-  posts: [],
+  blogs: [],
 }
 
 const blogsReducer = (state = initialState, action) => {
+  console.log('blogs reducer action', action)
   switch (action.type) {
     case 'INITIALIZE': {
+      console.log('INITIALIZE state', state)
       return { ...state, loading: true }
     }
     case 'GET_BLOGS_SUCCESS': {
@@ -37,11 +39,9 @@ const blogsReducer = (state = initialState, action) => {
   }
 }
 
-export const initializeBlogs = () => {
-  return {
-    type: 'INITIALIZE'
-  }
-}
+export const initializeBlogs = () => ({
+  type: 'INITIALIZE',
+})
 
 //blogReducer.js
 
@@ -50,7 +50,7 @@ export const getBlogsSuccess = (blogs) => ({
   payload: blogs,
 })
 
-export const getBlogsFailure = () => ({type: 'GET_BLOGS_FAILURE'})
+export const getBlogsFailure = () => ({ type: 'GET_BLOGS_FAILURE' })
 
 export const fetchBlogs = () => {
   return async (dispatch) => {
@@ -58,7 +58,8 @@ export const fetchBlogs = () => {
 
     try {
       const response = await axios.get(`/api/blogs/`)
-      console.log('axios response', response)
+      //const response = await blogService.getAll()
+      console.log('axios response', response.data)
 
       const data = await response.data
       console.log('axios response', data)

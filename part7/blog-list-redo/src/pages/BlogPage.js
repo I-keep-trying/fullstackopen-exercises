@@ -18,7 +18,6 @@ const Blog = ({ match }) => {
   }, [dispatch, match])
 
   const blog = useSelector((state) => {
-      console.log('BlogPage state',state)
       return state.blog.blog})
   //const comments = useSelector((state) => state.comments.comments)
   const loading = useSelector((state) => ({

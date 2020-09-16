@@ -21,11 +21,11 @@ const setToken = (newToken) => {
 
 const getAll = () => {
   const request = axios.get(baseUrl)
+  console.log('axios getAll request',request)
   return request.then((response) => response.data)
 }
 
 const getOne = (id) => {
-  console.log('getOne id param', id)
   const request = axios.get(`${baseUrl}/${id}`)
   return request.then((response) => {
     return response.data

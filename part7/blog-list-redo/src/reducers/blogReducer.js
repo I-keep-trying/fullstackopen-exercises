@@ -1,4 +1,3 @@
-import blogService from '../services/blogs'
 import axios from 'axios'
 
 export const initialState = {
@@ -8,12 +7,10 @@ export const initialState = {
 }
 
 export default function blogReducer(state = initialState, action) {
-  console.log('blogReducer state', state)
   switch (action.type) {
     case 'GET_BLOG':
       return { ...state, loading: true }
     case 'GET_BLOG_SUCCESS': {
-      console.log('action.payload', action)
       return { blog: action.payload, loading: false, hasErrors: false }
     }
     case 'GET_BLOG_FAILURE':
@@ -35,10 +32,9 @@ export function fetchBlog(id) {
     dispatch(getBlog())
 
     try {
-      const response = await blogService.getOne(id)
-      console.log('api response', response)
-      const data = await response
+      const response = await axios.get(`/api/blogs/${id} `)
 
+      const data = await response.data
       dispatch(getBlogSuccess(data))
     } catch (error) {
       dispatch(getBlogFailure())
