@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { likeBlog, deleteYourBlog } from '../reducers/blogReducer'
+import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
+import Blog from './BlogItem'
 import { toast } from 'react-toastify'
 
-export const Blog = ({ blog, user }) => {
+/* export const Blog = ({ blog, user }) => {
   const dispatch = useDispatch()
 
   const [visible, setVisible] = useState(false)
@@ -62,7 +63,7 @@ export const Blog = ({ blog, user }) => {
       </div>
     </div>
   )
-}
+} */
 
 const Blogs = ({ user }) => {
   const dispatch = useDispatch()
@@ -99,6 +100,7 @@ const Blogs = ({ user }) => {
   return (
     <>
       {sortedBlogs.map((blog) => {
+          console.log('blog from Blogs',blog)
         return (
           <ul key={blog.id}>
             <Blog blog={blog} blogs={sortedBlogs} user={user} />

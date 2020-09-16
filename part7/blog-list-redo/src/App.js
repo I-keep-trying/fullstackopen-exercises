@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs } from './reducers/blogReducer'
+import { initializeBlogs } from './reducers/blogsReducer'
 import { logoutUser } from './reducers/userReducer'
 import Blogs from './components/Blogs'
 import Users from './components/Users'

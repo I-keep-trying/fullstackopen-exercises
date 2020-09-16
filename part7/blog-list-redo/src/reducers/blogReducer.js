@@ -1,59 +1,47 @@
 import blogService from '../services/blogs'
+import axios from 'axios'
 
-const blogReducer = (state = [], action) => {
+export const initialState = {
+  loading: true,
+  hasErrors: false,
+  blog: {},
+}
+
+export default function blogReducer(state = initialState, action) {
+  console.log('blogReducer state', state)
   switch (action.type) {
-    case 'INITIALIZE': {
-      return action.data
+    case 'GET_BLOG':
+      return { ...state, loading: true }
+    case 'GET_BLOG_SUCCESS': {
+      console.log('action.payload', action)
+      return { blog: action.payload, loading: false, hasErrors: false }
     }
-    case 'NEW_BLOG':
-      return [...state, action.data]
-    case 'ADD_LIKE': {
-      const id = action.blog.id
-      return state.map((blog) => (blog.id !== id ? blog : action.blog))
-    }
-    case 'DELETE': {
-      const id = action.blog.id
-      const filteredBlogs = state.filter((blog) =>
-        blog.id !== id ? blog : null
-      )
-      return filteredBlogs
-    }
-
+    case 'GET_BLOG_FAILURE':
+      return { ...state, loading: false, hasErrors: true }
     default:
       return state
   }
 }
 
-export const initializeBlogs = (blogs) => {
-  return {
-    type: 'INITIALIZE',
-    data: blogs,
+export const getBlog = () => ({ type: 'GET_BLOG' })
+export const getBlogSuccess = (blog) => ({
+  type: 'GET_BLOG_SUCCESS',
+  payload: blog,
+})
+export const getBlogFailure = () => ({ type: 'GET_BLOG_FAILURE' })
+
+export function fetchBlog(id) {
+  return async (dispatch) => {
+    dispatch(getBlog())
+
+    try {
+      const response = await blogService.getOne(id)
+      console.log('api response', response)
+      const data = await response
+
+      dispatch(getBlogSuccess(data))
+    } catch (error) {
+      dispatch(getBlogFailure())
+    }
   }
 }
-
-export const createBlog = (data) => {
-  return {
-    type: 'NEW_BLOG',
-    data,
-  }
-}
-
-// blogReducer.js
-export const likeBlog = (blog) => {
-  const likeBlog = { ...blog, likes: blog.likes + 1 }
-  blogService.update(likeBlog)
-  return {
-    type: 'ADD_LIKE',
-    blog: likeBlog,
-  }
-}
-
-export const deleteYourBlog = (blog) => {
-  blogService.deleteBlog(blog)
-  return {
-    type: 'DELETE',
-    blog,
-  }
-}
-
-export default blogReducer

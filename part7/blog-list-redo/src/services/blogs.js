@@ -5,7 +5,6 @@ const loginUrl = '/api/login'
 
 let token
 
-
 const login = async (credentials) => {
   const response = await axios.post(loginUrl, credentials)
   window.localStorage.setItem(
@@ -25,8 +24,9 @@ const getAll = () => {
   return request.then((response) => response.data)
 }
 
-const getOne = (blogObject) => {
-  const request = axios.get(`${baseUrl}/${blogObject.id}`)
+const getOne = (id) => {
+  console.log('getOne id param', id)
+  const request = axios.get(`${baseUrl}/${id}`)
   return request.then((response) => {
     return response.data
   })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { createBlog } from '../reducers/blogReducer'
+import { createBlog } from '../reducers/blogsReducer'
 import blogService from '../services/blogs'
 import { toast } from 'react-toastify'
 
