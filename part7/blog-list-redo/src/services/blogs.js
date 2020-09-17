@@ -43,6 +43,7 @@ const create = async (newObject) => {
     likes: newObject.likes,
   }
   const response = await axios.post(baseUrl, blogObject, config)
+ console.log('axios req res',response.data)
   return response.data
 }
 

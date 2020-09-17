@@ -1,12 +1,27 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { initializeBlogs } from './reducers/blogsReducer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+} from 'react-router-dom'
+
+import { fetchBlogs } from './reducers/blogsReducer'
 import { logoutUser } from './reducers/userReducer'
-import Blogs from './components/Blogs'
-import Users from './components/Users'
 import blogService from './services/blogs'
+
+import Home from './components/Home'
+import Blogs from './components/Blogs'
+import Blog from './components/Blog'
+
+import { Menu } from './components/Menu'
+import Users from './components/Users'
 import LoginForm from './components/LoginForm'
+import NewBlog from './components/NewBlog'
 import Footer from './components/Footer'
+
 import { ToastContainer, toast } from 'react-toastify'
 import './ReactToastify.css'
 
@@ -14,15 +29,19 @@ import logo from './blog-icon.png'
 
 import './App.css'
 
-function App() {
+const App = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const user = useSelector((state) => {
     return state.user
   })
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
+    blogService.getAll().then((blogs) => {
+      console.log('App useEffect ', blogs)
+      return dispatch(fetchBlogs(blogs))
+    })
   }, [dispatch])
 
   const handleLogout = () => {
@@ -35,32 +54,43 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="App-header">
-        {user === null ? (
-          <></>
-        ) : (
-          <>
-            <div className="User">
-              User <i> {user.name} </i>is logged in
-            </div>
-            <br />
-            <div className="LogInOut" onClick={handleLogout}>
-              logout
-            </div>
-          </>
-        )}
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Blog List</h1>
-      </div>{' '}
-      <div className="AppBody">
-        <ToastContainer pauseOnFocusLoss={false} />
-        <LoginForm user={user} />
-        <Blogs user={user} />
-        <Users />
+    <Router>
+      <div className="App">
+        <div className="App-header">
+          <div className="App-menu"></div>
+          <Menu />
+          {user === null ? (
+            <></>
+          ) : (
+            <>
+              <div className="User">
+                User <i> {user.name} </i>is logged in
+              </div>
+              <br />
+              <div className="LogInOut" onClick={handleLogout}>
+                logout
+              </div>
+            </>
+          )}
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1>Blog List App </h1>
+        </div>
+        <div className="AppBody">
+          <ToastContainer pauseOnFocusLoss={false} />
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/blogs" component={Blogs}></Route>
+            <Route exact path="/blogs/:id" component={Blog}></Route>
+
+            <Route exact path="/users" component={Users}></Route>
+            <Route exact path="/login" component={LoginForm}></Route>
+            <Route exact path="/newBlog" component={NewBlog}></Route>
+            <Redirect to="/" />
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </Router>
   )
 }
 

@@ -32,9 +32,10 @@ const blogsReducer = (state = initialState, action) => {
           username: newData.user.username,
         },
       }
+      const id = newBlog.id
 
       // return [...state.blogs, newBlog] // this no longer works, says 'not iterable' wtf
-      return state.blogs.concat(newBlog)
+      return state.blogs.map((blog) => (blog.id !== id ? blog : newBlog))
     }
     case 'ADD_LIKE': {
       console.log('add like action', action.blog)

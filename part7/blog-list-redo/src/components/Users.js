@@ -4,10 +4,7 @@ import userService from '../services/users'
 import { getUsers } from '../reducers/allUsersReducer'
 import Togglable from '../components/Togglable'
 
-//import { toast } from 'react-toastify'
-
 const UserDetail = ({ user }) => {
- // console.log('User component', user)
   return (
     <>
       {user.blogs.map((blog) => (
@@ -40,7 +37,6 @@ const Users = () => {
     userService.getAllUsers().then((users) => dispatch(getUsers(users)))
   }, [dispatch])
   const users = useSelector((state) => state.users)
- // console.log('users component', users)
 
   return (
     <>

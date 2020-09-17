@@ -23,7 +23,6 @@ const LoginForm = () => {
     e.target.password.value = ''
 
     blogService.login(userData).then((response) => {
-      console.log('login response', response)
       dispatch(loginUser(response))
       toast(`Welcome, ${response.name}!`, {
         autoClose: 2000,

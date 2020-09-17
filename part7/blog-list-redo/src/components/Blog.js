@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
 
 import { fetchBlog } from '../reducers/blogReducer'
-//import { fetchComments } from '../actions/commentsActions'
 
-//import { Comment } from '../components/Comment'
 import { toast } from 'react-toastify'
 
 const Blog = ({ match }) => {
@@ -20,14 +18,11 @@ console.log('useEffect blog page')
 
   const blog = useSelector((state) => {
       return state.blog.blog})
-  //const comments = useSelector((state) => state.comments.comments)
   const loading = useSelector((state) => ({
     blog: state.blog.loading,
-   // comments: state.comments.loading,
   }))
   const hasErrors = useSelector((state) => ({
     blog: state.blog.hasErrors,
-  //  comments: state.comments.hasErrors,
   }))
 
   const addLike = () => {
@@ -37,13 +32,26 @@ console.log('useEffect blog page')
     })
     dispatch(fetchBlog(blog.id))
   } 
-/*   const renderComments = () => {
-    if (loading.comments) return <p>Loading comments...</p>
-    if (hasErrors.comments) return <p>Unable to display comments.</p>
-
-    return comments.map((comment) => (
-      <Comment key={comment.id} comment={comment} />
-    ))
+  
+  /*   const removeBlog = (blog) => {
+    if (user === null) {
+      toast('user null unauthorized', {
+        autoClose: 2000,
+      })
+      return
+    } else if (user.id === blog.user.id) {
+      if (window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
+        dispatch(deleteYourBlog(blog))
+        toast(`Your blog, "${blog.title}", has been deleted. `, {
+          autoClose: 2000,
+        })
+        history.push('/blogs')
+      }
+    } else {
+      toast('user unauthorized', {
+        autoClose: 2000,
+      })
+    }
   } */
 
   return (
