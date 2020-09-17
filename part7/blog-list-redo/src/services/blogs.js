@@ -21,7 +21,6 @@ const setToken = (newToken) => {
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  console.log('axios getAll request',request)
   return request.then((response) => response.data)
 }
 
@@ -33,10 +32,17 @@ const getOne = (id) => {
 }
 
 const create = async (newObject) => {
+  console.log('create axios req', newObject)
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: `bearer ${newObject.user.token}` },
   }
-  const response = await axios.post(baseUrl, newObject, config)
+  const blogObject = {
+    title: newObject.title,
+    author: newObject.author,
+    url: newObject.url,
+    likes: newObject.likes,
+  }
+  const response = await axios.post(baseUrl, blogObject, config)
   return response.data
 }
 

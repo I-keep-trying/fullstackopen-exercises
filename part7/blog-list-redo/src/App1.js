@@ -12,7 +12,7 @@ import {
 
 import {
   initializeBlogs,
-  fetchBlog,
+  fetchBlogs,
   likeBlog,
   deleteYourBlog,
 } from './reducers/blogsReducer'
@@ -45,7 +45,9 @@ const App = () => {
   })
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => dispatch(initializeBlogs(blogs)))
+    blogService.getAll().then((blogs) => {
+        console.log('App useEffect ',blogs)
+        return dispatch(fetchBlogs(blogs))})
   }, [dispatch])
 
   const handleLogout = () => {

@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
 
 import { fetchBlog } from '../reducers/blogReducer'
 //import { fetchComments } from '../actions/commentsActions'
 
-import { BlogItem } from '../components/BlogItem'
 //import { Comment } from '../components/Comment'
+import { toast } from 'react-toastify'
 
 const Blog = ({ match }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     const { id } = match.params
-
-  //  dispatch(fetchComments(id))
+console.log('useEffect blog page')
+  
     dispatch(fetchBlog(id))
   }, [dispatch, match])
 
@@ -29,13 +30,13 @@ const Blog = ({ match }) => {
   //  comments: state.comments.hasErrors,
   }))
 
-  const renderBlog = () => {
-    if (loading.blog) return <p>Loading blog...</p>
-    if (hasErrors.blog) return <p>Unable to display blog.</p>
-
-    return <BlogItem blog={blog} />
-  }
-
+  const addLike = () => {
+    dispatch(likeBlog(blog))
+    toast(`You added 1 like to "${blog.title}". `, {
+      autoClose: 2000,
+    })
+    dispatch(fetchBlog(blog.id))
+  } 
 /*   const renderComments = () => {
     if (loading.comments) return <p>Loading comments...</p>
     if (hasErrors.comments) return <p>Unable to display comments.</p>
@@ -47,7 +48,15 @@ const Blog = ({ match }) => {
 
   return (
     <section>
-      {renderBlog()}
+     <h2>{blog.title}</h2>
+      <div>
+        Author: {blog.author}
+        <br />
+        Info: {blog.url}
+        <br />
+        Likes: {blog.likes}
+      </div>
+      <button onClick={addLike}>Add like</button>
     </section>
   )
 }

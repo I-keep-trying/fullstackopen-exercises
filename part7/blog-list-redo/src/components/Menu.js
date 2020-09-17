@@ -15,6 +15,9 @@ export const Menu = () => {
     <Link className="MenuItem" to="/blogs">
       Blogs
     </Link>
+    <Link className="MenuItem" to="/users">
+      Users
+    </Link>
 {user === null ?
     <Link className="MenuItem" to="/login">
       Login
