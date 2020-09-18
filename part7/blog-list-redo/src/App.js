@@ -5,12 +5,14 @@ import {
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from 'react-router-dom'
 
 import { fetchBlogs } from './reducers/blogsReducer'
-import { logoutUser } from './reducers/userReducer'
+import { fetchUsers } from './reducers/allUsersReducer'
+
+import { logoutUser } from './reducers/authReducer'
 import blogService from './services/blogs'
+import usersService from './services/users'
 
 import Home from './components/Home'
 import Blogs from './components/Blogs'
@@ -18,6 +20,7 @@ import Blog from './components/Blog'
 
 import { Menu } from './components/Menu'
 import Users from './components/Users'
+import User from './components/User'
 import LoginForm from './components/LoginForm'
 import NewBlog from './components/NewBlog'
 import Footer from './components/Footer'
@@ -31,16 +34,17 @@ import './App.css'
 
 const App = () => {
   const dispatch = useDispatch()
-  const history = useHistory()
 
-  const user = useSelector((state) => {
-    return state.user
+  const auth = useSelector((state) => {
+    return state.auth
   })
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
-      console.log('App useEffect ', blogs)
       return dispatch(fetchBlogs(blogs))
+    })
+    usersService.getAllUsers().then((users) => {
+      return dispatch(fetchUsers(users))
     })
   }, [dispatch])
 
@@ -48,7 +52,7 @@ const App = () => {
     window.localStorage.removeItem('loggedInBlogAppUser')
     blogService.setToken('')
     dispatch(logoutUser())
-    toast(`Goodbye, ${user.name}! Come back soon!`, {
+    toast(`Goodbye, ${auth.name}! Come back soon!`, {
       autoClose: 2000,
     })
   }
@@ -59,12 +63,12 @@ const App = () => {
         <div className="App-header">
           <div className="App-menu"></div>
           <Menu />
-          {user === null ? (
+          {auth === null ? (
             <></>
           ) : (
             <>
               <div className="User">
-                User <i> {user.name} </i>is logged in
+                User <i> {auth.name} </i>is logged in
               </div>
               <br />
               <div className="LogInOut" onClick={handleLogout}>
@@ -83,6 +87,7 @@ const App = () => {
             <Route exact path="/blogs/:id" component={Blog}></Route>
 
             <Route exact path="/users" component={Users}></Route>
+            <Route exact path="/users/:id" component={User}></Route>
             <Route exact path="/login" component={LoginForm}></Route>
             <Route exact path="/newBlog" component={NewBlog}></Route>
             <Redirect to="/" />

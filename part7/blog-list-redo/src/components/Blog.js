@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
-
 import { fetchBlog } from '../reducers/blogReducer'
+import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
 
 import { toast } from 'react-toastify'
 
@@ -11,41 +10,56 @@ const Blog = ({ match }) => {
 
   useEffect(() => {
     const { id } = match.params
-console.log('useEffect blog page')
-  
+
     dispatch(fetchBlog(id))
   }, [dispatch, match])
+  const blogs = useSelector((state) => state.blogs.blogs)
+  console.log('blogs from Blog componenet', blogs) //like + 1 immediatley
+  const blog = useSelector((state) => state.blog.blog)
+  console.log('blog from Blog component', blog) //like + 1 after refresh
+  const auth = useSelector((state) => state.auth)
 
-  const blog = useSelector((state) => {
-      return state.blog.blog})
-  const loading = useSelector((state) => ({
-    blog: state.blog.loading,
-  }))
-  const hasErrors = useSelector((state) => ({
-    blog: state.blog.hasErrors,
-  }))
+  const blogLoading = useSelector((state) => state.blog.loading)
+  console.log('blog loading', blogLoading)
+
+  const blogsLoading = useSelector((state) => state.blogs.loading)
+  console.log('blogs loading', blogsLoading)
 
   const addLike = () => {
-    dispatch(likeBlog(blog))
-    toast(`You added 1 like to "${blog.title}". `, {
+    if (!blogLoading) {
+      console.log('blog???', blog)
+
+      dispatch(likeBlog(blog))
+      return dispatch(fetchBlog(blog.id))
+    } else {
+      return null
+    } /*    
+
+
+toast(`You added 1 like to "${blog.title}". `, {
       autoClose: 2000,
-    })
-    dispatch(fetchBlog(blog.id))
-  } 
-  
-  /*   const removeBlog = (blog) => {
-    if (user === null) {
+    }) 
+    const id = blog.id
+    const thisBlog = blogs.filter(b => b.id === id ? b : null )
+    */
+    // dispatch(fetchBlog(blog.id))
+  }
+  const blogObject = {
+    id: blog.id,
+    token: auth.token,
+  }
+  /*   const removeBlog = () => {
+    if (auth === null) {
       toast('user null unauthorized', {
         autoClose: 2000,
       })
       return
-    } else if (user.id === blog.user.id) {
+    } else if (auth.id === blog.user.id) {
       if (window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
-        dispatch(deleteYourBlog(blog))
+        dispatch(deleteYourBlog(blogObject))
         toast(`Your blog, "${blog.title}", has been deleted. `, {
           autoClose: 2000,
         })
-        history.push('/blogs')
       }
     } else {
       toast('user unauthorized', {
@@ -56,15 +70,30 @@ console.log('useEffect blog page')
 
   return (
     <section>
-     <h2>{blog.title}</h2>
-      <div>
-        Author: {blog.author}
-        <br />
-        Info: {blog.url}
-        <br />
-        Likes: {blog.likes}
-      </div>
+      <h2>
+        {blog.title} Likes: {blog.likes}{' '}
+      </h2>
       <button onClick={addLike}>Add like</button>
+      {/*     {loading ? (
+        <p>Loading blog...</p>
+      ) : (
+        <>
+          <h2>{blog.title}</h2>
+          <div>
+            Author: {blog.author}
+            <br />
+            Info: {blog.url}
+            <br />
+            Likes: {blog.likes}
+          </div>
+          <button onClick={addLike}>Add like</button>
+          {auth.id === blog.user.id ? (
+            <button onClick={removeBlog}>Delete</button>
+          ) : (
+            <></>
+          )}
+        </>
+      )} */}
     </section>
   )
 }

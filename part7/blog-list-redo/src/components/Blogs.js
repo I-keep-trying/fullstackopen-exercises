@@ -7,12 +7,15 @@ const Blogs = () => {
     return state.blogs.blogs
   })
 
-  return blogs.map((blog) => {
+  const loading = useSelector((state) => state.blogs.loading)
+
+  return blogs.map((b) => {
     return (
-      <div key={blog.id}>
+      <div key={b.id}>
         <h2>
-          <Link to={`/blogs/${blog.id}`}>{blog.title}</Link>
+          <Link to={`/blogs/${b.id}`}>{b.title}</Link>
         </h2>
+        <div>Likes: {b.likes} </div>
       </div>
     )
   })

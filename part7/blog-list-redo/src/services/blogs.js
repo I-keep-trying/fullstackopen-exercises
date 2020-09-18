@@ -34,7 +34,7 @@ const getOne = (id) => {
 const create = async (newObject) => {
   console.log('create axios req', newObject)
   const config = {
-    headers: { Authorization: `bearer ${newObject.user.token}` },
+    headers: { Authorization: `bearer ${newObject.auth.token}` },
   }
   const blogObject = {
     title: newObject.title,
@@ -43,7 +43,7 @@ const create = async (newObject) => {
     likes: newObject.likes,
   }
   const response = await axios.post(baseUrl, blogObject, config)
- console.log('axios req res',response.data)
+  console.log('axios req res', response.data)
   return response.data
 }
 
@@ -54,10 +54,12 @@ const update = async (changeObject) => {
 }
 
 const deleteBlog = (deleteObject) => {
+  console.log('deleteObject axios', deleteObject)
   const config = {
-    headers: { Authorization: token },
+    headers: { Authorization: `bearer ${deleteObject.token} ` },
   }
   const request = axios.delete(`${baseUrl}/${deleteObject.id}`, config)
+
   return request.then((response) => {
     return response.status
   })

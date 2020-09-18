@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import '../App.css'
 
 export const Menu = () => {
-  const user = useSelector((state) => {
-    return state.user
+  const auth = useSelector((state) => {
+    return state.auth
   })
   return (
   <nav className="App-menu">
@@ -18,7 +18,7 @@ export const Menu = () => {
     <Link className="MenuItem" to="/users">
       Users
     </Link>
-{user === null ?
+{auth === null ?
     <Link className="MenuItem" to="/login">
       Login
     </Link>

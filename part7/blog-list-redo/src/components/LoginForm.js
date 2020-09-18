@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { loginUser, logoutUser } from '../reducers/userReducer'
+import { loginUser } from '../reducers/authReducer'
 import blogService from '../services/blogs'
 import { toast } from 'react-toastify'
 import NewBlog from '../components/NewBlog'
@@ -12,7 +12,7 @@ const LoginForm = () => {
   const history = useHistory()
   const blogFormRef = useRef()
 
-  const user = useSelector(state => state.user)
+  const auth = useSelector((state) => state.auth)
   const loginHandler = (e) => {
     e.preventDefault()
     const userData = {
@@ -31,15 +31,6 @@ const LoginForm = () => {
     history.push('/')
   }
 
-  const handleLogout = () => {
-    window.localStorage.removeItem('loggedInBlogAppUser')
-    blogService.setToken('')
-    dispatch(logoutUser())
-    toast(`Goodbye, ${user.name}! Come back soon!`, {
-      autoClose: 2000,
-    })
-  }
-
   const blogForm = () => (
     <Togglable buttonLabel="Add blog" cancel="cancel" ref={blogFormRef}>
       <NewBlog />
@@ -48,7 +39,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      {user === null ? (
+      {auth === null ? (
         <div>
           <h2>Login</h2>
 

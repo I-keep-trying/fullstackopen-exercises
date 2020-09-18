@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 const NewBlog = () => {
   const dispatch = useDispatch()
-  const user = useSelector((state) => state.user)
+  const auth = useSelector((state) => state.auth)
 
   const addBlog = async (e) => {
     e.preventDefault()
@@ -15,7 +15,7 @@ const NewBlog = () => {
       author: e.target.author.value,
       url: e.target.url.value,
       likes: 0,
-      user,
+      auth,
     }
     e.target.title.value = ''
     e.target.author.value = ''

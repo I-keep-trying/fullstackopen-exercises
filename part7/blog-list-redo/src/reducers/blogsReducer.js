@@ -2,7 +2,7 @@ import blogService from '../services/blogs'
 import axios from 'axios'
 
 export const initialState = {
-  loading: false,
+  loading: true,
   hasErrors: false,
   blogs: [],
 }
@@ -18,7 +18,6 @@ const blogsReducer = (state = initialState, action) => {
     case 'GET_BLOGS_FAILURE':
       return { ...state, loading: false, hasErrors: true }
     case 'NEW_BLOG': {
-      console.log('NEW_BLOG', action.data.data)
       const newData = action.data.data
       const newBlog = {
         author: newData.author,
@@ -33,24 +32,34 @@ const blogsReducer = (state = initialState, action) => {
         },
       }
       const id = newBlog.id
-
-      // return [...state.blogs, newBlog] // this no longer works, says 'not iterable' wtf
-      return state.blogs.map((blog) => (blog.id !== id ? blog : newBlog))
+      const updatedBlogs = state.blogs.map((blog) =>
+        blog.id !== id ? blog : newBlog
+      )
+      return { blogs: updatedBlogs, loading: false, hasErrors: false }
     }
     case 'ADD_LIKE': {
-      console.log('add like action', action.blog)
-      const id = action.blog.id
-      console.log('add like state', state)
-      return state.blogs.map((blog) => (blog.id !== id ? blog : action.blog))
-    }
-    /*     case 'DELETE': {
-      const id = action.blog.id
-      const filteredBlogs = state.blogs.filter((blog) =>
-        blog.id !== id ? blog : null
-      )
-      return filteredBlogs
-    } */
+      console.log('ADD_LIKE action', action)
 
+      console.log('ADD_LIKE state', state)
+
+      const id = action.blog.id
+      const updatedBlogs = state.blogs.map((blog) =>
+        blog.id !== id ? blog : action.blog
+      )
+      return {
+        blogs: updatedBlogs,
+        blog: action.blog,
+        loading: false,
+        hasErrors: false,
+      }
+    }
+    /*       case 'DELETE': {
+          const id = action.blog.id
+          const filteredBlogs = state.blogs.filter((blog) => {
+            return blog.id !== id ? blog : null
+          })
+          return { blogs: filteredBlogs, loading: false, hasErrors: false }
+        } */
     default:
       return state
   }
@@ -59,8 +68,6 @@ const blogsReducer = (state = initialState, action) => {
 export const initializeBlogs = () => ({
   type: 'INITIALIZE',
 })
-
-//blogReducer.js
 
 export const getBlogsSuccess = (blogs) => ({
   type: 'GET_BLOGS_SUCCESS',
@@ -75,7 +82,7 @@ export const fetchBlogs = () => {
 
     try {
       const response = await axios.get(`/api/blogs/`)
-      //const response = await blogService.getAll()
+
       const data = await response.data
       dispatch(getBlogsSuccess(data))
     } catch (error) {
@@ -85,41 +92,29 @@ export const fetchBlogs = () => {
 }
 
 export const createBlog = (data) => {
-  console.log('reducer action creator', data)
-  /* 
-  author: "fasdsaf"
-id: "5f638cc8a96804245c416f01"
-likes: 0
-title: "afdssadf"
-url: "fasddsfa"
-user:
-blogs: (17) ["5f3ea774fd1f7135b834e725", "5f58f31cfb73ff084cc6ed94", ...]
-id: "5f343d0090c6c131a0729b9f"
-name: "test"
-username: "Test_User"
-  */
   return {
     type: 'NEW_BLOG',
     data: { data },
   }
 }
 
-// blogReducer.js
-export const likeBlog = (blog) => {
+export const likeBlog = (blog, blogs) => {
+  console.log('blog object from reducer, likeBlog', blog)
   const likeBlog = { ...blog, likes: blog.likes + 1 }
   blogService.update(likeBlog)
   return {
     type: 'ADD_LIKE',
     blog: likeBlog,
+    blogs,
   }
 }
 
-/* export const deleteYourBlog = (blog) => {
+export const deleteYourBlog = (blog) => {
   blogService.deleteBlog(blog)
   return {
     type: 'DELETE',
     blog,
   }
-} */
+}
 
 export default blogsReducer

@@ -1,51 +1,38 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import userService from '../services/users'
-import { getUsers } from '../reducers/allUsersReducer'
-import Togglable from '../components/Togglable'
-
-const UserDetail = ({ user }) => {
-  return (
-    <>
-      {user.blogs.map((blog) => (
-        <div key={blog.id}>Title: {blog.title}</div>
-      ))}
-    </>
-  )
-}
-
-const User = ({ user }) => {
-  const userDetail = () => (
-    <Togglable buttonLabel="details">
-      <UserDetail user={user} />
-    </Togglable>
-  )
-
-  return (
-    <li key={user.id}>
-      Name: {user.name}
-      <br />
-      Blogs: {user.blogs.length}
-      {user.blogs.length === 0 ? <div></div> : userDetail()}
-    </li>
-  )
-}
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Users = () => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    userService.getAllUsers().then((users) => dispatch(getUsers(users)))
-  }, [dispatch])
-  const users = useSelector((state) => state.users)
-
+  const users = useSelector((state) => state.users.users)
+  const loading = useSelector((state) => state.users.loading)
   return (
     <>
-      <h2>Users</h2>
-      {users.map((user) => (
-        <ul key={user.id}>
-          <User user={user} />
-        </ul>
-      ))}
+      {loading ? (
+        <div>Loading users...</div>
+      ) : (
+        <>
+          <table>
+            <h2>
+              Users
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>blogs total</td>
+                </tr>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>
+                      {' '}
+                      <Link to={`/users/${user.id}`}>{user.name}</Link>
+                    </td>
+                    <td>{user.blogs.length} </td>
+                  </tr>
+                ))}
+              </tbody>
+            </h2>
+          </table>
+        </>
+      )}
     </>
   )
 }
