@@ -1,21 +1,9 @@
 [
   {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlJvYmVydF9DX01hcnRpbiIsImlkIjoiNWYzNDExYmVlNzEzNmMyYzk0MmU4MmIyIiwiaWF0IjoxNTk4MDI3NTU5fQ.J1JaqI1QcHqOcQ0Bv16DW_1C2Ijw1wEQ0WV7XyZjnIg",
-    "username": "Robert_C_Martin",
-    "name": "Robert C. Martin",
-    "id": "5f3411bee7136c2c942e82b2"
-  },
-  {
     "blogs": [],
     "username": "Robert_C_Martin",
     "name": "Robert C. Martin",
     "id": "5f3411bee7136c2c942e82b2"
-  },
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkVkc2dlcl9XX0RpamtzdHJhIiwiaWQiOiI1ZjM0MTFlZGU3MTM2YzJjOTQyZTgyYjMiLCJpYXQiOjE1OTgwMjc2MDN9.-QgjB0fB4-2v4aO7RcTvQS_o2Hve3xemtXDdr9Xi844",
-    "username": "Edsger_W_Dijkstra",
-    "name": "Edsger W. Dijkstra",
-    "id": "5f3411ede7136c2c942e82b3"
   },
   {
     "blogs": [],
@@ -24,22 +12,10 @@
     "id": "5f3411ede7136c2c942e82b3"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImN1cGNha2UiLCJpZCI6IjVmMzQxMmJiMDMyMDRmMGY2YzNkMzAwNyIsImlhdCI6MTU5ODAyNzYzNH0.qzR0cSHET2KjAVJMcSp370DQPhLKRNBrD28BoBolMMA",
-    "username": "cupcake",
-    "name": "cupcake",
-    "id": "5f3412bb03204f0f6c3d3007"
-  },
-  {
     "blogs": [],
     "username": "cupcake",
     "name": "cupcake",
     "id": "5f3412bb03204f0f6c3d3007"
-  },
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IldlbmR5X1dvYmVydHMiLCJpZCI6IjVmMzQxMmRmNzNjZGNmMGZhY2IxM2YyYiIsImlhdCI6MTU5ODAyNzY1Nn0.Jd__rpQziQVT4f_fWoRRr2X7dUbsVLsdKF5X6dhJDW8",
-    "username": "Wendy_Woberts",
-    "name": "Wendy Woberts",
-    "id": "5f3412df73cdcf0facb13f2b"
   },
   {
     "blogs": [],
@@ -48,33 +24,71 @@
     "id": "5f3412df73cdcf0facb13f2b"
   },
   {
-    "blogs": [],
+    "blogs": [
+      {
+        "title": " John and Mary had never met. They were like two hummingbirds who had also never met.",
+        "author": "example",
+        "url": "exampledotcom",
+        "id": "5f68e19af76be70898e947eb"
+      },
+      {
+        "title": "!!We want a shrubbery!! and comments",
+        "author": "Michael Chan",
+        "url": "https://reactpatterns.com/",
+        "id": "5f6a185d9e796639941fa337"
+      },
+      {
+        "title": "!!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments",
+        "author": "Michael Chan",
+        "url": "https://reactpatterns.com/",
+        "id": "5f6a18a208a7fc3348200e9f"
+      },
+      {
+        "title": "whatever",
+        "author": "Michael Chan",
+        "url": "https://reactpatterns.com/",
+        "id": "5f6b73e37e0de92be43c1d59"
+      }
+    ],
     "username": "Michael_Chan",
     "name": "Michael Chan",
     "id": "5f341adb13d237244c477042"
   },
   {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWxfQ2hhbiIsImlkIjoiNWYzNDFhZGIxM2QyMzcyNDRjNDc3MDQyIiwiaWF0IjoxNTk4MDI3NzE3fQ.sC5igcopchy-5sp8q6HitUsCnCNaUYkYCJ2dDUNrdHM",
-    "username": "Michael_Chan",
-    "name": "Michael Chan",
-    "id": "5f341adb13d237244c477042"
-  },
-  {
-    "blogs": ["5f3ea774fd1f7135b834e725", "5f3f27bfad30850c2c186666"],
+    "blogs": [
+      {
+        "title": "McBride fell 12 stories, hitting the pavement like a Hefty bag filled with vegetable soup.",
+        "author": "example",
+        "url": "exampledotcom",
+        "id": "5f68f074f76be70898e947f2"
+      },
+      {
+        "title": "He spoke with the wisdom that can only come from experience, like a guy who went blind because he looked at a solar eclipse without one of those boxes with a pinhole in it and now goes around the country speaking at high schools about the dangers of looking at a solar eclipse without one of those boxes with a pinhole in it.",
+        "author": "example",
+        "url": "exampledotcom",
+        "id": "5f68f5c3f76be70898e947f3"
+      },
+      {
+        "title": "Long separated by cruel fate, the star-crossed lovers raced across the grassy field toward each other like two freight trains, one having left Cleveland at 6:36 p.m. traveling at 55 mph, the other from Topeka at 4:19 p.m. at a speed of 35 mph.",
+        "author": "example",
+        "url": "exampledotcom",
+        "id": "5f68f77ff76be70898e947f4"
+      },
+      {
+        "title": "His thoughts tumbled in his head, making and breaking alliances like underpants in a dryer without Cling Free.",
+        "author": "example",
+        "url": "example.com",
+        "id": "5f6901b3f76be70898e94800"
+      },
+      {
+        "title": "The little boat gently drifted across the pond exactly the way a bowling ball wouldn’t.",
+        "author": "blogger mcblogface",
+        "url": "internet.com",
+        "id": "5f6e367c1bacf13fd4233b82"
+      }
+    ],
     "username": "Test_User",
     "name": "test",
-    "id": "5f343d0090c6c131a0729b9f"
-  },
-  {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RfVXNlciIsImlkIjoiNWYzNDNkMDA5MGM2YzEzMWEwNzI5YjlmIiwiaWF0IjoxNTk4MDI1ODI5fQ.cIWdeqzPMJ6hVzdBC6XIXNya71s2ZPATS1CKqScLkiY",
-    "username": "Test_User",
-    "name": "test",
-    "id": "5f343d0090c6c131a0729b9f"
-  },
-  {
-    "blogs": ["5f3ea774fd1f7135b834e725"],
-    "username": "Test_User",
-    "name": "test",
-    "id": "5f343d0090c6c131a0729b9f"
+    "id": "5f67da48f76be70898e947e5"
   }
 ]

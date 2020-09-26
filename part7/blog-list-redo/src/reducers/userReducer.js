@@ -9,11 +9,10 @@ export const initialState = {
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case 'GET_USER': {
-      console.log('GET_USER action', action, 'state ....', state)
       return { ...state, loading: true }
     }
     case 'GET_USER_SUCCESS': {
-      return { user: action.data, loading: false, hasErrors: false }
+      return { ...state, user: action.data, loading: false, hasErrors: false }
     }
     case 'GET_USER_FAILURE':
       return { ...state, loading: false, hasErrors: true }

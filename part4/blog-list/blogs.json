@@ -1,134 +1,172 @@
 [
   {
-    "title": "Donut cotton candy jelly beans",
-    "author": "cupcake",
+    "title": " John and Mary had never met. They were like two hummingbirds who had also never met.",
+    "author": "example",
+    "url": "exampledotcom",
+    "likes": 17,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "comments": [
+      {
+        "date": "2020-09-23T17:56:37.000Z",
+        "_id": "5f6b8ed41a83593204135354",
+        "comment": "great blog"
+      },
+      {
+        "date": "2020-09-25T14:44:34.000Z",
+        "_id": "5f6e28aa1bacf13fd4233b7c",
+        "comment": "dsfasdaf"
+      },
+      {
+        "date": "2020-09-25T14:44:34.000Z",
+        "_id": "5f6e356e1bacf13fd4233b81",
+        "comment": "rrrrrrrrrr"
+      }
+    ],
+    "id": "5f68e19af76be70898e947eb"
+  },
+  {
+    "title": "McBride fell 12 stories, hitting the pavement like a Hefty bag filled with vegetable soup.",
+    "author": "example",
+    "url": "exampledotcom",
+    "likes": 5,
+    "user": {
+      "username": "Test_User",
+      "name": "test",
+      "id": "5f67da48f76be70898e947e5"
+    },
+    "comments": [
+      {
+        "date": "2020-09-23T17:56:37.000Z",
+        "_id": "5f6b8f2b1a83593204135355",
+        "comment": "love this blog so much"
+      },
+      {
+        "date": "2020-09-23T17:56:37.000Z",
+        "_id": "5f6b8f331a83593204135356",
+        "comment": "me too"
+      },
+      {
+        "date": "2020-09-23T18:09:21.000Z",
+        "_id": "5f6b9197b2267e4608711b28",
+        "comment": "afsdfadsdafsdfas"
+      }
+    ],
+    "id": "5f68f074f76be70898e947f2"
+  },
+  {
+    "title": "He spoke with the wisdom that can only come from experience, like a guy who went blind because he looked at a solar eclipse without one of those boxes with a pinhole in it and now goes around the country speaking at high schools about the dangers of looking at a solar eclipse without one of those boxes with a pinhole in it.",
+    "author": "example",
+    "url": "exampledotcom",
+    "likes": 1,
+    "user": {
+      "username": "Test_User",
+      "name": "test",
+      "id": "5f67da48f76be70898e947e5"
+    },
+    "comments": [
+      {
+        "date": "2020-09-25T14:44:34.000Z",
+        "_id": "5f6e29511bacf13fd4233b7d",
+        "comment": "sdafdafs"
+      },
+      {
+        "date": "2020-09-25T14:44:34.000Z",
+        "_id": "5f6e29f81bacf13fd4233b7e",
+        "comment": "fffffffffff"
+      }
+    ],
+    "id": "5f68f5c3f76be70898e947f3"
+  },
+  {
+    "title": "Long separated by cruel fate, the star-crossed lovers raced across the grassy field toward each other like two freight trains, one having left Cleveland at 6:36 p.m. traveling at 55 mph, the other from Topeka at 4:19 p.m. at a speed of 35 mph.",
+    "author": "example",
+    "url": "exampledotcom",
+    "likes": 1,
+    "user": {
+      "username": "Test_User",
+      "name": "test",
+      "id": "5f67da48f76be70898e947e5"
+    },
+    "comments": [],
+    "id": "5f68f77ff76be70898e947f4"
+  },
+  {
+    "title": "His thoughts tumbled in his head, making and breaking alliances like underpants in a dryer without Cling Free.",
+    "author": "example",
     "url": "example.com",
+    "likes": 1,
+    "user": {
+      "username": "Test_User",
+      "name": "test",
+      "id": "5f67da48f76be70898e947e5"
+    },
+    "comments": [],
+    "id": "5f6901b3f76be70898e94800"
+  },
+  {
+    "title": "!!We want a shrubbery!! and comments",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 75,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "comments": [
+      { "0": ".", "1": ".", "2": ".", "date": "2020-09-25T18:28:35.000Z" }
+    ],
+    "id": "5f6a185d9e796639941fa337"
+  },
+  {
+    "title": "!!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 75,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "comments": [
+      { "0": ".", "1": ".", "2": ".", "date": "2020-09-25T18:28:35.000Z" }
+    ],
+    "id": "5f6a18a208a7fc3348200e9f"
+  },
+  {
+    "title": "whatever",
+    "author": "Michael Chan",
+    "url": "https://reactpatterns.com/",
+    "likes": 2,
+    "user": {
+      "username": "Michael_Chan",
+      "name": "Michael Chan",
+      "id": "5f341adb13d237244c477042"
+    },
+    "comments": [
+      {
+        "date": "2020-09-25T14:44:34.000Z",
+        "_id": "5f6e35611bacf13fd4233b80",
+        "comment": "ggggggg"
+      }
+    ],
+    "id": "5f6b73e37e0de92be43c1d59"
+  },
+  {
+    "title": "The little boat gently drifted across the pond exactly the way a bowling ball wouldn’t.",
+    "author": "blogger mcblogface",
+    "url": "internet.com",
     "likes": 0,
     "user": {
-      "username": "cupcake",
-      "name": "cupcake",
-      "id": "5f3412bb03204f0f6c3d3007"
+      "username": "Test_User",
+      "name": "test",
+      "id": "5f67da48f76be70898e947e5"
     },
-    "id": "5f3415a2a981520154a167c7"
-  },
-  {
-    "title": "We want FIVE shrubbery!!",
-    "author": "Wendy Woberts",
-    "url": "example99.com",
-    "likes": 76,
-    "user": {
-      "username": "Wendy_Woberts",
-      "name": "Wendy Woberts",
-      "id": "5f3412df73cdcf0facb13f2b"
-    },
-    "id": "5f3415f7de19c933f8eabe9d"
-  },
-  {
-    "title": "Canonical string reduction",
-    "author": "Edsger W. Dijkstra",
-    "url": "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
-    "likes": 12,
-    "user": {
-      "username": "Edsger_W_Dijkstra",
-      "name": "Edsger W. Dijkstra",
-      "id": "5f3411ede7136c2c942e82b3"
-    },
-    "id": "5f34167f74c36712bc95190b"
-  },
-  {
-    "title": "Go To Statement Considered Harmful",
-    "author": "Edsger W. Dijkstra",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "Edsger_W_Dijkstra",
-      "name": "Edsger W. Dijkstra",
-      "id": "5f3411ede7136c2c942e82b3"
-    },
-    "id": "5f3416f62ed50415e0f302e3"
-  },
-  {
-    "title": "First class tests",
-    "author": "Robert C. Martin",
-    "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-    "likes": 10,
-    "user": {
-      "username": "Robert_C_Martin",
-      "name": "Robert C. Martin",
-      "id": "5f3411bee7136c2c942e82b2"
-    },
-    "id": "5f341731f8e79f3074bc3526"
-  },
-  {
-    "title": "TDD harms architecture",
-    "author": "Robert C. Martin",
-    "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-    "likes": 0,
-    "user": {
-      "username": "Robert_C_Martin",
-      "name": "Robert C. Martin",
-      "id": "5f3411bee7136c2c942e82b2"
-    },
-    "id": "5f34173ef8e79f3074bc3527"
-  },
-  {
-    "title": "React patterns",
-    "author": "Michael Chan",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "Michael_Chan",
-      "name": "Michael Chan",
-      "id": "5f341adb13d237244c477042"
-    },
-    "id": "5f341bd55493932820cd4af8"
-  },
-  {
-    "title": "React patterns",
-    "author": "Michael Chan",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "Michael_Chan",
-      "name": "Michael Chan",
-      "id": "5f341adb13d237244c477042"
-    },
-    "id": "5f3428e4e9b6552d586b7147"
-  },
-  {
-    "title": "React patterns0000",
-    "author": "Michael Chan",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "Michael_Chan",
-      "name": "Michael Chan",
-      "id": "5f341adb13d237244c477042"
-    },
-    "id": "5f342986d6b05f1cb8e38555"
-  },
-  {
-    "title": "React patterns1111",
-    "author": "Michael Chan",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "Michael_Chan",
-      "name": "Michael Chan",
-      "id": "5f341adb13d237244c477042"
-    },
-    "id": "5f3429b8d6b05f1cb8e38556"
-  },
-  {
-    "title": "eat dessert first",
-    "author": "cupcake",
-    "url": "https://reactpatterns.com/",
-    "likes": 70,
-    "user": {
-      "username": "cupcake",
-      "name": "cupcake",
-      "id": "5f3412bb03204f0f6c3d3007"
-    },
-    "id": "5f3430a5f221ea26347e5f6d"
+    "comments": [],
+    "id": "5f6e367c1bacf13fd4233b82"
   }
 ]

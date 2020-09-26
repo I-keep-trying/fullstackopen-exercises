@@ -4,7 +4,10 @@
   "private": true,
   "repository": "https://github.com/I-keep-trying/create-react-app-boilerplate",
   "dependencies": {
+    "@material-ui/core": "^4.11.0",
     "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "moment": "^2.29.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

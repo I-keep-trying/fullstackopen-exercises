@@ -3,20 +3,15 @@ import axios from 'axios'
 const baseUrl = '/api/blogs'
 const loginUrl = '/api/login'
 
-let token
-
-const login = async (credentials) => {
+const login = async credentials => {
   const response = await axios.post(loginUrl, credentials)
+  console.log('response',response.data)
   window.localStorage.setItem(
     'loggedInBlogAppUser',
     JSON.stringify(response.data)
   )
-  setToken(response.data.token)
-  return response.data
-}
-
-const setToken = (newToken) => {
-  token = `bearer ${newToken}`
+  return response
+  
 }
 
 const getAll = () => {
@@ -32,7 +27,6 @@ const getOne = (id) => {
 }
 
 const create = async (newObject) => {
-  console.log('create axios req', newObject)
   const config = {
     headers: { Authorization: `bearer ${newObject.auth.token}` },
   }
@@ -43,7 +37,6 @@ const create = async (newObject) => {
     likes: newObject.likes,
   }
   const response = await axios.post(baseUrl, blogObject, config)
-  console.log('axios req res', response.data)
   return response.data
 }
 
@@ -53,10 +46,9 @@ const update = async (changeObject) => {
   return response.data
 }
 
-const deleteBlog = (deleteObject) => {
-  console.log('deleteObject axios', deleteObject)
+const deleteBlog = (deleteObject, auth) => {
   const config = {
-    headers: { Authorization: `bearer ${deleteObject.token} ` },
+    headers: { Authorization: `bearer ${auth.token} ` },
   }
   const request = axios.delete(`${baseUrl}/${deleteObject.id}`, config)
 
@@ -65,13 +57,18 @@ const deleteBlog = (deleteObject) => {
   })
 }
 
+const addComment = async (comment, blogId) => {
+  const response = await axios.post(`${baseUrl}/${blogId}/comments`, comment)
+  return response.data
+}
+
 export default {
   getAll,
   getOne,
   create,
   update,
   login,
-  setToken,
+  //setToken,
   deleteBlog,
-  token,
+  addComment,
 }

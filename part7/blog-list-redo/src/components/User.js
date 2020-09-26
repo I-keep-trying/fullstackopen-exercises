@@ -16,24 +16,35 @@ const User = ({ match }) => {
   const loading = useSelector((state) => state.user.loading)
 
   return (
-    <section>
+    <section key={user.id}>
       {loading ? (
         <p>Loading user...</p>
       ) : (
         <>
-          <h2>{user.name}'s added blogs</h2>
-          <div>
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{user.name}'s added blogs</h5>
+              </div>
+            </div>
+
             {user.blogs.length === 0 ? (
-              <h2>😐 No blogs from {user.name} </h2>
+              <div class="list-group-item list-group-item-action">
+                <div class="mb-1">
+                  <span role="img" aria-label="frown">
+                    😐
+                  </span>
+                  No blogs from {user.name}{' '}
+                </div>
+              </div>
             ) : (
               <>
                 {user.blogs.map((blog) => (
-                  <ul>
-                    <li>
-                      {' '}
-                      <h3>{blog.title} </h3>
-                    </li>
-                  </ul>
+                  <div class="list-group-item list-group-item-action">
+                    <div class="mb-1" key={blog.id}>
+                      <div class="mb-1">{blog.title}</div>
+                    </div>
+                  </div>
                 ))}
               </>
             )}

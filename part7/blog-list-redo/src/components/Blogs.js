@@ -1,21 +1,22 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchBlogs } from '../reducers/blogsReducer'
+import Blog from './BlogLink'
 
 const Blogs = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(fetchBlogs())
+  }, [dispatch])
   const blogs = useSelector((state) => {
     return state.blogs.blogs
   })
 
-  const loading = useSelector((state) => state.blogs.loading)
-
-  return blogs.map((b) => {
+  return blogs.map((blog) => {
     return (
-      <div key={b.id}>
-        <h2>
-          <Link to={`/blogs/${b.id}`}>{b.title}</Link>
-        </h2>
-        <div>Likes: {b.likes} </div>
+      <div key={blog.id}>
+        <Blog blog={blog} />
       </div>
     )
   })

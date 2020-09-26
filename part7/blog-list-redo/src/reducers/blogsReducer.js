@@ -38,28 +38,23 @@ const blogsReducer = (state = initialState, action) => {
       return { blogs: updatedBlogs, loading: false, hasErrors: false }
     }
     case 'ADD_LIKE': {
-      console.log('ADD_LIKE action', action)
-
-      console.log('ADD_LIKE state', state)
-
       const id = action.blog.id
       const updatedBlogs = state.blogs.map((blog) =>
         blog.id !== id ? blog : action.blog
       )
       return {
         blogs: updatedBlogs,
-        blog: action.blog,
         loading: false,
         hasErrors: false,
       }
     }
-    /*       case 'DELETE': {
-          const id = action.blog.id
-          const filteredBlogs = state.blogs.filter((blog) => {
-            return blog.id !== id ? blog : null
-          })
-          return { blogs: filteredBlogs, loading: false, hasErrors: false }
-        } */
+    case 'DELETE': {
+      const id = action.blog.id
+      const filteredBlogs = state.blogs.filter((blog) => {
+        return blog.id !== id ? blog : null
+      })
+      return { blogs: filteredBlogs, loading: false, hasErrors: false }
+    }
     default:
       return state
   }
@@ -91,6 +86,14 @@ export const fetchBlogs = () => {
   }
 }
 
+/* export const getUpdatedUsers = (data) => {
+  return async dispatch => {
+    try {
+dispatch(usersService.getAllUsers())
+    }
+  }
+} */
+
 export const createBlog = (data) => {
   return {
     type: 'NEW_BLOG',
@@ -99,7 +102,6 @@ export const createBlog = (data) => {
 }
 
 export const likeBlog = (blog, blogs) => {
-  console.log('blog object from reducer, likeBlog', blog)
   const likeBlog = { ...blog, likes: blog.likes + 1 }
   blogService.update(likeBlog)
   return {
@@ -109,8 +111,10 @@ export const likeBlog = (blog, blogs) => {
   }
 }
 
-export const deleteYourBlog = (blog) => {
-  blogService.deleteBlog(blog)
+export const deleteYourBlog = (blog, auth, response) => {
+  console.log('deleteYourBlog action creator', blog, '...auth...', auth)
+  console.log('delete response action creator', response)
+  //blogService.deleteBlog(blog, auth)
   return {
     type: 'DELETE',
     blog,

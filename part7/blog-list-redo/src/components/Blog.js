@@ -1,101 +1,119 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { fetchBlog } from '../reducers/blogReducer'
 import { likeBlog, deleteYourBlog } from '../reducers/blogsReducer'
-
+import blogService from '../services/blogs'
 import { toast } from 'react-toastify'
+import NewComment from '../components/AddComment'
 
-const Blog = ({ match }) => {
+const BlogList = ({ match }) => {
   const dispatch = useDispatch()
-
+  const history = useHistory()
   useEffect(() => {
     const { id } = match.params
 
     dispatch(fetchBlog(id))
   }, [dispatch, match])
-  const blogs = useSelector((state) => state.blogs.blogs)
-  console.log('blogs from Blog componenet', blogs) //like + 1 immediatley
+
+  const loading = useSelector((state) => state.blog.loading)
+  const loadingAll = useSelector((state) => state.blogs.loading)
+
   const blog = useSelector((state) => state.blog.blog)
-  console.log('blog from Blog component', blog) //like + 1 after refresh
+  const blogUser = useSelector((state) => state.blog.blog.user)
   const auth = useSelector((state) => state.auth)
 
-  const blogLoading = useSelector((state) => state.blog.loading)
-  console.log('blog loading', blogLoading)
-
-  const blogsLoading = useSelector((state) => state.blogs.loading)
-  console.log('blogs loading', blogsLoading)
-
   const addLike = () => {
-    if (!blogLoading) {
-      console.log('blog???', blog)
-
+    if (!loading) {
       dispatch(likeBlog(blog))
-      return dispatch(fetchBlog(blog.id))
+      toast(`You added a like to "${blog.title}". `, { autoClose: 2000 })
+      return blog
     } else {
       return null
-    } /*    
-
-
-toast(`You added 1 like to "${blog.title}". `, {
-      autoClose: 2000,
-    }) 
-    const id = blog.id
-    const thisBlog = blogs.filter(b => b.id === id ? b : null )
-    */
-    // dispatch(fetchBlog(blog.id))
-  }
-  const blogObject = {
-    id: blog.id,
-    token: auth.token,
-  }
-  /*   const removeBlog = () => {
-    if (auth === null) {
-      toast('user null unauthorized', {
-        autoClose: 2000,
-      })
-      return
-    } else if (auth.id === blog.user.id) {
-      if (window.confirm(`Are you sure you want to delete "${blog.title}"?`)) {
-        dispatch(deleteYourBlog(blogObject))
-        toast(`Your blog, "${blog.title}", has been deleted. `, {
-          autoClose: 2000,
-        })
-      }
-    } else {
-      toast('user unauthorized', {
-        autoClose: 2000,
-      })
     }
-  } */
+  }
+
+  const removeBlog = async () => {
+    window.confirm(`Are you sure you want to delete "${blog.title}"? `)
+    try {
+      await blogService.deleteBlog(blog, auth).then((response) => {
+        dispatch(deleteYourBlog(blog, auth, response))
+        toast(`${blog.title} has been deleted. `, { autoClose: 1000 })
+        history.push('/blogs')
+      })
+    } catch (err) {
+      console.log('delete err', err)
+    }
+  }
+
+  const renderBlog = () => {
+    return (
+      <div className="container">
+        <div>
+          <div className="form-group">
+            <div>
+              <a href={blog.url} >{blog.title}</a>
+            </div>
+            <div>
+              <div>Added by: {blogUser.name}</div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            Likes: {blog.likes}{' '}
+            <button
+              className="btn btn-secondary"
+              type="submit"
+              onClick={addLike}
+            >
+              Like
+            </button>
+          </div>
+          <div>
+            {auth.id !== blogUser.id ? (
+              <></>
+            ) : (
+              <div className="form-group">
+                Delete this blog:{' '}
+                <button
+                  className="btn btn-secondary"
+                  type="submit"
+                  onClick={removeBlog}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+          <div key={blog.id}>
+            <div>
+              <NewComment />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <section>
-      <h2>
-        {blog.title} Likes: {blog.likes}{' '}
-      </h2>
-      <button onClick={addLike}>Add like</button>
-      {/*     {loading ? (
-        <p>Loading blog...</p>
+    <div>
+      {loading || loadingAll ? (
+        <div>Loading...</div>
       ) : (
-        <>
-          <h2>{blog.title}</h2>
-          <div>
-            Author: {blog.author}
-            <br />
-            Info: {blog.url}
-            <br />
-            Likes: {blog.likes}
-          </div>
-          <button onClick={addLike}>Add like</button>
-          {auth.id === blog.user.id ? (
-            <button onClick={removeBlog}>Delete</button>
-          ) : (
-            <></>
-          )}
-        </>
-      )} */}
-    </section>
+        <div>{renderBlog()} </div>
+      )}
+    </div>
   )
 }
 
-export default Blog
+export default BlogList
+
+/* 
+ // for commments dates:
+
+  const myDate = new Date
+const humanReadableDate = `${myDate.getFullYear()}-${myDate.getMonth()}-${myDate.getDay()}`
+console.log(humanReadableDate)
+
+// returns 2020-8-2
+  */

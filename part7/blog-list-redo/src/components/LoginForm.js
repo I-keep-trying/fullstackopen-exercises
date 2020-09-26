@@ -1,34 +1,38 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { loginUser } from '../reducers/authReducer'
 import blogService from '../services/blogs'
+import { loginUser, loginUserFail } from '../reducers/authReducer'
 import { toast } from 'react-toastify'
 import NewBlog from '../components/NewBlog'
 import Togglable from '../components/Togglable'
 
-const LoginForm = () => {
+const LoginForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   const blogFormRef = useRef()
 
-  const auth = useSelector((state) => state.auth)
-  const loginHandler = (e) => {
+  const auth = useSelector((state) => {
+    return state.auth
+  })
+  const handleLogin = async (e) => {
     e.preventDefault()
-    const userData = {
+    const credentials = {
       username: e.target.username.value,
       password: e.target.password.value,
     }
     e.target.username.value = ''
     e.target.password.value = ''
-
-    blogService.login(userData).then((response) => {
-      dispatch(loginUser(response))
-      toast(`Welcome, ${response.name}!`, {
-        autoClose: 2000,
+    try {
+      await blogService.login(credentials).then((response) => {
+        dispatch(loginUser(response))
+        toast(`Welcome, ${response.data.name}!`)
+        history.push('/blogs')
       })
-    })
-    history.push('/')
+    } catch (err) {
+      dispatch(loginUserFail(err))
+      toast.error(`Login failed 🙁... ${auth.error} `, { autoClose: 2000 })
+    }
   }
 
   const blogForm = () => (
@@ -36,32 +40,33 @@ const LoginForm = () => {
       <NewBlog />
     </Togglable>
   )
-
   return (
-    <div>
-      {auth === null ? (
-        <div>
-          <h2>Login</h2>
+    <div className="col-md-12">
+      <div className="card card-container">
+        <h2>Login</h2>
 
-          <form onSubmit={loginHandler}>
-            <div>
-              <label>username</label>
-              <input name="username" />
-              Test_User
-            </div>
-            <div>
-              <label>password</label>
-              <input name="password" type="password" />
-              password
-            </div>
-            <button id="login-button" type="submit">
-              Login
-            </button>
-          </form>
-        </div>
-      ) : (
-        <div>{blogForm()}</div>
-      )}
+        <form onSubmit={handleLogin}>
+        <div className="form-group">
+        <label htmlFor="username">Username</label>
+
+            <input className="form-control" name="username" placeholder="Username" />
+            <div style={{ color: 'white' }}>Test_User Robert_C_Martin</div>
+          </div>
+          <div className="form-group">
+          <label htmlFor="password">Password</label>
+
+            <input className="form-control" name="password" type="password" placeholder="Password" />
+            <div style={{ color: 'white' }}>password</div>
+          </div>
+          <div className="form-group">
+          <button className="btn btn-secondary btn-block" type="submit">
+            Login
+          </button>
+          </div>
+          
+        </form>
+      </div>
+      <div>{blogForm()}</div>
     </div>
   )
 }

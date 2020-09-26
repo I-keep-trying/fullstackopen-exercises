@@ -14,8 +14,35 @@ blogsRouter.get('/:id', async (request, response) => {
     name: 1,
     id: 1,
   })
+
   if (blog) {
     response.json(blog)
+  } else {
+    response.status(404).end()
+  }
+})
+
+blogsRouter.get('/:id/comments', async (request, response) => {
+  const blog = await Blog.findById(request.params.id).populate('comments', {
+    date: 1,
+    id: 1,
+    comment: 1,
+  })
+
+  if (blog.comments) {
+    response.json(blog.comments)
+  } else {
+    response.status(404).end()
+  }
+})
+
+blogsRouter.get('/:id/comments/:commentid', async (request, response) => {
+  const blog = await Blog.findById(request.params.id)
+  const comment = await blog.comments.find(
+    comment => comment.id === request.params.commentid
+  )
+  if (comment) {
+    response.json(comment)
   } else {
     response.status(404).end()
   }
@@ -35,11 +62,28 @@ blogsRouter.post('/', async (request, response) => {
     url: body.url,
     likes: body.likes || 0,
     user: user,
+    comments: body.comments || [],
   })
   const savedBlog = await blog.save()
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
   response.json(savedBlog)
+})
+
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+  console.log('request body', typeof request.body.comments.date)
+  const blogId = request.params.id
+  const comment = request.body.comments
+  try {
+    const blogObject = await Blog.findById(blogId)
+    blogObject.comments.push(comment)
+    const savedBlog = await blogObject.save()
+    console.log('new comment response', typeof savedBlog.comments[0].date)
+    response.status(201).json(savedBlog)
+  } catch (error) {
+    console.log('comment post request error', error)
+    next(error)
+  }
 })
 
 blogsRouter.delete('/:id', async (request, response) => {
@@ -70,60 +114,11 @@ blogsRouter.delete('/:id', async (request, response) => {
   response.status(204).end()
 })
 
-blogsRouter.put('/:id', async (request, response) => {
-  const token = request.token
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  const user = await User.findById(decodedToken.id)
-  const body = request.body
-  const blog = {
-    title: body.title,
-    author: body.author,
-    url: body.url,
-    likes: body.likes + 1,
-    user: user,
-  }
-
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
-    new: true,
-  })
-  response.json(updatedBlog)
-})
-
-/* blogsRouter.patch('/:id', async (request, response) => {
-  if (Object.keys(request.body).length === 0) {
-    return response.status(400).send('content missing').end()
-  }
-
-  let blog = await Blog.findById(request.params.id).populate('user', {
-    username: 1,
-    name: 1,
-    id: 1,
-  })
-  console.log('blog', blog)
-
-  blog = blog.toObject()
-  Object.keys(blog).forEach(key => {
-    let value = request.body[key]
-    if (value) {
-      blog[key] = value
-    }
-  })
-
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
-    new: true,
-  }).populate('user', {
-    username: 1,
-    name: 1,
-    id: 1,
-  })
-  console.log('updatedBlog', updatedBlog)
-  response.json(updatedBlog)
-}) */
-
 blogsRouter.patch('/:id', async (request, response) => {
   if (Object.keys(request.body).length === 0) {
     return response.status(400).send('content missing').end()
   }
+
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,
     request.body,
