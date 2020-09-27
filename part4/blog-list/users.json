@@ -1,6 +1,19 @@
 [
   {
-    "blogs": [],
+    "blogs": [
+      {
+        "title": "The young fighter had a hungry look, the kind you get from not eating for a while.",
+        "author": "author arthur",
+        "url": "website.com",
+        "id": "5f6f825d82fa8222c8a7d9fa"
+      },
+      {
+        "title": "He fell for her like his heart was a mob informant and she was the East River.",
+        "author": "blogger blogface",
+        "url": "internet.com",
+        "id": "5f6fa0c282fa8222c8a7d9fc"
+      }
+    ],
     "username": "Robert_C_Martin",
     "name": "Robert C. Martin",
     "id": "5f3411bee7136c2c942e82b2"
@@ -24,62 +37,13 @@
     "id": "5f3412df73cdcf0facb13f2b"
   },
   {
-    "blogs": [
-      {
-        "title": " John and Mary had never met. They were like two hummingbirds who had also never met.",
-        "author": "example",
-        "url": "exampledotcom",
-        "id": "5f68e19af76be70898e947eb"
-      },
-      {
-        "title": "!!We want a shrubbery!! and comments",
-        "author": "Michael Chan",
-        "url": "https://reactpatterns.com/",
-        "id": "5f6a185d9e796639941fa337"
-      },
-      {
-        "title": "!!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments, !!We want a shrubbery!! and comments",
-        "author": "Michael Chan",
-        "url": "https://reactpatterns.com/",
-        "id": "5f6a18a208a7fc3348200e9f"
-      },
-      {
-        "title": "whatever",
-        "author": "Michael Chan",
-        "url": "https://reactpatterns.com/",
-        "id": "5f6b73e37e0de92be43c1d59"
-      }
-    ],
+    "blogs": [],
     "username": "Michael_Chan",
     "name": "Michael Chan",
     "id": "5f341adb13d237244c477042"
   },
   {
     "blogs": [
-      {
-        "title": "McBride fell 12 stories, hitting the pavement like a Hefty bag filled with vegetable soup.",
-        "author": "example",
-        "url": "exampledotcom",
-        "id": "5f68f074f76be70898e947f2"
-      },
-      {
-        "title": "He spoke with the wisdom that can only come from experience, like a guy who went blind because he looked at a solar eclipse without one of those boxes with a pinhole in it and now goes around the country speaking at high schools about the dangers of looking at a solar eclipse without one of those boxes with a pinhole in it.",
-        "author": "example",
-        "url": "exampledotcom",
-        "id": "5f68f5c3f76be70898e947f3"
-      },
-      {
-        "title": "Long separated by cruel fate, the star-crossed lovers raced across the grassy field toward each other like two freight trains, one having left Cleveland at 6:36 p.m. traveling at 55 mph, the other from Topeka at 4:19 p.m. at a speed of 35 mph.",
-        "author": "example",
-        "url": "exampledotcom",
-        "id": "5f68f77ff76be70898e947f4"
-      },
-      {
-        "title": "His thoughts tumbled in his head, making and breaking alliances like underpants in a dryer without Cling Free.",
-        "author": "example",
-        "url": "example.com",
-        "id": "5f6901b3f76be70898e94800"
-      },
       {
         "title": "The little boat gently drifted across the pond exactly the way a bowling ball wouldn’t.",
         "author": "blogger mcblogface",
@@ -90,5 +54,24 @@
     "username": "Test_User",
     "name": "test",
     "id": "5f67da48f76be70898e947e5"
+  },
+  {
+    "blogs": [],
+    "username": "Test_User2",
+    "name": "Testy McTestface",
+    "id": "5f70bea05299151e60b47d1d"
+  },
+  {
+    "blogs": [],
+    "username": "yuri_chan",
+    "name": "Yuri Chan",
+    "id": "5f70c24d5299151e60b47d1e",
+    "pw":"meowmeow"
+  },
+  {
+    "blogs": [],
+    "username": "cosmo",
+    "name": "Cosmo Kitty",
+    "id": "5f70c56a812309239c6b4ddf"
   }
 ]

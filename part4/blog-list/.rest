@@ -55,8 +55,8 @@ POST http://localhost:3007/api/users
 Content-Type: application/json
 
 {
-    "username": "Test_User",
-    "name": "test",
+    "username": "Test_User2",
+    "name": "Testy McTestface",
     "password":"password"
 }
 
@@ -71,7 +71,7 @@ Content-Type: application/json
     "password":"password"
 }
 ###
-DELETE http://localhost:3007/api/users/
+DELETE http://localhost:3007/api/users/5f70cb79812309239c6b4de5
 ###
     "username": "Robert_C_Martin",
     "username": "Edsger_W_Dijkstra",

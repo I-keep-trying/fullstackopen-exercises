@@ -1,16 +1,13 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import blogService from '../services/blogs'
 import { loginUser, loginUserFail } from '../reducers/authReducer'
 import { toast } from 'react-toastify'
-import NewBlog from '../components/NewBlog'
-import Togglable from '../components/Togglable'
 
 const LoginForm = ({ user, setUser }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const blogFormRef = useRef()
 
   const auth = useSelector((state) => {
     return state.auth
@@ -35,12 +32,8 @@ const LoginForm = ({ user, setUser }) => {
     }
   }
 
-  const blogForm = () => (
-    <Togglable buttonLabel="Add blog" cancel="cancel" ref={blogFormRef}>
-      <NewBlog />
-    </Togglable>
-  )
   return (
+    <>
     <div className="col-md-12">
       <div className="card card-container">
         <h2>Login</h2>
@@ -66,8 +59,8 @@ const LoginForm = ({ user, setUser }) => {
           
         </form>
       </div>
-      <div>{blogForm()}</div>
-    </div>
+ </div>
+ </>
   )
 }
 

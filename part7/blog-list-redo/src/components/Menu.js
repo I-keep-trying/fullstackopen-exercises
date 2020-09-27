@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
-
 import { logoutUser } from '../reducers/authReducer'
 import logo from '../blog-icon.png'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -20,7 +18,7 @@ export const Menu = () => {
   }
   return (
     <div style={{marginBottom: 150}} >
-      <nav class="fixed-top" >
+      <nav className="fixed-top" >
       <nav className="navbar navbar-expand navbar-dark bg-dark ">
         <img src={logo} className="App-logo" alt="logo" />
         {auth.id === '' ? (
@@ -74,6 +72,9 @@ export const Menu = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/login">
                 Login
+              </Link>
+              <Link className="nav-link" to="/register">
+                Register
               </Link>
             </li>
           </div>

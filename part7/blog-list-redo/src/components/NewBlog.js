@@ -38,24 +38,31 @@ const NewBlog = () => {
   return (
     <div className="card">
       <div className="card-container">
+        <h2>Add A Blog</h2>
         <form onSubmit={addBlog}>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Title</span>
-  </div>
-            <input class="form-control" name="title" />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                Title
+              </span>
+            </div>
+            <input className="form-control" name="title" />
           </div>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Author</span>
-  </div>
-            <input class="form-control" name="author" />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                Author
+              </span>
+            </div>
+            <input className="form-control" name="author" />
           </div>
-            <div class="input-group mb-3">
-            <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon1">Url</span>
-  </div>
-            <input class="form-control" name="url" />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                Url
+              </span>
+            </div>
+            <input className="form-control" name="url" />
           </div>
 
           <div className="form-group">

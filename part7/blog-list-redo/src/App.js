@@ -6,7 +6,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
 
 import { fetchBlogs } from './reducers/blogsReducer'
 import { fetchUsers } from './reducers/allUsersReducer'
@@ -22,20 +21,17 @@ import { Menu } from './components/Menu'
 import Users from './components/Users'
 import User from './components/User'
 import LoginForm from './components/LoginForm'
+import Registration from './components/Register'
 import NewBlog from './components/NewBlog'
 import Footer from './components/Footer'
 
 import { ToastContainer } from 'react-toastify'
 import './ReactToastify.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-
-import logo from './blog-icon.png'
-
 import './App.css'
 
 const App = () => {
   const dispatch = useDispatch()
-  const history = createBrowserHistory()
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
@@ -47,15 +43,11 @@ const App = () => {
     dispatch(initializeAuth(window.localStorage.getItem('loggedInBlogAppUser')))
   }, [dispatch])
 
-  useEffect(() => {
-    history.listen((location) => {
-      console.log('history location', location)
-    })
-  }, [dispatch])
+
 
   return (
     <div className="container">
-    <Router history={history}>
+    <Router>
       <div>
           <Menu />
         </div>
@@ -68,6 +60,7 @@ const App = () => {
             <Route exact path="/users" component={Users}></Route>
             <Route exact path="/users/:id" component={User}></Route>
             <Route exact path="/login" component={LoginForm}></Route>
+            <Route exact path="/register" component={Registration}></Route>
             <Route exact path="/newBlog" component={NewBlog}></Route>
             <Redirect to="/" />
           </Switch>

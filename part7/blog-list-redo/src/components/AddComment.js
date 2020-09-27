@@ -30,13 +30,13 @@ const NewComment = () => {
     <div className="card">
       <div className="card-container">
         <form onSubmit={newComment}>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
                 Add Comment
               </span>
             </div>
-            <textarea class="form-control" name="comment" />
+            <textarea className="form-control" name="comment" />
           </div>
 
           <div className="form-group">

@@ -19,17 +19,17 @@ const Users = () => {
       ) : (
         <>
           <div>
-            <div class="list-group">
-              <div class="list-group-item d-flex justify-content-between">
-                <strong class="mb-1">User</strong>
-                <strong> blogs created </strong>
+            <div className="list-group">
+              <div className="list-group-item d-flex justify-content-between">
+                <strong className="mb-1">User</strong>
+                <strong> Blogs Created </strong>
               </div>
             </div>
             {users.map((user) => {
               return (
-                <div class="list-group" key={user.id}>
-                  <div class="list-group-item d-flex justify-content-between">
-                    <User user={user} />
+                <div key={user.id} className="list-group">
+                  <div className="list-group-item d-flex justify-content-between">
+                    <User key={user.id} user={user} />
                     <div>{user.blogs.length}</div>
                   </div>
                 </div>

@@ -15,4 +15,15 @@ const getOneUser = (userObject) => {
   })
 }
 
-export default { getAllUsers, getOneUser }
+const createUser = async (userObject) => {
+  const newUserObject = {
+    name: userObject.name,
+    username: userObject.username,
+    password: userObject.password
+  }
+  const response = await axios.post(baseUrlUsers, newUserObject)
+  console.log('createUser axios response',response)
+  return response.data
+}
+
+export default { getAllUsers, getOneUser, createUser }

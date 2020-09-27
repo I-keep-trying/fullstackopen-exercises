@@ -10,8 +10,8 @@ const User = ({ match }) => {
 
     dispatch(fetchUser(id))
   }, [dispatch, match])
-
   const user = useSelector((state) => state.user.user)
+  console.log('user param', user)
 
   const loading = useSelector((state) => state.user.loading)
 
@@ -21,16 +21,16 @@ const User = ({ match }) => {
         <p>Loading user...</p>
       ) : (
         <>
-          <div class="list-group">
-            <div class="list-group-item list-group-item-action">
-              <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">{user.name}'s added blogs</h5>
+          <div className="list-group">
+            <div className="list-group-item list-group-item-action">
+              <div className="d-flex w-100 justify-content-between">
+                <h5 className="mb-1">{user.name}'s added blogs</h5>
               </div>
             </div>
 
             {user.blogs.length === 0 ? (
-              <div class="list-group-item list-group-item-action">
-                <div class="mb-1">
+              <div className="list-group-item list-group-item-action">
+                <div className="mb-1">
                   <span role="img" aria-label="frown">
                     😐
                   </span>
@@ -40,9 +40,9 @@ const User = ({ match }) => {
             ) : (
               <>
                 {user.blogs.map((blog) => (
-                  <div class="list-group-item list-group-item-action">
-                    <div class="mb-1" key={blog.id}>
-                      <div class="mb-1">{blog.title}</div>
+                  <div className="list-group-item list-group-item-action">
+                    <div className="mb-1" key={blog.id}>
+                      <div className="mb-1">{blog.title}</div>
                     </div>
                   </div>
                 ))}

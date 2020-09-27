@@ -6,7 +6,7 @@ export const initialState = {
   user: {},
 }
 
-export default function userReducer(state = initialState, action) {
+export default function userReducer1(state = initialState, action) {
   switch (action.type) {
     case 'GET_USER': {
       return { ...state, loading: true }

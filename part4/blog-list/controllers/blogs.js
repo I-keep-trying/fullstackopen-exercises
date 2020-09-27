@@ -78,10 +78,8 @@ blogsRouter.post('/:id/comments', async (request, response, next) => {
     const blogObject = await Blog.findById(blogId)
     blogObject.comments.push(comment)
     const savedBlog = await blogObject.save()
-    console.log('new comment response', typeof savedBlog.comments[0].date)
     response.status(201).json(savedBlog)
   } catch (error) {
-    console.log('comment post request error', error)
     next(error)
   }
 })

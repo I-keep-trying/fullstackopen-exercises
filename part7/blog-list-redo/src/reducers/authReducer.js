@@ -15,7 +15,8 @@ const authReducer = (state = initialState, action) => {
       return auth
     }
     case 'LOG_IN_SUCCESS': {
-      return action.auth.data
+
+      return action.auth
     }
     case 'LOG_IN_FAIL': {
       return { ...state, error: action.err.message }
@@ -38,7 +39,7 @@ export const initializeAuth = (auth) => {
 export const loginUser = (auth) => {
   return {
     type: 'LOG_IN_SUCCESS',
-    auth,
+    auth: auth.data,
   }
 }
 
