@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 
-const date = new Date()
 const blogSchema = mongoose.Schema({
   title: {
     type: String,

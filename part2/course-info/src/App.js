@@ -3,7 +3,7 @@ import Course from './Course'
 import './App.css'
 
 function App() {
-  const courses = [
+    const courses = [
     {
       id: 1,
       name: 'Half Stack application development',
@@ -47,10 +47,12 @@ function App() {
       ],
     },
   ]
+
   return (
     <div className="App">
       <h1>Web Development Curriculum</h1>
-      <Course courses={courses} />
+            <Course courses={courses} />
+      {' '}
     </div>
   )
 }
