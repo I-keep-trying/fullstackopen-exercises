@@ -51,3 +51,8 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 ## [countries hook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/country-hook)
 
 ## [blog list redux](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/blog-list-redo)
+
+
+# [Part 8](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8)
+
+## [library-graphql](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/library-graphql)
