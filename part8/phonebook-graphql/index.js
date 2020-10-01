@@ -52,7 +52,7 @@ const resolvers = {
           invalidArgs: args.name,
         })
       }
-      const person = { ...args, id: new Date() }
+      const person = { ...args, id: Date.now() }
       persons = persons.concat(person)
       return person
     },
