@@ -1,5 +1,5 @@
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
-const typeDefs = require('./src/schema1')
+const typeDefs = require('./schema1')
 
 const idDate = Date.now()//changes after server restart
 let links = [
