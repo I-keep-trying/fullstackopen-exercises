@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
@@ -10,6 +9,10 @@ const schema = new mongoose.Schema({
   },
   born: {
     type: Number,
+  },
+  book: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book',
   },
 })
 

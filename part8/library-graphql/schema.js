@@ -33,6 +33,7 @@ const typeDefs = gql`
       author: String
       setBornTo: Int
     ): Book
+    addAuthor(name: String!, born: Int): Author
     editAuthor(name: String, setBornTo: Int): Author
   }
 `
