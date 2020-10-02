@@ -52,7 +52,12 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [blog list redux](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part7/blog-list-redo)
 
-
 # [Part 8](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8)
 
-## [library-graphql](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/library-graphql)
+## [library-frontend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/library-gql-apollo-react)
+
+## [library-graphql backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/library-graphql)
+
+## [phonebook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/graphql-apollo-react)
+
+## [phonebook-backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/phonebook-graphql)
