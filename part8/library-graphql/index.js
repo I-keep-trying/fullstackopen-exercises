@@ -24,24 +24,29 @@ mongoose
   .catch(error => {
     console.log('error connection to MongoDB:', error.message)
   })
-
 const resolvers = {
   Query: {
     bookCount: () => Book.collection.countDocuments(),
-    allBooks: (root, args) => Book.find({}),
-    findBook: (root, args) => Book.findOne({ title: args.title }),
+    authorCount: () => Author.collection.countDocuments(),
+
+    allBooks: (root, args) => Book.find({}).populate('author'),
+    allAuthors: (root, args) => Author.find({}).populate('books'),
+    findBook: (root, args) =>
+      Book.findOne({ title: args.title }).populate('author', {
+        name: 1,
+        born: 1,
+      }),
   },
-  Book: {
-    author: (root, args) => {
-      return {
-        name: root.name,
-      }
-    },
-  },
+
   Mutation: {
     addBook: async (root, args) => {
-      const author = await Author.findOne({ name: args.author })
+      let author = await Author.findOne({ name: args.author })
       console.log('author', author)
+      if (author === null) {
+        author = new Author({ name: args.author })
+        await author.save()
+        console.log('savedAuthor', author)
+      }
       const book = new Book({ ...args, author })
       console.log('book', book)
       const savedBook = await book.save()
@@ -53,6 +58,19 @@ const resolvers = {
       const savedAuthor = await author.save()
       console.log('savedAuthor', savedAuthor)
       return savedAuthor
+    },
+    editAuthor: async (root, args) => {
+      const author = await Author.findOne({ name: args.name })
+      author.born = args.setBornTo
+
+      try {
+        await author.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+      return author
     },
   },
 }

@@ -21,7 +21,7 @@ const typeDefs = gql`
     allBooks(author: String, genre: String): [Book]
     findBook(title: String!): Book
     authorCount: Int!
-    allAuthors: [Author!]!
+    allAuthors(books:[String]): [Author!]!
     findAuthor(name: String!): Author
   }
 

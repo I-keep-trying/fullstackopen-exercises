@@ -6,13 +6,11 @@ let authors = [
   },
   {
     name: "Martin Fowler",
-    id: "afa5b6f0-344d-11e9-a414-719c6709cf3e",
-    born: 1963,
+    setBornTo: 1963,
   },
   {
     name: "Fyodor Dostoevsky",
-    id: "afa5b6f1-344d-11e9-a414-719c6709cf3e",
-    born: 1821,
+    setBornTo: 1821,
   },
   {
     name: "Joshua Kerievsky", // birthyear not known
@@ -28,13 +26,15 @@ let books = [
 /*   
 mutation {
     addBook(
-          title: "Clean Code",
-      published: 2008,
-      author: "Robert Martin",
-      genres: ["refactoring"],
+    title: "Clean Code",
+    published: 2008,
+    author: "Robert Martin",
+    genres: ["refactoring"],
     ){
       title
-
+author{
+  name
+}
     }
   } 
 
@@ -46,12 +46,21 @@ mutation {
       name
     }
   } 
+
+    mutation {
+    editAuthor(
+         name: "Robert Martin",
+    setBornTo: 1952,
+    ){
+      name
+      born
+    }
+  } 
   */
   {
     title: "Clean Code",
     published: 2008,
     author: "Robert Martin",
-    id: "afa5b6f4-344d-11e9-a414-719c6709cf3e",
     genres: ["refactoring"],
   },
   {
