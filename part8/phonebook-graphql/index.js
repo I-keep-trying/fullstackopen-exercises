@@ -1,12 +1,9 @@
 require('dotenv').config()
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
-const typeDefs = require('./schema')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
-const User = require('./models/user')
-const jwt = require('jsonwebtoken')
+const typeDefs = require('./schema')
 
-const JWT_SECRET = process.env.SECRET
 const MONGODB_URI = process.env.MONGODB_URI
 
 console.log('connecting to', MONGODB_URI)
@@ -25,29 +22,6 @@ mongoose
     console.log('error connection to MongoDB:', error.message)
   })
 
-/* let persons = [
-  {
-    name: 'Arto Hellas',
-    phone: '040-123543',
-    street: 'Tapiolankatu 5 A',
-    city: 'Espoo',
-    id: '3d594650-3436-11e9-bc57-8b80ba54c431',
-  },
-  {
-    name: 'Matti Luukkainen',
-    phone: '040-432342',
-    street: 'Malminkaari 10 A',
-    city: 'Helsinki',
-    id: '3d599470-3436-11e9-bc57-8b80ba54c431',
-  },
-  {
-    name: 'Venla Ruuska',
-    street: 'Nallemäentie 22 C',
-    city: 'Helsinki',
-    id: '3d599471-3436-11e9-bc57-8b80ba54c431',
-  },
-] */
-
 const resolvers = {
   Query: {
     personCount: () => Person.collection.countDocuments(),
@@ -58,9 +32,6 @@ const resolvers = {
       return Person.find({ phone: { $exists: args.phone === 'YES' } })
     },
     findPerson: (root, args) => Person.findOne({ name: args.name }),
-    me: (root, args, context) => {
-      return context.currentUser
-    },
   },
   Person: {
     address: root => {
@@ -71,18 +42,11 @@ const resolvers = {
     },
   },
   Mutation: {
-    addPerson: async (root, args, context) => {
+    addPerson: async (root, args) => {
       const person = new Person({ ...args })
-      const currentUser = context.currentUser
-
-      if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
-      }
 
       try {
         await person.save()
-        currentUser.friends = currentUser.friends.concat(person)
-        await currentUser.save()
       } catch (error) {
         throw new UserInputError(error.message, {
           invalidArgs: args,
@@ -101,48 +65,7 @@ const resolvers = {
           invalidArgs: args,
         })
       }
-
       return person
-    },
-    createUser: (root, args) => {
-      const user = new User({ username: args.username })
-
-      return user.save().catch(error => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
-        })
-      })
-    },
-    login: async (root, args) => {
-      const user = await User.findOne({ username: args.username })
-
-      if (!user || args.password !== 'secret') {
-        throw new UserInputError('wrong credentials')
-      }
-
-      const userForToken = {
-        username: user.username,
-        id: user._id,
-      }
-
-      return { value: jwt.sign(userForToken, JWT_SECRET) }
-    },
-    addAsFriend: async (root, args, { currentUser }) => {
-      const nonFriendAlready = person =>
-        !currentUser.friends.map(f => f._id).includes(person._id)
-
-      if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
-      }
-
-      const person = await Person.findOne({ name: args.name })
-      if (nonFriendAlready(person)) {
-        currentUser.friends = currentUser.friends.concat(person)
-      }
-
-      await currentUser.save()
-
-      return currentUser
     },
   },
 }
@@ -150,24 +73,10 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: async ({ req }) => {
-    const auth = req ? req.headers.authorization : null
-    if (auth && auth.toLowerCase().startsWith('bearer ')) {
-      const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-      const currentUser = await User.findById(decodedToken.id).populate(
-        'friends'
-      )
-      return { currentUser }
-    }
-  },
 })
 
 const PORT = 4003
 
 server.listen({ port: PORT }).then(({ url }) => {
-  console.log(`Server ready at port ${url}`)
+  console.log(`Server ready at ${url}`)
 })
-
-/* 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ii4uLiIsImlkIjoiNWY3NjM2YjZkZWU3NzEwYTc4NDJhYmZhIiwiaWF0IjoxNjAxNTgyOTc4fQ.q9ahNfIPnYC19vyPl68DNZTv3Lxbtw_XxQLAqwWtAgo
-*/

@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
   },
   phone: {
     type: String,
-    minlength: 5n
+    minlength: 5
   },
   street: {
     type: String,

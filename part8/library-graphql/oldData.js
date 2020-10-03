@@ -34,9 +34,16 @@ mutation {
       genres: ["refactoring"],
     ){
       title
-      author{
-        name
-      }
+
+    }
+  } 
+
+  mutation {
+    addAuthor(
+         name: "Robert Martin",
+    born: 1952,
+    ){
+      name
     }
   } 
   */
