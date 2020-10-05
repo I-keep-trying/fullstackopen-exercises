@@ -48,6 +48,8 @@ const resolvers = {
       try {
         await person.save()
       } catch (error) {
+        console.log('error ', error.message)
+
         throw new UserInputError(error.message, {
           invalidArgs: args,
         })

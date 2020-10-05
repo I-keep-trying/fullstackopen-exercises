@@ -1,0 +1,22 @@
+{
+  "errors": [
+    {
+      "message": "Person validation failed: name: Path `name` is required., phone: Path `phone` (``) is shorter than the minimum allowed length (5)., street: Path `street` is required., city: Path `city` is required.",
+      "locations": [{ "line": 2, "column": 3 }],
+      "path": ["addPerson"],
+      "extensions": {
+        "invalidArgs": { "name": "", "phone": "", "street": "", "city": "" },
+        "code": "BAD_USER_INPUT",
+        "exception": {
+          "invalidArgs": { "name": "", "phone": "", "street": "", "city": "" },
+          "stacktrace": [
+            "UserInputError: Person validation failed: name: Path `name` is required., phone: Path `phone` (``) is shorter than the minimum allowed length (5)., street: Path `street` is required., city: Path `city` is required.",
+            "    at addPerson (C:\\Users\\Owner\\webdev\\fullstackopen-exercises\\part8\\phonebook-graphql\\index.js:51:15)",
+            "    at process._tickCallback (internal/process/next_tick.js:68:7)"
+          ]
+        }
+      }
+    }
+  ],
+  "data": { "addPerson": null }
+}

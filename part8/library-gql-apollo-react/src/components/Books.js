@@ -1,11 +1,12 @@
 import React from 'react'
 
 const Books = ({ books }) => {
+  books = books.data.allBooks
   return (
     <div>
       <h2>Books</h2>
 
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Title</th>

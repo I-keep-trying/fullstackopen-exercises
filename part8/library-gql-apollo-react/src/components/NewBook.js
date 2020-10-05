@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { ADD_BOOK, ALL_BOOKS } from '../queries'
+import { ADD_BOOK, ALL_BOOKS, ALL_AUTHORS } from '../queries'
 
-const NewBook = ({ setError }) => {
+const NewBook = ({ setErrorMessage }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
@@ -10,11 +10,18 @@ const NewBook = ({ setError }) => {
   const [genres, setGenres] = useState([])
 
   const [createBook] = useMutation(ADD_BOOK, {
-    refetchQueries: [{ query: ALL_BOOKS }],
+    refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }],
+   
   })
 
   const submit = async (event) => {
     event.preventDefault()
+    console.log('title input',title.length)
+    console.log('author input',author.length)
+    if (author.length < 4 || title.length < 2) {
+      setErrorMessage('incomplete form')
+      
+    }
     const bookObject = {
       variables: {
         title,
@@ -23,8 +30,11 @@ const NewBook = ({ setError }) => {
         genre,
       },
     }
+    try {
     createBook(bookObject)
-
+} catch (err) {
+  console.log('err',err)
+}
     setTitle('')
     setPublished('')
     setAuthor('')
@@ -110,9 +120,7 @@ const NewBook = ({ setError }) => {
 
           <div className="input-group mb-3">
             <div className="input-group-prepend">
-              <span>
-                Genres: {genres.join(' ')}
-              </span>
+              <span>Genres: {genres.join(' ')}</span>
             </div>
           </div>
 

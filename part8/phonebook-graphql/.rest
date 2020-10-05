@@ -1,0 +1,28 @@
+POST http://localhost:4003/
+content-type: application/json
+
+{operationName: "createPerson"
+query: "mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) 
+{addPerson(name: $name, street: $street, city: $city, phone: $phone) {    
+    name    
+phone   
+id   
+address {
+          street
+          city
+           __typename
+          }
+           __typename
+          }
+          }
+          "
+variables: {name: "TEST REST", phone: "123-456-7777", street: "main street", city: "gotham"}
+city: "gotham"
+name: "TEST REST"
+phone: "123-456-7777"
+street: "main street"}
+###
+query: "{↵  allPersons {↵    name↵    phone↵    id↵    __typename↵  }↵}↵"
+variables: {}
+
+{"variables":{},"query":"{  allPersons {    name    phone    id    __typename  }}"}

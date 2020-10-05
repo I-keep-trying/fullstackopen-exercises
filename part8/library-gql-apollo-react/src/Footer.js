@@ -8,8 +8,9 @@ const Footer = () => {
         href="https://github.com/I-keep-trying"
         target="_blank"
         rel="noopener noreferrer"
-      >{' '}
-        <i style={{ color: 'white' }} class="fab fa-github"></i>
+      >
+        {' '}
+        <i style={{ color: 'white' }} className="fab fa-github"></i>
       </a>
     </div>
   )

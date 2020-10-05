@@ -6,7 +6,6 @@ export const ALL_AUTHORS = gql`
       name
       id
       born
-      bookCount
     }
   }
 `
@@ -16,9 +15,17 @@ export const EDIT_AUTHOR = gql`
       name
       id
       born
-      bookCount
     }
   }
+`
+
+export const BOOKS_BY_AUTHOR = gql`
+query findBooksByAuthor ($nameToSearch: String!) {
+  booksByAuthor(name: $nameToSearch){
+    title
+  }
+}
+
 `
 
 export const ALL_BOOKS = gql`
@@ -64,7 +71,6 @@ export const FIND_AUTHOR = gql`
       name
       id
       born
-      bookCount
     }
   }
 `

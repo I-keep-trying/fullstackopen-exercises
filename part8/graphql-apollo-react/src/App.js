@@ -17,13 +17,13 @@ const Notify = ({ errorMessage }) => {
 function App() {
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const result = useQuery(ALL_PERSONS, { pollInterval: 2000 })
-  console.log('result', result)
+  const result = useQuery(ALL_PERSONS)
   if (result.loading) {
     return <div>loading...</div>
   }
 
   const notify = (message) => {
+    console.log('App notify error message', message)
     setErrorMessage(message)
     setTimeout(() => {
       setErrorMessage(null)

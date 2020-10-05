@@ -28,41 +28,56 @@ const resolvers = {
   Query: {
     bookCount: () => Book.collection.countDocuments(),
     authorCount: () => Author.collection.countDocuments(),
-
-    allBooks: (root, args) => Book.find({}).populate('author'),
-    allAuthors: (root, args) => Author.find({}).populate('books'),
-    findBook: (root, args) =>
-      Book.findOne({ title: args.title }).populate('author', {
+    allBooks: (root, args) => {
+      if (args.genre) {
+        return Book.find({ genres: { $in: [args.genre] } }).populate('author', {
+          name: 1,
+          born: 1,
+        })
+      }
+      return Book.find({}).populate('author', {
         name: 1,
         born: 1,
-      }),
+      })
+    },
+    allAuthors: (root, args) => {
+      return Author.find({}).populate('books')
+    },
+    findBook: (root, args) =>
+      Book.find({ title: args.title }).populate('author', { name: 1, born: 1 }),
+    findAuthor: (root, args) => Author.findOne({ name: args.name }),
   },
 
   Mutation: {
     addBook: async (root, args) => {
       let author = await Author.findOne({ name: args.author })
-      console.log('author', author)
       if (author === null) {
         author = new Author({ name: args.author })
-        await author.save()
-        console.log('savedAuthor', author)
       }
-      const book = new Book({ ...args, author })
-      console.log('book', book)
-      const savedBook = await book.save()
-      console.log('savedBook', savedBook)
-      return savedBook
+      let book = new Book({ ...args, author })
+      try {
+        console.log('book', book) //this fires when no errors
+        author = await author.save()
+        book = await book.save()
+      } catch (error) {
+        console.log('add book book error', error) //this NEVER EVER EVER FIRES WHYYYYYYY
+        //NOTHING PRINTS TO CONSOLE EVER!!!
+        throw new UserInputError(error.message, {
+          //code never even gets here.
+          invalidArgs: args,
+        })
+      }
+      return book
     },
     addAuthor: async (root, args) => {
-      const author = new Author({ ...args })
+      const books = await Book.find({ author: author })
+      const author = new Author({ ...args, books: [books] })
       const savedAuthor = await author.save()
-      console.log('savedAuthor', savedAuthor)
       return savedAuthor
     },
     editAuthor: async (root, args) => {
       const author = await Author.findOne({ name: args.name })
       author.born = args.setBornTo
-
       try {
         await author.save()
       } catch (error) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import App from './App1'
+import App from './App'
 
 import {
   ApolloClient,
@@ -17,20 +17,6 @@ const client = new ApolloClient({
     uri: 'http://localhost:4001',
   }),
 })
-
-/* const query = gql`
-  query {
-    allAuthors {
-      name
-      id
-      born
-    }
-  }
-`
-
-client.query({ query }).then((response) => {
-  console.log(response.data)
-}) */
 
 ReactDOM.render(
   <ApolloProvider client={client}>

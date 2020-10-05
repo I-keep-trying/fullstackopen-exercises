@@ -12,8 +12,7 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:3007/api/blogs/5f68e19af76be70898e947eb/comments/5f6a5347e4117428e0bb21e9
-###
-POST http://localhost:3007/api/blogs/5f68e19af76be70898e947eb/comments/5f6a5347e4117428e0bb21e9
+
 ###
 DELETE http://localhost:3007/api/blogs/5f68df50f76be70898e947ea
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pY2hhZWxfQ2hhbiIsImlkIjoiNWYzNDFhZGIxM2QyMzcyNDRjNDc3MDQyIiwiaWF0IjoxNjAwNzg4NTA3fQ.lkCVFofOJ3ISh9mlScO0czg3HNj19Tr2BFDneyd7Vvc
