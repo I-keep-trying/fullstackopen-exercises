@@ -20,12 +20,11 @@ export const EDIT_AUTHOR = gql`
 `
 
 export const BOOKS_BY_AUTHOR = gql`
-query findBooksByAuthor ($nameToSearch: String!) {
-  booksByAuthor(name: $nameToSearch){
-    title
+  query findBooksByAuthor($nameToSearch: String!) {
+    booksByAuthor(name: $nameToSearch) {
+      title
+    }
   }
-}
-
 `
 
 export const ALL_BOOKS = gql`
@@ -71,6 +70,13 @@ export const FIND_AUTHOR = gql`
       name
       id
       born
+    }
+  }
+`
+export const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      value
     }
   }
 `

@@ -72,3 +72,11 @@
 .image {
   width: 50%;
 }
+
+.LogInOut {
+  color: #002d2e;
+  right: 0.5rem;
+  top: 2rem;
+  text-align: right;
+  font-weight: bold;
+}

@@ -99,4 +99,15 @@ author{
     author: "Fyodor Dostoevsky",
     genres: ["classic", "revolution"],
   },
+/*   addBook(title:"authenticated",author:"author",published:2000){
+    title
+    author{
+      name
+    }
+  } */
+  /* 
+{
+  "Authorization":"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhYSIsImlkIjoiNWY3Y2MwODgzODVlMmUzMGQ4NjYyNGU2IiwiaWF0IjoxNjAyMDEyNDQ4fQ.H_tvlx8oInfbyYuAhjo4WlgHDXt1NZkbxmcOYkYMKlc"
+}
+  */
 ]

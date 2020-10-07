@@ -15,8 +15,7 @@
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.7",
-    "mongoose-unique-validator": "^2.0.3"
+    "mongoose": "^5.10.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

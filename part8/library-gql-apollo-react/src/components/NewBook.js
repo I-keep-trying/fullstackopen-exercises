@@ -2,26 +2,17 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_BOOK, ALL_BOOKS, ALL_AUTHORS } from '../queries'
 
-const NewBook = ({ setErrorMessage }) => {
+const NewBook = ({ setMessage }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
-
   const [createBook] = useMutation(ADD_BOOK, {
     refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }],
-   
   })
-
   const submit = async (event) => {
     event.preventDefault()
-    console.log('title input',title.length)
-    console.log('author input',author.length)
-    if (author.length < 4 || title.length < 2) {
-      setErrorMessage('incomplete form')
-      
-    }
     const bookObject = {
       variables: {
         title,
@@ -30,11 +21,37 @@ const NewBook = ({ setErrorMessage }) => {
         genre,
       },
     }
-    try {
-    createBook(bookObject)
-} catch (err) {
-  console.log('err',err)
-}
+    if (
+      bookObject.variables.published.toString().length > 0 &&
+      (bookObject.variables.author.length < 4 ||
+        bookObject.variables.title.length < 2)
+    ) {
+      setMessage('Title and Author are required.')
+      setTimeout(() => {
+        setMessage(null)
+      }, 1000)
+    }
+    createBook(bookObject).catch((e) => {
+      console.log('new book error', e)
+      if (bookObject.variables.author.length < 4) {
+        setMessage('Author name must be 4 characters minimum.')
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
+      } else if (bookObject.variables.title.length < 2) {
+        setMessage('Book Title must be 2 characters minimum.')
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
+      } else if (e.networkError) {
+        setMessage('Title, Author, and Published date are required.')
+        setTimeout(() => {
+          setMessage(null)
+        }, 1000)
+      } else if (e.errors) {
+        console.log('error .catch', e)
+      }
+    })
     setTitle('')
     setPublished('')
     setAuthor('')
@@ -44,7 +61,6 @@ const NewBook = ({ setErrorMessage }) => {
 
   const addGenre = () => {
     setGenres(genres.concat(genre))
-
     setGenre('')
   }
 
