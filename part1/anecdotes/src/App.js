@@ -9,7 +9,6 @@ import {
 import Footer from './components/Footer'
 import './App.css'
 
-
 const CreateNew = (props) => {
   const [content, setContent] = useState('')
   const [author, setAuthor] = useState('')
@@ -58,7 +57,6 @@ const CreateNew = (props) => {
     </div>
   )
 }
-
 
 const Menu = () => {
   const padding = {
@@ -173,33 +171,39 @@ function App() {
   }
 
   const padding = {
-    padding: 5
+    padding: 5,
   }
-  
+
   return (
     <Router>
-    <div>
-      <Link style={padding} to="/">home</Link>
-      <Link style={padding} to="/anecdotes">anecdotes</Link>
-      <Link style={padding} to="/about">about</Link>
-    </div>
+      <div>
+        <Link style={padding} to="/">
+          home
+        </Link>
+        <Link style={padding} to="/anecdotes">
+          anecdotes
+        </Link>
+        <Link style={padding} to="/about">
+          about
+        </Link>
+      </div>
 
-    <Switch>
-      <Route path="/anecdotes">
-        <Anecdotes />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
+      <Switch>
+        <Route path="/anecdotes">
+          <Anecdotes />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
 
-    <div>
-      <i>Anecdote app, Department of Computer Science 2020</i>
-    </div>
-  </Router>
+      <div>
+        <i>Anecdote app, Department of Computer Science 2020</i>
+      </div>
+    </Router>
   )
 }
 

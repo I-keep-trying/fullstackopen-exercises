@@ -1,25 +1,65 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
-const Books = ({ books }) => {
+const Books = ({ books, user }) => {
   books = books.data.allBooks
-  console.log('Books', books)
-  const requests = [
-    { id: 1, person: { id: 1 } },
-    { id: 2, person: { id: 1 } },
-    { id: 3, person: { id: 2 } },
-    { id: 4, person: { id: 3 } },
-    { id: 5, person: { id: 2 } },
-  ]
-  const result = [...new Set(requests.map(({ person: { id } }) => id))]
-  console.log(result)
-  const genreFilter = () => {}
+  const [bookFilter, setFilter] = useState('')
+  const [booksToShow, setBooksToShow] = useState(books)
+
+  const uniqueGenres = books.reduce((acc, v) => {
+    const genres = [...new Set(acc.concat(v.genres))]
+    return genres
+  }, [])
+
+  useEffect(() => {
+    if (user !== null) {
+      setFilter(user.favoriteGenre)
+    }
+  }, [user])
+
+  useEffect(() => {
+    bookFilter === ''
+      ? setBooksToShow(books)
+      : setBooksToShow(
+          books.filter((book) => {
+            return book.genres.some((genre) => genre === bookFilter)
+          })
+        )
+  }, [books, bookFilter, user])
+
   return (
     <div>
       <h2>Books</h2>
-      <div>{books.map((book) => {
-console.log('mapped book',book)
-
-      })}</div>
+      <div></div>
+      <div>
+        {uniqueGenres.map((g) => {
+          const id = uuidv4()
+          return (
+            <span key={id}>
+              <button
+                value={g}
+                onClick={({ target }) => setFilter(target.value)}
+              >
+                {g}{' '}
+              </button>
+            </span>
+          )
+        })}
+        <hr />
+        <button value={''} onClick={({ target }) => setFilter(target.value)}>
+          all books
+        </button>
+        {user !== null ? (
+          <>
+            <button onClick={() => setFilter(user.favoriteGenre)}>
+              favorite genre
+            </button>
+            <div>Books in your favorite genre, {user.favoriteGenre}:</div>
+          </>
+        ) : (
+          <></>
+        )}
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -29,11 +69,11 @@ console.log('mapped book',book)
           </tr>
         </thead>
         <tbody>
-          {books.map((a) => (
-            <tr key={a.id}>
-              <td>{a.title}</td>
-              <td>{a.author.name}</td>
-              <td>{a.published}</td>
+          {booksToShow.map((book) => (
+            <tr key={book.id}>
+              <td>{book.title}</td>
+              <td>{book.author.name}</td>
+              <td>{book.published}</td>
             </tr>
           ))}
         </tbody>

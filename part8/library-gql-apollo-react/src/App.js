@@ -3,13 +3,15 @@ import { useQuery, useApolloClient } from '@apollo/client'
 import { ALL_AUTHORS, ALL_BOOKS } from './queries'
 import Authors from './components/Authors'
 import AuthorForm from './components/AuthorForm'
-import Books from './components/Books'
+import Books from './components/Books1'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
 import Footer from './Footer'
 
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { ToastContainer, toast } from 'react-toastify'
+import './ReactToastify.css'
 
 const Home = () => (
   <div>
@@ -26,17 +28,15 @@ const Home = () => (
   </div>
 )
 
-const Notify = ({ message }) => {
-  if (!message) {
-    return null
-  }
-  return <div style={{ color: 'red' }}>{message}</div>
-}
-
 const App = () => {
   const [token, setToken] = useState(null)
-  const [message, setMessage] = useState(null)
   const [page, setPage] = useState('home')
+  const [user, setUser] = useState(null)
+
+  let authors = useQuery(ALL_AUTHORS)
+
+  let books = useQuery(ALL_BOOKS)
+
   const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
@@ -46,40 +46,24 @@ const App = () => {
 
   const logout = () => {
     setToken(null)
+    setUser(null)
     localStorage.clear()
     client.resetStore()
+    toast('Logout successful', { autoClose: 2000 })
+    setPage('home')
   }
 
-  let authors = useQuery(ALL_AUTHORS)
-  console.log('App component authors', authors)
-  let books = useQuery(ALL_BOOKS)
-  /*   authors = authors.data.allAuthors
-  books = books.data.allBooks */
   const authContent = () => {
     if (page === 'home') {
       return <Home />
     } else if (page === 'authors') {
-      return (
-        <Authors
-          authors={authors}
-          books={books}
-          setMessage={setMessage}
-          message={message}
-        />
-      )
+      return <Authors authors={authors} books={books} />
     } else if (page === 'authorForm') {
-      return (
-        <AuthorForm
-          authors={authors}
-          books={books}
-          setMessage={setMessage}
-          message={message}
-        />
-      )
+      return <AuthorForm authors={authors} books={books} setPage={setPage} />
     } else if (page === 'books') {
-      return <Books books={books} />
+      return <Books books={books} user={user} />
     } else if (page === 'newBook') {
-      return <NewBook setMessage={setMessage} message={message} books={books} />
+      return <NewBook books={books} setPage={setPage} />
     }
   }
 
@@ -87,22 +71,15 @@ const App = () => {
     if (page === 'home') {
       return <Home />
     } else if (page === 'authors') {
-      return (
-        <Authors
-          authors={authors}
-          books={books}
-          setMessage={setMessage}
-          message={message}
-        />
-      )
+      return <Authors authors={authors} books={books} />
     } else if (page === 'books') {
-      return <Books books={books} />
+      return <Books books={books} user={user} />
     } else if (page === 'login') {
       return (
         <LoginForm
           setToken={setToken}
-          setMessage={setMessage}
-          message={message}
+          setUser={setUser}
+          user={user}
           setPage={setPage}
         />
       )
@@ -125,6 +102,8 @@ const App = () => {
                         <h3>React Apollo Graphql - Library</h3>
                       </div>
                       <div className="navbar-nav mr-auto">
+                        <ToastContainer />
+
                         <li
                           style={{ cursor: 'pointer' }}
                           className="nav-item nav-link"
@@ -157,14 +136,15 @@ const App = () => {
                     </nav>
                   </nav>
                 </div>
-                <Notify message={message} />
-                <div>{unAuthContent()}</div>
+                <div>
+                  <ToastContainer />
+                  {unAuthContent()}
+                </div>
               </div>
               <Footer />
             </>
           )}
         </div>
-        <Notify message={message} />
       </div>
     )
   }
@@ -229,7 +209,7 @@ const App = () => {
                 </nav>
               </nav>
             </div>
-            <Notify message={message} />
+            <ToastContainer />
             <div>{authContent()}</div>
           </div>
           <Footer />

@@ -140,6 +140,26 @@ li {
   font-weight: bold;
 }
 
+.error {
+  color: red;
+  background: #ff00006e;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.info {
+  color: #1f8500;
+  background: #3bff00;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 ol,
 ul {
   margin: 1.5em;

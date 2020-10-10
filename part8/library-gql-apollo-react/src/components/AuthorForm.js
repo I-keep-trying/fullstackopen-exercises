@@ -1,43 +1,32 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { EDIT_AUTHOR } from '../queries'
+import { toast } from 'react-toastify'
 
-const AuthorForm = ({ authors, setMessage }) => {
+const AuthorForm = ({ authors, setPage }) => {
   authors = authors.data.allAuthors
-  console.log('Author Form authors', authors)
   const [name, setName] = useState(authors[0].name)
   const [born, setBorn] = useState('')
-  const [updateAuthor] = useMutation(EDIT_AUTHOR)
+  const [updateAuthor] = useMutation(EDIT_AUTHOR, {
+    onError: (error) => {
+      toast.error(`💥${error.graphQLErrors[0].message}`, { autoClose: 2000 })
+    },
+  })
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const authorObject = {
       variables: {
         name,
-        setBornTo: born,
+        setBornTo: Number(born),
       },
     }
-    if (isNaN(authorObject.variables.setBornTo)) {
-      setMessage('Please enter Author year of birth numerically.')
-      setTimeout(() => {
-        setMessage(null)
-      }, 1000)
-    }
-    if (authorObject.variables.setBornTo.toString().length < 1) {
-      setMessage('Please enter Author year of birth.')
-      setTimeout(() => {
-        setMessage(null)
-      }, 1000)
-    }
-    updateAuthor(authorObject).catch((e) => {
-      if (e.errors) {
-        console.log('e.errors', e.errors)
-      } else if (!e.errors) {
-        console.log('!e.errors', e)
-      }
-    })
+
+    updateAuthor(authorObject)
     setName('')
     setBorn('')
+   
   }
   return (
     <div className="col-md-12">
@@ -61,8 +50,8 @@ const AuthorForm = ({ authors, setMessage }) => {
           <div className="form-group">
             <input
               value={born}
-              placeholder="date of birth"
-              onChange={({ target }) => setBorn(Number(target.value))}
+              placeholder="year of birth"
+              onChange={({ target }) => setBorn(target.value)}
             />
           </div>
           <div className="form-group">

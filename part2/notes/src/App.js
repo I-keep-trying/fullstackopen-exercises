@@ -47,11 +47,11 @@ const App = () => {
       window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user))
       noteService.setToken(user.token)
       setUser(user)
-      toast(`Welcome, ${user.name}!`)
+      toast(`Welcome, ${user.name}!`, { autoClose: 2000 })
       setUsername('')
       setPassword('')
     } catch (exception) {
-      toast.error('Wrong credentials')
+      toast.error('Wrong credentials', { autoClose: 2000 })
     }
   }
 

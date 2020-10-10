@@ -3,7 +3,6 @@ import React from 'react'
 const Authors = ({ authors, books }) => {
     authors = authors.data.allAuthors
   books = books.data.allBooks
-  console.log('Authors component', authors)
 
   return (
     <div>

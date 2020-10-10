@@ -1,25 +1,24 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../queries'
+import { toast } from 'react-toastify'
 
-const LoginForm = ({ setMessage, setToken, setPage }) => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+const LoginForm = ({ setToken, setPage, setUser }) => {
+  const [username, setUsername] = useState('aaa')
+  const [password, setPassword] = useState('secret')
 
-  const [login, result] = useMutation(LOGIN, {
+  const [login] = useMutation(LOGIN, {
     onError: (error) => {
-      setMessage(error.graphQLErrors[0].message)
+      toast.error(`💥${error.graphQLErrors[0].message}`)
+    },
+    onCompleted: (data) => {
+      setToken(data.login.value)
+      setUser(data.login.user)
+      localStorage.setItem('library-user-token', data.login.value)
+      toast(`🐸Welcome, ${data.login.user.username}!`, { autoClose: 1000 })
+      setPage('home')
     },
   })
-
-  useEffect(() => {
-    if (result.data) {
-      const token = result.data.login.value
-      setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
-      setPage('home')
-    }
-  }, [result.data]) // eslint-disable-line
 
   const submit = async (event) => {
     event.preventDefault()

@@ -3,10 +3,12 @@ import { useLazyQuery } from '@apollo/client'
 import { FIND_PERSON } from '../queries'
 
 const Persons = ({ persons }) => {
+  console.log('persons from props', persons)
   const [getPerson, result] = useLazyQuery(FIND_PERSON)
   const [person, setPerson] = useState(null)
-
+  console.log('result from useLazyQuery', result)
   const showPerson = (name) => {
+    console.log('name param', name)
     getPerson({ variables: { nameToSearch: name } })
   }
 
@@ -15,7 +17,7 @@ const Persons = ({ persons }) => {
       setPerson(result.data.findPerson)
     }
   }, [result])
-
+  console.log('person from useState', person)
   if (person) {
     return (
       <div>

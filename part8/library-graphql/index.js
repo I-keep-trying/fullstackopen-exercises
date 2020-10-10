@@ -1,6 +1,8 @@
 require('dotenv').config()
+const fs = require('fs')
 const {
   ApolloServer,
+  ApolloError,
   UserInputError,
   AuthenticationError,
 } = require('apollo-server')
@@ -34,6 +36,7 @@ const resolvers = {
     bookCount: () => Book.collection.countDocuments(),
     authorCount: () => Author.collection.countDocuments(),
     allBooks: (root, args) => {
+      console.log('allbooks query ', args)
       if (args.genre) {
         return Book.find({ genres: { $in: [args.genre] } }).populate('author', {
           name: 1,
@@ -51,6 +54,7 @@ const resolvers = {
     findBook: (root, args) =>
       Book.find({ title: args.title }).populate('author', { name: 1, born: 1 }),
     findAuthor: (root, args) => Author.findOne({ name: args.name }),
+    allUsers: () => User.find({}),
     me: (root, args, context) => {
       return context.currentUser
     },
@@ -58,24 +62,30 @@ const resolvers = {
 
   Mutation: {
     addBook: async (root, args, context) => {
-      const currentUser = context.currentUser
-      console.log('currentUser', currentUser)
-      if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
-      } else {
+      try {
+        let bookAuthor = await Author.findOne({ name: args.author })
+        if (bookAuthor === null) {
+          bookAuthor = new Author({ name: args.author })
+          await bookAuthor.save()
+        }
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+
+      try {
         let author = await Author.findOne({ name: args.author })
-        if (author === null) {
-          author = new Author({ name: args.author })
-        }
         let book = new Book({ ...args, author })
-        try {
-          console.log('book', book) //this fires when no errors
-          author = await author.save()
-          book = await book.save()
-        } catch (error) {
-          console.log('add book book error', error) //this NEVER EVER EVER FIRES WHYYYYYYY
+        if (args.published === 0) {
+          throw new UserInputError('Please enter published date.')
         }
+        await book.save()
         return book
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
       }
     },
     addAuthor: async (root, args) => {
@@ -84,25 +94,22 @@ const resolvers = {
       return savedAuthor
     },
     editAuthor: async (root, args, context) => {
-      const currentUser = context.currentUser
-      console.log('currentUser', currentUser)
-      if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
-      } else {
-        let author = await Author.findOne({ name: args.name })
-        author.born = args.setBornTo
-        try {
-          author = await author.save()
-        } catch (error) {
-          //nope. never happens.
-          console.log('error..........', error)
-          throw new UserInputError(error)
+      let author = await Author.findOne({ name: args.name })
+
+      try {
+        if (args.setBornTo === 0) {
+          throw new UserInputError('Author date of birth required')
+        } else {
+          author.born = args.setBornTo
         }
-        return author
+        author = await author.save()
+      } catch (error) {
+        return error
       }
+      return author
     },
     createUser: (root, args) => {
-      const user = new User({ username: args.username })
+      const user = new User({ ...args })
 
       return user.save().catch(error => {
         throw new UserInputError(error.message, {
@@ -110,19 +117,31 @@ const resolvers = {
         })
       })
     },
+    editUser: async (root, args) => {
+      let user = await User.findOne({ username: args.username })
+      user.favoriteGenre = args.favoriteGenre
+      try {
+        user = await user.save()
+      } catch (error) {
+        return error
+      }
+      return user
+    },
     login: async (root, args) => {
       const user = await User.findOne({ username: args.username })
 
       if (!user || args.password !== 'secret') {
-        throw new UserInputError('wrong credentials')
+        throw new UserInputError('Oops! Invalid username and/or password.')
       }
-
       const userForToken = {
         username: user.username,
+        favoriteGenre: user.favoriteGenre || null,
         id: user._id,
       }
-
-      return { value: jwt.sign(userForToken, JWT_SECRET) }
+      return {
+        value: jwt.sign(userForToken, JWT_SECRET),
+        user: userForToken,
+      }
     },
   },
 }
@@ -134,9 +153,7 @@ const server = new ApolloServer({
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
       const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-      const currentUser = await User.findById(decodedToken.id).populate(
-        'friends'
-      )
+      const currentUser = await User.findById(decodedToken.id)
       return { currentUser }
     }
   },

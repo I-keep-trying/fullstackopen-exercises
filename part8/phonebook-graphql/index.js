@@ -53,8 +53,6 @@ const resolvers = {
   Mutation: {
     addPerson: async (root, args, context) => {
       let person = await Person.findOne({ name: args.name })
-      console.log('addPerson person', person)
-      //   console.log('not duplicate', person.name)
       if (person === null) {
         person = new Person({ ...args })
       } else if (person.name === args.name) {

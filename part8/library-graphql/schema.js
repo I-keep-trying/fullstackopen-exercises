@@ -11,43 +11,45 @@ const typeDefs = gql`
   type Book {
     title: String!
     published: Int!
-    author: Author!
+    author: Author
     genres: [String!]!
     id: ID!
   }
 
   type User {
     username: String!
-    favoriteGenre: String!
+    favoriteGenre: String
     id: ID!
   }
 
   type Token {
     value: String!
+    user: User
   }
 
   type Query {
     bookCount: Int!
-
     allBooks(genre: String): [Book]
     findBook(title: String!): [Book]
     authorCount: Int!
     allAuthors: [Author!]!
     findAuthor(name: String!): Author
+    allUsers: [User]
     me: User
   }
 
   type Mutation {
     addBook(
       title: String!
-      published: Int
+      published: Int!
       genres: [String]
-      author: String
+      author: String!
       setBornTo: Int
     ): Book
     addAuthor(name: String!, born: Int): Author
     editAuthor(name: String, setBornTo: Int): Author
     createUser(username: String!, favoriteGenre: String): User
+    editUser(username: String!): User
     login(username: String!, password: String!): Token
   }
 `

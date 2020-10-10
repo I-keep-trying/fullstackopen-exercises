@@ -1,62 +1,48 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_BOOK, ALL_BOOKS, ALL_AUTHORS } from '../queries'
+import { toast } from 'react-toastify'
 
-const NewBook = ({ setMessage }) => {
+const NewBook = ({ setPage }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
+
   const [createBook] = useMutation(ADD_BOOK, {
     refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }],
+    onError: (error) => {
+      toast.error(`💥${error.graphQLErrors[0].message}`, { autoClose: 2000 })
+    },
+    onCompleted: (data) => {
+      toast(`Book titled "${data.addBook.title}" successfully added.`, {
+        autoClose: 2000,
+      })
+      setPage('books')
+    },
+    update: (store, response) => {
+      const dataInStore = store.readQuery({ query: ALL_BOOKS })
+      store.writeQuery({
+        query: ALL_BOOKS,
+        data: {
+          ...dataInStore,
+          allBooks: [...dataInStore.allBooks, response.data.addBook],
+        },
+      })
+    },
   })
-  const submit = async (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault()
-    const bookObject = {
+    createBook({
       variables: {
         title,
-        published,
+        published: Number(published),
         author,
-        genre,
+        genres,
       },
-    }
-    if (
-      bookObject.variables.published.toString().length > 0 &&
-      (bookObject.variables.author.length < 4 ||
-        bookObject.variables.title.length < 2)
-    ) {
-      setMessage('Title and Author are required.')
-      setTimeout(() => {
-        setMessage(null)
-      }, 1000)
-    }
-    createBook(bookObject).catch((e) => {
-      console.log('new book error', e)
-      if (bookObject.variables.author.length < 4) {
-        setMessage('Author name must be 4 characters minimum.')
-        setTimeout(() => {
-          setMessage(null)
-        }, 1000)
-      } else if (bookObject.variables.title.length < 2) {
-        setMessage('Book Title must be 2 characters minimum.')
-        setTimeout(() => {
-          setMessage(null)
-        }, 1000)
-      } else if (e.networkError) {
-        setMessage('Title, Author, and Published date are required.')
-        setTimeout(() => {
-          setMessage(null)
-        }, 1000)
-      } else if (e.errors) {
-        console.log('error .catch', e)
-      }
     })
-    setTitle('')
-    setPublished('')
-    setAuthor('')
-    setGenres([])
-    setGenre('')
   }
 
   const addGenre = () => {
@@ -68,18 +54,21 @@ const NewBook = ({ setMessage }) => {
     <div className="card">
       <div className="card-container">
         <h2>Add A Book</h2>
-
-        <form onSubmit={submit}>
+        <p>
+          <small>Required fields marked with *.</small>
+        </p>
+        <form onSubmit={handleSubmit}>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
-                Title
+                *Title
               </span>
             </div>
             <input
               className="form-control"
               name="title"
               value={title}
+              placeholder="minimum of 2 characters"
               onChange={({ target }) => setTitle(target.value)}
             />
           </div>
@@ -87,13 +76,14 @@ const NewBook = ({ setMessage }) => {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
-                Author
+                *Author
               </span>
             </div>
             <input
               className="form-control"
               name="title"
               value={author}
+              placeholder="minimum of 4 characters"
               onChange={({ target }) => setAuthor(target.value)}
             />
           </div>
@@ -101,7 +91,7 @@ const NewBook = ({ setMessage }) => {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
-                Published
+                *Published
               </span>
             </div>
             <input
@@ -109,6 +99,7 @@ const NewBook = ({ setMessage }) => {
               name="title"
               type="number"
               value={published}
+              placeholder="i.e., 1900"
               onChange={({ target }) => setPublished(Number(target.value))}
             />
           </div>
