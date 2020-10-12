@@ -1,8 +1,7 @@
 require('dotenv').config()
-const fs = require('fs')
 const {
   ApolloServer,
-  ApolloError,
+  PubSub,
   UserInputError,
   AuthenticationError,
 } = require('apollo-server')
@@ -12,7 +11,7 @@ const Author = require('./models/author')
 const Book = require('./models/book')
 const User = require('./models/user')
 const jwt = require('jsonwebtoken')
-
+const pubsub = new PubSub()
 const JWT_SECRET = process.env.SECRET
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -36,7 +35,6 @@ const resolvers = {
     bookCount: () => Book.collection.countDocuments(),
     authorCount: () => Author.collection.countDocuments(),
     allBooks: (root, args) => {
-      console.log('allbooks query ', args)
       if (args.genre) {
         return Book.find({ genres: { $in: [args.genre] } }).populate('author', {
           name: 1,
@@ -61,32 +59,57 @@ const resolvers = {
   },
 
   Mutation: {
-    addBook: async (root, args, context) => {
-      try {
-        let bookAuthor = await Author.findOne({ name: args.author })
-        if (bookAuthor === null) {
-          bookAuthor = new Author({ name: args.author })
-          await bookAuthor.save()
-        }
-      } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
-        })
+    addBook: async (root, args) => {
+      if (args.author.length < 4) {
+        //this works
+        throw new UserInputError(
+          'Please enter author name, at least 4 characters.',
+          {
+            invalidArgs: args,
+          }
+        )
       }
 
+      if (args.title.length < 2) {
+        //this works
+        throw new UserInputError(
+          'Please enter a title at least 2 characters.',
+          {
+            invalidArgs: args,
+          }
+        )
+      }
+
+      if (args.published === 0) {
+        //this works
+        throw new UserInputError('Please enter published date.', {
+          invalidArgs: args,
+        })
+      }
+      let foundBookAuthor = await Author.findOne({ name: args.author })
+      if (foundBookAuthor === null) {
+        foundBookAuthor = new Author({ name: args.author })
+      }
+      let foundBook = await Book.findOne({ title: args.title })
+      if (foundBook !== null) { 
+        throw new UserInputError('A book with this title already exists.', {
+          invalidArgs: args,
+        })
+      }
+      let book = new Book({ ...args, author: foundBookAuthor || newBookAuthor })
+      console.log('foundBook',foundBook)
+      console.log('book',book)
       try {
-        let author = await Author.findOne({ name: args.author })
-        let book = new Book({ ...args, author })
-        if (args.published === 0) {
-          throw new UserInputError('Please enter published date.')
-        }
+        await foundBookAuthor.save()
         await book.save()
-        return book
       } catch (error) {
+        console.log('error new book', error)
         throw new UserInputError(error.message, {
           invalidArgs: args,
         })
       }
+      pubsub.publish('BOOK_ADDED', { bookAdded: book })
+      return book
     },
     addAuthor: async (root, args) => {
       const author = new Author({ ...args })
@@ -142,6 +165,11 @@ const resolvers = {
         value: jwt.sign(userForToken, JWT_SECRET),
         user: userForToken,
       }
+    },
+  },
+  Subscription: {
+    bookAdded: {
+      subscribe: () => pubsub.asyncIterator(['BOOK_ADDED']),
     },
   },
 }

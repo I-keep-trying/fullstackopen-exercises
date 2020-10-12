@@ -26,7 +26,7 @@ const AuthorForm = ({ authors, setPage }) => {
     updateAuthor(authorObject)
     setName('')
     setBorn('')
-   
+   setPage('authors')
   }
   return (
     <div className="col-md-12">

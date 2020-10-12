@@ -27,18 +27,25 @@ export const BOOKS_BY_AUTHOR = gql`
   }
 `
 
+const BOOK_DETAILS = gql`
+  fragment BookDetails on Book {
+    title
+    published
+    id
+    author {
+      name
+    }
+    genres
+  }
+`
+
 export const ALL_BOOKS = gql`
   query {
     allBooks {
-      title
-      published
-      id
-      author {
-        name
-      }
-      genres
+      ...BookDetails
     }
   }
+  ${BOOK_DETAILS}
 `
 
 export const ALL_BOOKS_BY_GENRE = gql`
@@ -78,6 +85,19 @@ export const ADD_BOOK = gql`
     }
   }
 `
+export const BOOK_ADDED = gql`
+  subscription {
+    bookAdded {
+      id
+      title
+      author {
+        name
+      }
+      published
+      genres
+    }
+  }
+`
 
 export const FIND_AUTHOR = gql`
   query findAuthorByName($nameToSearch: String!) {
@@ -102,6 +122,14 @@ export const LOGIN = gql`
 export const CURRENT_USER = gql`
   query {
     me {
+      username
+      favoriteGenre
+    }
+  }
+`
+export const EDIT_USER = gql`
+  mutation editUser($username: String!, $favoriteGenre: String) {
+    editUser(username: $username, favoriteGenre: $favoriteGenre) {
       username
       favoriteGenre
     }

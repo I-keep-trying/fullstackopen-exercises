@@ -1,15 +1,35 @@
 import React, { useState, useEffect } from 'react'
-import { useLazyQuery } from '@apollo/client'
-import { ALL_BOOKS_BY_GENRE } from '../queries'
+import { useLazyQuery, useMutation } from '@apollo/client'
+import { ALL_BOOKS_BY_GENRE, EDIT_USER } from '../queries'
+import { toast } from 'react-toastify'
 
 import { v4 as uuidv4 } from 'uuid'
 
 const Books = ({ books, user }) => {
   const initBooks = books.data.allBooks
-
-  const [getBooks, result] = useLazyQuery(ALL_BOOKS_BY_GENRE)
+  console.log('initbooks', initBooks)
+  const [getBooks, result] = useLazyQuery(ALL_BOOKS_BY_GENRE, {
+    onError: (error) => {
+      console.log('get books by genre error', error)
+    },
+    onCompleted: (data) => {
+      //console.log('data returned from ALL_BOOKS_BY_GENRE', data)
+    },
+  })
   const [booksToDisplay, setBooks] = useState(initBooks)
-  const [genre, setGenre] = useState('')
+  const [favoriteGenre, setGenre] = useState('')
+  const [clicked, setClicked] = useState(false)
+
+  const [makeFavorite] = useMutation(EDIT_USER, {
+    onError: (error) => {
+      console.log('add user favorite error', error)
+    },
+    onCompleted: (data) => {
+      toast(
+        `Your favorite genre has been set to "${data.editUser.favoriteGenre}"`
+      )
+    },
+  })
 
   const uniqueGenres = booksToDisplay.reduce((acc, v) => {
     const genres = [...new Set(acc.concat(v.genres))]
@@ -21,6 +41,36 @@ const Books = ({ books, user }) => {
       setBooks(result.data.allBooks)
     }
   }, [result])
+
+  const favoriteBooks = () => {
+    if (user) {
+      if (user.favoriteGenre) {
+        getBooks({ variables: { genreSelection: user.favoriteGenre } })
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (user) {
+      if (user.favoriteGenre) {
+        favoriteBooks(user)
+        setClicked(true)
+      }
+    }
+  }, [user]) // eslint-disable-line
+
+  const setFavorite = async (e) => {
+    e.preventDefault()
+    const username = user.username
+    makeFavorite({ variables: { username, favoriteGenre } })
+    favoriteBooks(user)
+    setClicked(true)
+  }
+
+  const allButton = () => {
+    setClicked(false)
+    setBooks(initBooks)
+  }
 
   if (booksToDisplay) {
     return (
@@ -35,7 +85,8 @@ const Books = ({ books, user }) => {
                 <button
                   value={g}
                   onClick={({ target }) => {
-                    setGenre(target.value)
+                    setClicked(true)
+                    setGenre(g)
                     getBooks({ variables: { genreSelection: target.value } })
                   }}
                 >
@@ -46,21 +97,40 @@ const Books = ({ books, user }) => {
           })}
 
           <hr />
-          <button onClick={() => setBooks(initBooks)}>all books</button>
+          <button onClick={allButton}>all books</button>
           {user !== null ? (
             <>
-              <button
-                onClick={({ target }) => {
-                  setGenre(target.value)
-                  getBooks({
-                    variables: { genreSelection: user.favoriteGenre },
-                  })
-                }}
-              >
-                favorite genre
-              </button>
-              <div>Books in your favorite genre, {user.favoriteGenre}:</div>
+              {user.favoriteGenre === null ? (
+                <div>
+                  {clicked === false ? (
+                    <></>
+                  ) : (
+                    <>
+                      Make {favoriteGenre} your favorite
+                      <button onClick={setFavorite}> Set favorite </button>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={() => {
+                      setClicked(true)
+                      getBooks({
+                        variables: { genreSelection: user.favoriteGenre },
+                      })
+                    }}
+                  >
+                    <span></span>✨{user.favoriteGenre}✨
+                  </button>
+                </>
+              )}
             </>
+          ) : (
+            <></>
+          )}
+          {user !== null && user.favoriteGenre !== null && clicked ? (
+            <div>Books in your favorite genre, {user.favoriteGenre}:</div>
           ) : (
             <></>
           )}
@@ -74,13 +144,15 @@ const Books = ({ books, user }) => {
             </tr>
           </thead>
           <tbody>
-            {booksToDisplay.map((book) => (
-              <tr key={book.id}>
-                <td>{book.title}</td>
-                <td>{book.author.name}</td>
-                <td>{book.published}</td>
-              </tr>
-            ))}
+            {booksToDisplay.map((book) => {
+              return (
+                <tr key={book.id}>
+                  <td>{book.title}</td>
+                  <td>{book.author.name}</td>
+                  <td>{book.published}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

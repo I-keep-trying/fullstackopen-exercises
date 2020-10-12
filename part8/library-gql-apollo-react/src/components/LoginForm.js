@@ -4,7 +4,7 @@ import { LOGIN } from '../queries'
 import { toast } from 'react-toastify'
 
 const LoginForm = ({ setToken, setPage, setUser }) => {
-  const [username, setUsername] = useState('aaa')
+  const [username, setUsername] = useState('eee')
   const [password, setPassword] = useState('secret')
 
   const [login] = useMutation(LOGIN, {

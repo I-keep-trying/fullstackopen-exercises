@@ -3,12 +3,15 @@ const {
   ApolloServer,
   UserInputError,
   AuthenticationError,
+  PubSub,
 } = require('apollo-server')
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const Person = require('./models/person')
 const User = require('./models/user')
 const typeDefs = require('./schema')
+
+const pubsub = new PubSub()
 
 const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.SECRET
@@ -77,6 +80,7 @@ const resolvers = {
           invalidArgs: args,
         })
       }
+      pubsub.publish('PERSON_ADDED', { personAdded: person })
       return person
     },
     editNumber: async (root, args) => {
@@ -136,6 +140,11 @@ const resolvers = {
       return currentUser
     },
   },
+  Subscription: {
+    personAdded: {
+      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED']),
+    },
+  },
 }
 
 const server = new ApolloServer({
@@ -145,11 +154,9 @@ const server = new ApolloServer({
     const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
       const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-
       const currentUser = await User.findById(decodedToken.id).populate(
         'friends'
       )
-
       return { currentUser }
     }
   },
@@ -157,6 +164,7 @@ const server = new ApolloServer({
 
 const PORT = 4003
 
-server.listen({ port: PORT }).then(({ url }) => {
+server.listen({ port: PORT }).then(({ url, subscriptionsUrl }) => {
   console.log(`Server ready at ${url}`)
+  console.log(`Subscriptions ready at ${subscriptionsUrl}`)
 })

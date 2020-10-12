@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { ADD_BOOK, ALL_BOOKS, ALL_AUTHORS } from '../queries'
 import { toast } from 'react-toastify'
 
-const NewBook = ({ setPage }) => {
+const NewBook = ({ setPage, updateCacheWith }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [published, setPublished] = useState('')
@@ -13,9 +13,11 @@ const NewBook = ({ setPage }) => {
   const [createBook] = useMutation(ADD_BOOK, {
     refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }],
     onError: (error) => {
+      console.log('error',error)
       toast.error(`💥${error.graphQLErrors[0].message}`, { autoClose: 2000 })
     },
     onCompleted: (data) => {
+      console.log('added book in new book component',data.addBook)
       toast(`Book titled "${data.addBook.title}" successfully added.`, {
         autoClose: 2000,
       })
@@ -30,11 +32,14 @@ const NewBook = ({ setPage }) => {
           allBooks: [...dataInStore.allBooks, response.data.addBook],
         },
       })
+      updateCacheWith(response.data.addBook)
     },
   })
 
+
   const handleSubmit = (event) => {
     event.preventDefault()
+
     createBook({
       variables: {
         title,

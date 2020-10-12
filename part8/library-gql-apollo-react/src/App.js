@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useQuery, useApolloClient } from '@apollo/client'
-import { ALL_AUTHORS, ALL_BOOKS } from './queries'
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+import { ALL_AUTHORS, ALL_BOOKS, BOOK_ADDED } from './queries'
 import Authors from './components/Authors'
 import AuthorForm from './components/AuthorForm'
 import Books from './components/Books1'
@@ -53,28 +53,45 @@ const App = () => {
     setPage('home')
   }
 
+  const updateCacheWith = (addedBook) => {
+    const includedIn = (set, object) => {
+      return set
+        .map((p) => {
+          return p.id
+        })
+        .includes(object.id)
+    }
+
+    const dataInStore = client.readQuery({ query: ALL_BOOKS })
+    if (!includedIn(dataInStore.allBooks, addedBook)) {
+      client.writeQuery({
+        query: ALL_BOOKS,
+        data: { allBooks: dataInStore.allBooks.concat(addedBook) },
+      })
+    }
+  }
+
+  useSubscription(BOOK_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const addedBook = subscriptionData.data.bookAdded
+      console.log('added book in subscription', addedBook)
+      toast(`${addedBook.title} added`, { autoClose: 2000 })
+      updateCacheWith(addedBook)
+    },
+  })
+
   const authContent = () => {
     if (page === 'home') {
       return <Home />
     } else if (page === 'authors') {
       return <Authors authors={authors} books={books} />
-    } else if (page === 'authorForm') {
+    } else if (token && page === 'authorForm') {
       return <AuthorForm authors={authors} books={books} setPage={setPage} />
     } else if (page === 'books') {
       return <Books books={books} user={user} />
     } else if (page === 'newBook') {
       return <NewBook books={books} setPage={setPage} />
-    }
-  }
-
-  const unAuthContent = () => {
-    if (page === 'home') {
-      return <Home />
-    } else if (page === 'authors') {
-      return <Authors authors={authors} books={books} />
-    } else if (page === 'books') {
-      return <Books books={books} user={user} />
-    } else if (page === 'login') {
+    } else if (!token && page === 'login') {
       return (
         <LoginForm
           setToken={setToken}
@@ -84,69 +101,6 @@ const App = () => {
         />
       )
     }
-  }
-
-  if (!token) {
-    return (
-      <div>
-        <div className="container">
-          {authors.loading || books.loading ? (
-            <div>Loading...</div>
-          ) : (
-            <>
-              <div>
-                <div style={{ marginBottom: 50 }}>
-                  <nav className="fixed-top">
-                    <nav className="navbar navbar-expand navbar-dark bg-dark ">
-                      <div className="navbar-brand">
-                        <h3>React Apollo Graphql - Library</h3>
-                      </div>
-                      <div className="navbar-nav mr-auto">
-                        <ToastContainer />
-
-                        <li
-                          style={{ cursor: 'pointer' }}
-                          className="nav-item nav-link"
-                          onClick={toPage('home')}
-                        >
-                          home
-                        </li>
-                        <li
-                          style={{ cursor: 'pointer' }}
-                          className="nav-item nav-link"
-                          onClick={toPage('authors')}
-                        >
-                          authors
-                        </li>
-                        <li
-                          style={{ cursor: 'pointer' }}
-                          className="nav-item nav-link"
-                          onClick={toPage('books')}
-                        >
-                          books
-                        </li>
-                        <li
-                          style={{ cursor: 'pointer' }}
-                          className="nav-item nav-link"
-                          onClick={toPage('login')}
-                        >
-                          login
-                        </li>
-                      </div>
-                    </nav>
-                  </nav>
-                </div>
-                <div>
-                  <ToastContainer />
-                  {unAuthContent()}
-                </div>
-              </div>
-              <Footer />
-            </>
-          )}
-        </div>
-      </div>
-    )
   }
 
   return (
@@ -177,13 +131,17 @@ const App = () => {
                     >
                       authors
                     </li>
-                    <li
-                      style={{ cursor: 'pointer' }}
-                      className="nav-item nav-link"
-                      onClick={toPage('authorForm')}
-                    >
-                      edit author
-                    </li>
+                    {token ? (
+                      <li
+                        style={{ cursor: 'pointer' }}
+                        className="nav-item nav-link"
+                        onClick={toPage('authorForm')}
+                      >
+                        edit author
+                      </li>
+                    ) : (
+                      <></>
+                    )}
                     <li
                       style={{ cursor: 'pointer' }}
                       className="nav-item nav-link"
@@ -191,20 +149,33 @@ const App = () => {
                     >
                       books
                     </li>
-                    <li
-                      style={{ cursor: 'pointer' }}
-                      className="nav-item nav-link"
-                      onClick={toPage('newBook')}
-                    >
-                      add book
-                    </li>
-                    <li
-                      style={{ cursor: 'pointer' }}
-                      className="nav-item nav-link"
-                      onClick={logout}
-                    >
-                      logout
-                    </li>
+
+                    {token ? (
+                      <>
+                        <li
+                          style={{ cursor: 'pointer' }}
+                          className="nav-item nav-link"
+                          onClick={toPage('newBook')}
+                        >
+                          add book
+                        </li>
+                        <li
+                          style={{ cursor: 'pointer' }}
+                          className="nav-item nav-link"
+                          onClick={logout}
+                        >
+                          logout
+                        </li>
+                      </>
+                    ) : (
+                      <li
+                        style={{ cursor: 'pointer' }}
+                        className="nav-item nav-link"
+                        onClick={toPage('login')}
+                      >
+                        login
+                      </li>
+                    )}
                   </div>
                 </nav>
               </nav>
