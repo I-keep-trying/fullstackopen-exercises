@@ -7,13 +7,12 @@ import { v4 as uuidv4 } from 'uuid'
 
 const Books = ({ books, user }) => {
   const initBooks = books.data.allBooks
-  console.log('initbooks', initBooks)
   const [getBooks, result] = useLazyQuery(ALL_BOOKS_BY_GENRE, {
     onError: (error) => {
       console.log('get books by genre error', error)
     },
     onCompleted: (data) => {
-      //console.log('data returned from ALL_BOOKS_BY_GENRE', data)
+     // console.log('data returned from ALL_BOOKS_BY_GENRE', data)
     },
   })
   const [booksToDisplay, setBooks] = useState(initBooks)
@@ -37,41 +36,37 @@ const Books = ({ books, user }) => {
   }, [])
 
   useEffect(() => {
+
     if (result.data) {
       setBooks(result.data.allBooks)
+    } else {
+      setBooks(initBooks)
     }
-  }, [result])
+  }, [result,initBooks])
 
-  const favoriteBooks = () => {
-    if (user) {
-      if (user.favoriteGenre) {
-        getBooks({ variables: { genreSelection: user.favoriteGenre } })
-      }
-    }
-  }
+  const favoriteBooks = () =>
+    getBooks({ variables: { genreSelection: user.favoriteGenre } })
 
   useEffect(() => {
     if (user) {
       if (user.favoriteGenre) {
         favoriteBooks(user)
-        setClicked(true)
       }
     }
   }, [user]) // eslint-disable-line
 
-  const setFavorite = async (e) => {
-    e.preventDefault()
+  /*   const setFavorite = async (e) => {
+   console.log('favorite genre?',favoriteGenre)
     const username = user.username
     makeFavorite({ variables: { username, favoriteGenre } })
-    favoriteBooks(user)
-    setClicked(true)
-  }
+   
+  } */
 
   const allButton = () => {
     setClicked(false)
     setBooks(initBooks)
   }
-
+console.log('booksToDisplay',booksToDisplay)
   if (booksToDisplay) {
     return (
       <div>
@@ -100,36 +95,23 @@ const Books = ({ books, user }) => {
           <button onClick={allButton}>all books</button>
           {user !== null ? (
             <>
-              {user.favoriteGenre === null ? (
-                <div>
-                  {clicked === false ? (
-                    <></>
-                  ) : (
-                    <>
-                      Make {favoriteGenre} your favorite
-                      <button onClick={setFavorite}> Set favorite </button>
-                    </>
-                  )}
-                </div>
-              ) : (
-                <>
-                  <button
-                    onClick={() => {
-                      setClicked(true)
-                      getBooks({
-                        variables: { genreSelection: user.favoriteGenre },
-                      })
-                    }}
-                  >
-                    <span></span>✨{user.favoriteGenre}✨
-                  </button>
-                </>
-              )}
+              <>
+                <button
+                  onClick={() => {
+                    setClicked(true)
+                    getBooks({
+                      variables: { genreSelection: user.favoriteGenre },
+                    })
+                  }}
+                >
+                  <span></span>✨{user.favoriteGenre}✨
+                </button>
+              </>
             </>
           ) : (
             <></>
           )}
-          {user !== null && user.favoriteGenre !== null && clicked ? (
+          {user !== null && user.favoriteGenre !== null ? (
             <div>Books in your favorite genre, {user.favoriteGenre}:</div>
           ) : (
             <></>

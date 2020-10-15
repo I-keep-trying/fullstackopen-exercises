@@ -5,35 +5,19 @@ import { toast } from 'react-toastify'
 
 const NewBook = ({ setPage, updateCacheWith }) => {
   const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [published, setPublished] = useState('')
+  const [author, setAuthor] = useState('Robert Martin')
+  const [published, setPublished] = useState('2000')
   const [genre, setGenre] = useState('')
   const [genres, setGenres] = useState([])
 
   const [createBook] = useMutation(ADD_BOOK, {
-    refetchQueries: [{ query: ALL_BOOKS }, { query: ALL_AUTHORS }],
     onError: (error) => {
-      console.log('error',error)
-      toast.error(`💥${error.graphQLErrors[0].message}`, { autoClose: 2000 })
+      toast.error(`💥${error.graphQLErrors[0].message}`)
     },
-    onCompleted: (data) => {
-      console.log('added book in new book component',data.addBook)
-      toast(`Book titled "${data.addBook.title}" successfully added.`, {
-        autoClose: 2000,
-      })
+    onCompleted: () => {
       setPage('books')
     },
-    update: (store, response) => {
-      const dataInStore = store.readQuery({ query: ALL_BOOKS })
-      store.writeQuery({
-        query: ALL_BOOKS,
-        data: {
-          ...dataInStore,
-          allBooks: [...dataInStore.allBooks, response.data.addBook],
-        },
-      })
-      updateCacheWith(response.data.addBook)
-    },
+
   })
 
 

@@ -15,6 +15,7 @@ const typeDefs = gql`
     name: String!
     phone: String
     address: Address!
+    friendOf: [User]
     id: ID!
   }
 
@@ -29,8 +30,8 @@ const typeDefs = gql`
   }
 
   type Subscription {
-  personAdded: Person!
-}  
+    personAdded: Person!
+  }
 
   type Query {
     personCount: Int!
@@ -42,16 +43,9 @@ const typeDefs = gql`
   type Mutation {
     addPerson(name: String, phone: String, street: String, city: String): Person
     editNumber(name: String!, phone: String!): Person
-    createUser(
-      username: String!
-    ): User
-    login(
-      username: String!
-      password: String!
-    ): Token 
-    addAsFriend(
-      name: String!
-    ): User      
+    createUser(username: String!): User
+    login(username: String!, password: String!): Token
+    addAsFriend(name: String!): User
   }
 `
 module.exports = typeDefs

@@ -10,7 +10,7 @@ import Footer from './Footer'
 
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer, toast, Slide } from 'react-toastify'
 import './ReactToastify.css'
 
 const Home = () => (
@@ -34,6 +34,7 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   let authors = useQuery(ALL_AUTHORS)
+  console.log('App component authors',authors)
 
   let books = useQuery(ALL_BOOKS)
 
@@ -53,7 +54,7 @@ const App = () => {
     setPage('home')
   }
 
-  const updateCacheWith = (addedBook) => {
+    const updateCacheWith = (addedBook) => {
     const includedIn = (set, object) => {
       return set
         .map((p) => {
@@ -74,12 +75,11 @@ const App = () => {
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const addedBook = subscriptionData.data.bookAdded
-      console.log('added book in subscription', addedBook)
-      toast(`${addedBook.title} added`, { autoClose: 2000 })
+        toast(`Book titled "${addedBook.title}" successfully added.`, {autoClose: 2000,})
       updateCacheWith(addedBook)
     },
   })
-
+//console.log('books - App ',books)
   const authContent = () => {
     if (page === 'home') {
       return <Home />
@@ -180,7 +180,7 @@ const App = () => {
                 </nav>
               </nav>
             </div>
-            <ToastContainer />
+            <ToastContainer pauseOnFocusLoss={false} autoClose={2000} transition={Slide} />
             <div>{authContent()}</div>
           </div>
           <Footer />

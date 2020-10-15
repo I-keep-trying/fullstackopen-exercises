@@ -9,7 +9,7 @@ const AuthorForm = ({ authors, setPage }) => {
   const [born, setBorn] = useState('')
   const [updateAuthor] = useMutation(EDIT_AUTHOR, {
     onError: (error) => {
-      toast.error(`💥${error.graphQLErrors[0].message}`, { autoClose: 2000 })
+      toast.error(`💥${error.graphQLErrors[0].message}`)
     },
   })
 

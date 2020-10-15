@@ -33,10 +33,10 @@ const typeDefs = gql`
 
   type Query {
     bookCount: Int!
-    allBooks(genre: String): [Book]
+    allBooks(genre: String, title: String): [Book]
     findBook(title: String!): [Book]
     authorCount: Int!
-    allAuthors: [Author!]!
+    allAuthors: [Author]
     findAuthor(name: String!): Author
     allUsers: [User]
     me: User
@@ -51,7 +51,7 @@ const typeDefs = gql`
       setBornTo: Int
     ): Book
     addAuthor(name: String!, born: Int): Author
-    editAuthor(name: String, setBornTo: Int): Author
+    editAuthor(name: String, setBornTo: Int, books: [String]): Author
     createUser(username: String!, favoriteGenre: String): User
     editUser(username: String!, favoriteGenre: String): User
     login(username: String!, password: String!): Token

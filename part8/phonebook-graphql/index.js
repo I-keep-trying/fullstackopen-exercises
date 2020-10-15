@@ -17,6 +17,8 @@ const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.SECRET
 console.log('connecting to', MONGODB_URI)
 
+mongoose.set('debug', true)
+
 mongoose
   .connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -34,13 +36,20 @@ mongoose
 const resolvers = {
   Query: {
     personCount: () => Person.collection.countDocuments(),
-    allPersons: (root, args) => {
+    allPersons: async (root, args) => {
       if (!args.phone) {
-        return Person.find({})
+        const noPhone = await Person.find({}).populate('friendOf')
+        // console.log('noPhone', noPhone)
+        return noPhone
       }
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+      const hasPhone = await Person.find({
+        phone: { $exists: args.phone === 'YES' },
+      }).populate('friendOf')
+      //  console.log('hasPhone', hasPhone)
+      return hasPhone
     },
-    findPerson: (root, args) => Person.findOne({ name: args.name }),
+    findPerson: (root, args) =>
+      Person.findOne({ name: args.name }).populate('friendOf'),
     me: (root, args, context) => {
       return context.currentUser
     },
@@ -51,6 +60,15 @@ const resolvers = {
         street: root.street,
         city: root.city,
       }
+    },
+    friendOf: async root => {
+      const friends = await User.find({
+        friends: {
+          $in: [root._id],
+        },
+      })
+
+      return friends
     },
   },
   Mutation: {

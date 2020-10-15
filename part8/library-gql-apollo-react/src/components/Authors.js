@@ -1,9 +1,10 @@
 import React from 'react'
 
 const Authors = ({ authors, books }) => {
-    authors = authors.data.allAuthors
+  authors = authors.data.allAuthors
+/*     authors = authors.data.allAuthors
   books = books.data.allBooks
-
+ */
   return (
     <div>
       <h2>Authors</h2>
@@ -17,14 +18,12 @@ const Authors = ({ authors, books }) => {
         </thead>
         <tbody>
           {authors.map((a) => {
-            const books1 = books.filter((book) =>
-              a.name === book.author.name ? book : null
-            )
+
             return (
               <tr key={a.id}>
                 <td>{a.name}</td>
                 <td>{a.born}</td>
-                <td>{books1.length}</td>
+                <td>{a.bookCount}</td>
               </tr>
             )
           })}

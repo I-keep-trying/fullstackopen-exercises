@@ -4,7 +4,7 @@ import { LOGIN } from '../queries'
 import { toast } from 'react-toastify'
 
 const LoginForm = ({ setToken, setPage, setUser }) => {
-  const [username, setUsername] = useState('eee')
+  const [username, setUsername] = useState('aaa')
   const [password, setPassword] = useState('secret')
 
   const [login] = useMutation(LOGIN, {
@@ -15,7 +15,7 @@ const LoginForm = ({ setToken, setPage, setUser }) => {
       setToken(data.login.value)
       setUser(data.login.user)
       localStorage.setItem('library-user-token', data.login.value)
-      toast(`🐸Welcome, ${data.login.user.username}!`, { autoClose: 1000 })
+      toast(`🐸Welcome, ${data.login.user.username}!`)
       setPage('home')
     },
   })
