@@ -131,7 +131,6 @@ const resolvers = {
       return user
     },
     login: async (root, args) => {
-      console.log('args', args)
       const user = await User.findOne({ username: args.username })
 
       if (!user || args.password !== 'secret') {

@@ -3,7 +3,7 @@ import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
 import { ALL_AUTHORS, ALL_BOOKS, BOOK_ADDED } from './queries'
 import Authors from './components/Authors'
 import AuthorForm from './components/AuthorForm'
-import Books from './components/Books1'
+import Books from './components/Books'
 import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
 import Footer from './Footer'
@@ -34,7 +34,6 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   let authors = useQuery(ALL_AUTHORS)
-  console.log('App component authors',authors)
 
   let books = useQuery(ALL_BOOKS)
 
@@ -54,7 +53,7 @@ const App = () => {
     setPage('home')
   }
 
-    const updateCacheWith = (addedBook) => {
+  const updateCacheWith = (addedBook) => {
     const includedIn = (set, object) => {
       return set
         .map((p) => {
@@ -75,11 +74,13 @@ const App = () => {
   useSubscription(BOOK_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const addedBook = subscriptionData.data.bookAdded
-        toast(`Book titled "${addedBook.title}" successfully added.`, {autoClose: 2000,})
+      toast(`Book titled "${addedBook.title}" successfully added.`, {
+        autoClose: 2000,
+      })
       updateCacheWith(addedBook)
     },
   })
-//console.log('books - App ',books)
+
   const authContent = () => {
     if (page === 'home') {
       return <Home />
@@ -180,7 +181,11 @@ const App = () => {
                 </nav>
               </nav>
             </div>
-            <ToastContainer pauseOnFocusLoss={false} autoClose={2000} transition={Slide} />
+            <ToastContainer
+              pauseOnFocusLoss={false}
+              autoClose={2000}
+              transition={Slide}
+            />
             <div>{authContent()}</div>
           </div>
           <Footer />
