@@ -1,0 +1,21 @@
+{
+  "name": "ts-intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ts-node": "ts-node",
+    "start-ts": "ts-node index.ts",
+    "start-js": "index.js",
+    "multiply": "ts-node -- multiplier.ts",
+    "calculate": "ts-node -- calculator.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^14.11.9",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {}
+}
