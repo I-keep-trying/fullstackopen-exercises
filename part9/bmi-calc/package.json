@@ -2,12 +2,12 @@
   "name": "bmi-calc",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "calc.js",
   "scripts": {
-    "start": "node .",
+    "start": "node calc.js",
     "build": "tsc",
     "watch": "npm run build -- --watch",
-    "calculate": "ts-node bmiCalculator.ts",
+    "calculate": "node bmiCalculator.js",
     "exercise":"ts-node exercisets.ts"
   },
   "keywords": [],

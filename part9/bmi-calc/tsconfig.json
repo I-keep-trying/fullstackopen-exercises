@@ -1,14 +1,14 @@
 {
     "compilerOptions": {
         "noImplicitAny": true,
-        "target": "esnext",
-        "module": "commonjs",
-        "allowJs": true,
-        "checkJs": false,
-        "outDir": "./dist",
-        "rootDir": "./",
-        "strict": false,
-        "esModuleInterop": true,
+        //"target": "esnext",
+       // "module": "commonjs",
+        //"allowJs": true,
+       // "checkJs": false,
+      //  "outDir": "./dist",
+       // "rootDir": "./",
+      //  "strict": false,
+      //  "esModuleInterop": true,
       //  "forceConsistentCasingInFileNames": true
     },
   }
