@@ -61,3 +61,7 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 ## [phonebook](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/graphql-apollo-react)
 
 ## [phonebook-backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part8/phonebook-graphql)
+
+# [Part 9](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9)
+
+## [bmi calculator and exercise diary](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9/bmi-calc)
