@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
-        "noImplicitAny": true,
-        //"target": "esnext",
-       // "module": "commonjs",
-        //"allowJs": true,
-       // "checkJs": false,
-      //  "outDir": "./dist",
-       // "rootDir": "./",
-      //  "strict": false,
-      //  "esModuleInterop": true,
-      //  "forceConsistentCasingInFileNames": true
+      "noImplicitAny": true,
+      "noImplicitReturns": true,
+      "strictNullChecks": true,
+      "strictPropertyInitialization": true,
+      "strictBindCallApply": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitThis": true,
+      "alwaysStrict": true,
+      "esModuleInterop": true,
+      "declaration": true,
     },
   }
