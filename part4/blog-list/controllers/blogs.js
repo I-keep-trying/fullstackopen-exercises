@@ -50,6 +50,7 @@ blogsRouter.get('/:id/comments/:commentid', async (request, response) => {
 
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
+  console.log('req body',body)
   const token = request.token
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {

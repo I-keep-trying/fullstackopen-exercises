@@ -40,9 +40,11 @@ export const calculateBmi = (input: BmiValues): string => {
 try {
   calculateBmi(parseArguments(process.argv));
 } catch (e) {
-  if (process.argv.length <= 2) {
-    console.log('waiting for args...');
-  } else {
-    console.log('Error, something bad happened, message: ', e.message);
+  if (e instanceof Error) {
+    if (process.argv.length <= 2) {
+      console.log('waiting for args...');
+    } else {
+      console.log('Error, something bad happened, message: ', e.message);
+    }
   }
 }

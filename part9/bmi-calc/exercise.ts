@@ -8,36 +8,20 @@ interface CalcValues {
   average: number;
 }
 
-const parseInputArguments = (args: Array<string>): number[] => {
-  let arr: number[] = [];
+export const exerciseCalc = (
+  target: number,
+  entries: number[]
+): CalcValues => {
+  const periodLength = entries.length;
 
-  for (let i = 2; i < process.argv.length; ) {
-    if (!isNaN(Number(args[i]))) {
-      arr[i - 2] = Number(args[i]);
-      i++;
-    } else {
-      throw new Error('Provided values were not numbers!');
-    }
-  }
-  return arr;
-};
-
-const runCalculation = (entries: number[]): CalcValues => {
-  let target = entries[0];
-
-  const periodLength = entries.length - 1;
-
-  const days = entries;
-  days.splice(0, 1);
-
-  const trainingDays = days.reduce((acc, next) => {
+  const trainingDays = entries.reduce((acc, next) => {
     if (next > 0) {
       return acc + 1;
     }
     return acc;
   }, 0);
 
-  const workingTotal = days.reduce((acc, next) => {
+  const workingTotal = entries.reduce((acc, next) => {
     return acc + next;
   });
   const average = ((workingTotal / periodLength) * 100) / 100;
@@ -73,13 +57,6 @@ const runCalculation = (entries: number[]): CalcValues => {
     target: target,
     average: average,
   };
-  console.log(report);
+  console.log('report results', report);
   return report;
 };
-
-try {
-  const arr: number[] = parseInputArguments(process.argv);
-  runCalculation(arr);
-} catch (e) {
-  console.log('Error, something bad happened, message: ', e.message);
-}
