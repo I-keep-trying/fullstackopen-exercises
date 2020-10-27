@@ -1,8 +1,15 @@
 import express from 'express';
 import { calculateBmi } from './bmi';
 import { exerciseCalc } from './exercise';
+
 const app = express();
 app.use(express.json());
+
+app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain');
+  res.write('you posted:\n');
+  res.end(JSON.stringify(req.body, null, 2));
+});
 
 app.get('/bmi', (req, res) => {
   const { height, mass } = req.query;
@@ -23,22 +30,32 @@ interface InputTypes {
 }
 
 app.post('/exercises', (request, response) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const body: InputTypes = request.body;
-  console.log('body ', body);
-  const target = Number(body.target);
-  if (isNaN(target)) {
-    throw new Error('target must be a number');
-  }
-  const entries = body.entries.map((entry) => {
-    if (isNaN(Number(entry))) {
-      throw new Error('entries must all be numbers');
+  try {
+    const input = request.body as InputTypes;
+    const { target, entries } = input;
+    if (typeof target === 'undefined') {
+      throw new Error('Target parameter was not received');
     }
-    return entry;
-  });
-
-  const calc = exerciseCalc(target, entries);
-  response.send(calc);
+    if (typeof target !== 'number') {
+      throw new Error('Target must be a number');
+    }
+    if (typeof entries === 'undefined') {
+      throw new Error('Entries parameter missing');
+    }
+    entries.map((entry) => {
+      if (typeof entry !== 'number') {
+        throw new Error('Entries must all be numbers');
+      }
+      return entry;
+    });
+    const calc = exerciseCalc(target, entries);
+    response.send(calc);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log('instance of e', e.message);
+      response.send(e.message);
+    }
+  }
 });
 
 const PORT = 3003;

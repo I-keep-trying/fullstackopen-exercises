@@ -8,10 +8,13 @@ interface CalcValues {
   average: number;
 }
 
-export const exerciseCalc = (
-  target: number,
-  entries: number[]
-): CalcValues => {
+export const exerciseCalc = (target: number, entries: number[]): CalcValues => {
+  console.log(
+    'target passed to exerciseCalc',
+    target,
+    'typeof... ',
+    typeof target
+  );
   const periodLength = entries.length;
 
   const trainingDays = entries.reduce((acc, next) => {
@@ -57,6 +60,6 @@ export const exerciseCalc = (
     target: target,
     average: average,
   };
-  console.log('report results', report);
+  //console.log('report results', report);
   return report;
 };
