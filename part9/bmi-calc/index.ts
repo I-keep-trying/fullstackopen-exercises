@@ -5,6 +5,8 @@ import { exerciseCalc } from './exercise';
 const app = express();
 app.use(express.json());
 
+
+
 app.use(function (req, res) {
   res.setHeader('Content-Type', 'text/plain');
   res.write('you posted:\n');
@@ -57,6 +59,20 @@ app.post('/exercises', (request, response) => {
     }
   }
 });
+
+app.use(
+  (
+    err: Error,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): Response => {
+    console.error(err.stack);
+    next(err);
+    return res.status(500).send('Internal Server Error');
+
+  }
+);
 
 const PORT = 3003;
 
