@@ -5,14 +5,6 @@ import { exerciseCalc } from './exercise';
 const app = express();
 app.use(express.json());
 
-
-
-app.use(function (req, res) {
-  res.setHeader('Content-Type', 'text/plain');
-  res.write('you posted:\n');
-  res.end(JSON.stringify(req.body, null, 2));
-});
-
 app.get('/bmi', (req, res) => {
   const { height, mass } = req.query;
   if (!isNaN(Number(req.query.height)) && !isNaN(Number(req.query.mass))) {
@@ -54,7 +46,6 @@ app.post('/exercises', (request, response) => {
     response.send(calc);
   } catch (e) {
     if (e instanceof Error) {
-      console.log('instance of e', e.message);
       response.send(e.message);
     }
   }
@@ -66,11 +57,13 @@ app.use(
     _req: express.Request,
     res: express.Response,
     next: express.NextFunction
-  ): Response => {
-    console.error(err.stack);
+  ): void => {
+    if (err.name === 'SyntaxError') {
+     return res.status(500).send('Malformatted request').end();
+    } else {
+      res.status(500).send(err.message);
+    }
     next(err);
-    return res.status(500).send('Internal Server Error');
-
   }
 );
 
