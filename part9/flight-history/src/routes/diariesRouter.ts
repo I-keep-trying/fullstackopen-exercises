@@ -15,7 +15,6 @@ router.get('/:id', (req, res) => {
 });
 
 router.get('/', (_req, res) => {
-  console.log('Date.now()', Date.now(), 'typeof Date.now()', typeof Date.now());
   res.send(diaryService.getNonSensitiveDiaryEntries());
 });
 

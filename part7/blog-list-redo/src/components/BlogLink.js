@@ -9,7 +9,7 @@ import {
   Paper
 } from '@material-ui/core'
 
-const Blog = ({ blog }) => {
+const BlogLink = ({ blog }) => {
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -23,15 +23,8 @@ const Blog = ({ blog }) => {
           </TableRow>
         </TableBody>
       </Table>
-      {/* 
-      <h3 key={blog.id}>
-        <Link blog={blog} to={`/blogs/${blog.id}`}>
-          {blog.title}
-        </Link>
-        <hr />
-      </h3> */}
     </TableContainer>
   )
 }
 
-export default Blog
+export default BlogLink

@@ -1,15 +1,17 @@
 import React from 'react';
-import {ContentProps} from './Content';
+import { CoursePart } from '../types';
 
-const Total: React.FC<ContentProps> = (props) => {
-    return (
-        <div>
-         <p>
-        Number of exercises
-        {props.courseParts.reduce((carry, part) => carry + part.exerciseCount, 0)}
-      </p>
-        </div>
-    )
+interface Total {
+  total: CoursePart[];
 }
 
-export default Total
+const Total: React.FC<Total> = ({total}) => {
+  return (
+    <p>
+      Total Exercises:
+      {total.reduce((carry, part) => carry + part.exerciseCount, 0)}
+    </p>
+  );
+};
+
+export default Total;

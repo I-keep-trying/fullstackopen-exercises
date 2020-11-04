@@ -1,18 +1,7 @@
 import React from 'react';
 
-interface HeaderProps {
-    courseName: string;
-}
+const Header: React.FC<{ courseName: string }> = ({ courseName }) => {
+  return <h2>{courseName} </h2>;
+};
 
-const Header: React.FC<HeaderProps> = (props) => {
-
-    return (
-        <div className="App">
-            <header className="App-header">
-            <h1>{props.courseName} </h1>
-            </header>
-        </div>
-    )
-}
-
-export default Header
+export default Header;

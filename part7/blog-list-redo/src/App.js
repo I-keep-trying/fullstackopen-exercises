@@ -16,7 +16,7 @@ import usersService from './services/users'
 
 import Home from './components/Home'
 import Blogs from './components/Blogs'
-import Blog from './components/Blog'
+import BlogDetail from './components/Blog'
 import { Menu } from './components/Menu'
 import Users from './components/Users'
 import User from './components/User'
@@ -55,7 +55,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" component={Home}></Route>
             <Route exact path="/blogs" component={Blogs}></Route>
-            <Route exact path="/blogs/:id" component={Blog}></Route>
+            <Route exact path="/blogs/:id" component={BlogDetail}></Route>
 
             <Route exact path="/users" component={Users}></Route>
             <Route exact path="/users/:id" component={User}></Route>

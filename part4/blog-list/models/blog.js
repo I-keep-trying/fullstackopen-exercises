@@ -4,7 +4,6 @@ const blogSchema = mongoose.Schema({
   title: {
     type: String,
     minlength: 5,
-    required: true,
   },
   author: {
     type: String,
@@ -19,8 +18,10 @@ const blogSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  //blogSchema
+  // comments: [ String ] // to work with solution front end
+
   comments: [
+    // to work with my own
     {
       comment: String,
       date: String,

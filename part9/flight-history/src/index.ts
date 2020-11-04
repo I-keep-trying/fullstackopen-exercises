@@ -14,6 +14,22 @@ app.get('/ping', (_req, res) => {
 
 app.use('/api/diaries', diaryRouter);
 
+app.use(
+  (
+    err: Error,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): void => {
+    if (err.name === 'SyntaxError') {
+      return res.status(500).send('Malformatted request').end();
+    } else {
+      res.status(500).send(err.message);
+    }
+    next(err);
+  }
+);
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -1,84 +1,45 @@
 import React from 'react';
-import Header from './components/Header';
 import Content from './components/Content';
 import Total from './components/Total';
-
+import Header from './components/Header';
+import { CoursePart } from './types';
 import './App.css';
 
 const App: React.FC = () => {
-
-  const assertNever = (value: never): never => {
-    throw new Error(
-      `Unhandled discriminated union member: ${JSON.stringify(value)}`
-    );
-  };
-
   const courseName = 'Half Stack application development';
-
-  const courseParts = [
+  const courseParts: CoursePart[] = [
     {
-      name: "Fundamentals",
+      name: 'Fundamentals',
       exerciseCount: 10,
-      description: "This is an awesome course part"
+      description: 'This is an awesome course part',
     },
     {
-      name: "Using props to pass data",
+      name: 'Using props to pass data',
       exerciseCount: 7,
-      groupProjectCount: 3
+      groupProjectCount: 3,
     },
     {
-      name: "Deeper type usage",
+      name: 'Deeper type usage',
       exerciseCount: 14,
-      description: "Confusing description",
-      exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev"
-    }
+      description: 'Confusing description',
+      exerciseSubmissionLink: 'https://fake-exercise-submit.made-up-url.dev',
+    },
+    {
+      name: 'Fundamentals, Advanced',
+      exerciseCount: 10,
+      description: 'This is an awesome course part',
+    },
   ];
 
-/*   courseParts.forEach(part => {
-      switch(part.name) {
-        case "Fundamentals":
-          break;
-          case "Using props to pass data":
-            break;
-            case "Deeper type usage":
-              break;
-              default:
-          break;
-      }
-  }) */
-
-    return (
-      <div>
+  return (
+    <div className="App">
+      <header className="App-header">
         <Header courseName={courseName} />
-        <Content courseParts={courseParts.forEach(part => {
-      switch(part.name) {
-        case "Fundamentals":
-          break;
-          case "Using props to pass data":
-            break;
-            case "Deeper type usage":
-              break;
-              default:
-                return assertNever(part);
-          break;
-      }
-  })} />
-        <Total courseParts={courseParts.forEach(part => {
-      switch(part.name) {
-        case "Fundamentals":
-          break;
-          case "Using props to pass data":
-            break;
-            case "Deeper type usage":
-              break;
-              default:
-                return assertNever(part);
-          break;
-      }
-  })} />
-      </div>
-   
+      </header>
+      <Content parts={courseParts} />
+      <Total total={courseParts} />
+    </div>
   );
-}
+};
 
 export default App;

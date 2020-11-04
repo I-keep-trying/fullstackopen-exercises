@@ -7,7 +7,7 @@ import blogService from '../services/blogs'
 import { toast } from 'react-toastify'
 import NewComment from '../components/AddComment'
 
-const BlogList = ({ match }) => {
+const BlogDetail = ({ match }) => {
   const dispatch = useDispatch()
   const history = useHistory()
   useEffect(() => {
@@ -20,7 +20,9 @@ const BlogList = ({ match }) => {
   const loadingAll = useSelector((state) => state.blogs.loading)
 
   const blog = useSelector((state) => state.blog.blog)
-  const blogUser = useSelector((state) => state.blog.blog.user)
+  const blogUser = useSelector((state) => {
+    console.log('state',state)
+    return state.blog.blog.user})
   const auth = useSelector((state) => state.auth)
 
   const addLike = () => {
@@ -52,7 +54,7 @@ const BlogList = ({ match }) => {
         <div>
           <div className="form-group">
             <div>
-              <a href={blog.url} >{blog.title}</a>
+              <a href={blog.url}>{blog.title}</a>
             </div>
             <div>
               <div>Added by: {blogUser.name}</div>
@@ -66,7 +68,7 @@ const BlogList = ({ match }) => {
               type="submit"
               onClick={addLike}
             >
-              Like
+              Add Like
             </button>
           </div>
           <div>
@@ -106,7 +108,7 @@ const BlogList = ({ match }) => {
   )
 }
 
-export default BlogList
+export default BlogDetail
 
 /* 
  // for commments dates:

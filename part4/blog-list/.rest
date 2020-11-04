@@ -1,6 +1,6 @@
 GET http://localhost:3007/api/blogs
 ###
-GET http://localhost:3007/api/blogs/5f68e19af76be70898e947eb
+GET http://localhost:3007/api/blogs/5f6e367c1bacf13fd4233b82
 ###
 GET http://localhost:3007/api/blogs/5f68e19af76be70898e947eb/comments
 ###

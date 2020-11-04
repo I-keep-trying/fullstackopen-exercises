@@ -24,7 +24,7 @@ const patients: Patient[] = [
     name: 'Dana Scully',
     dateOfBirth: '1974-01-05',
     ssn: '050174-432N',
-    gender: Gender.Other,
+    gender: Gender.Female,
     occupation: 'Forensic Pathologist',
     entries: [],
   },
@@ -33,11 +33,10 @@ const patients: Patient[] = [
     name: 'Matti Luukkainen',
     dateOfBirth: '1971-04-09',
     ssn: '090471-8890',
-    gender: Gender.Male,
+    gender: Gender.Other,
     occupation: 'Digital evangelist',
     entries: [],
   },
 ];
-
 
 export default patients;

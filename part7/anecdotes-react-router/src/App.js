@@ -31,8 +31,6 @@ const App = () => {
   const [message, setMessage] = useState(null)
   const [location, setLocation] = useState('/')
 
-  const [formData, setFormData] = useState({})
-
   let history = useHistory()
 
   useEffect(() => {
@@ -61,6 +59,7 @@ const App = () => {
       </div>
       <div className="AppBody">
         <Switch>
+          
           <Route path="/anecdotes/:id">
             <Anecdote anecdotes={anecdotes} />
           </Route>
