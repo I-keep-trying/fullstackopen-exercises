@@ -1,11 +1,10 @@
 import express from 'express';
-import diagnosesData from '../../data/diagnoses.json';
-
+import { getDiagnoses } from '../services/diagnosisService';
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.send(diagnosesData);
+  res.send(getDiagnoses());
 });
 
 router.post('/', (_req, res) => {

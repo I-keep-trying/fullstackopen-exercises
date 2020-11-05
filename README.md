@@ -66,6 +66,6 @@ Part 2 Note: I did not push 2.5 because the previous exercises already had this 
 
 ## [bmi calculator and exercise diary](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9/bmi-calc)
 
-## [patientor backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9/patientor-backend)
+## [patientor backend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9/yet-another-backend-ts)
 
 ## [patientor frontend](https://github.com/I-keep-trying/fullstackopen-exercises/tree/master/part9/patientor-frontend)

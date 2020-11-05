@@ -1,13 +1,22 @@
 import React, { FC, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Container, Table } from 'semantic-ui-react';
+import { Container, Table, Icon } from 'semantic-ui-react';
 import { useStateValue, addPatient } from '../state';
 import { apiBaseUrl } from '../constants';
+//import { Entry, Diagnosis } from '../types';
+import Entries from './Entries';
+//import { nanoid } from 'nanoid';
 
 const PatientDetail: FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [{ patients }, dispatch] = useStateValue();
+  const [
+    {
+      patients,
+      // diagnoses
+    },
+    dispatch,
+  ] = useStateValue();
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -29,41 +38,37 @@ const PatientDetail: FC = () => {
   return patients[id] ? (
     <div className="App">
       <Container textAlign="center">
-        {patients[id].gender === 'male' ? (
-          <h1>
-            {' '}
-            {patients[id].name} <i className="mars big icon"></i>
-          </h1>
-        ) : patients[id].gender === 'female' ? (
-          <h1>
-            {' '}
-            {patients[id].name} <i className="venus big icon"></i>
-          </h1>
-        ) : (
-          <h1>
-            {' '}
-            {patients[id].name} <i className="genderless big icon"></i>
-          </h1>
-        )}
+        <h1>
+          {patients[id].name}
+          {patients[id].gender === 'male' ? (
+            <Icon className="mars big icon" />
+          ) : patients[id].gender === 'female' ? (
+            <Icon className="venus big icon" />
+          ) : (
+            <Icon className="genderless big icon" />
+          )}
+        </h1>
       </Container>
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Name</Table.HeaderCell>
-            <Table.HeaderCell>Gender</Table.HeaderCell>
+            <Table.HeaderCell width={3}>Gender: </Table.HeaderCell>
+            <Table.Cell>{patients[id].gender}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
             <Table.HeaderCell>SSN</Table.HeaderCell>
-            <Table.HeaderCell>Date Of Birth</Table.HeaderCell>
+            <Table.Cell>{patients[id].ssn}</Table.Cell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell>Occupation</Table.HeaderCell>
+            <Table.Cell>{patients[id].occupation}</Table.Cell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Row>
-            <Table.Cell>{patients[id].name}</Table.Cell>
-            <Table.Cell>{patients[id].gender}</Table.Cell>
-            <Table.Cell>{patients[id].ssn}</Table.Cell>
-            <Table.Cell>{patients[id].dateOfBirth}</Table.Cell>
-          </Table.Row>
+          <Table.Row></Table.Row>
         </Table.Body>
       </Table>
+      <Entries />
     </div>
   ) : null;
 };

@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { NewPatient, Gender } from './types';
+import { NewPatient, Gender, Entry, Diagnosis } from './types';
 
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String;
@@ -53,15 +53,45 @@ const parseOccupation = (occupation: any): string => {
   return occupation;
 };
 
-const isStringArray = (text: any[]): text is string[] => {
-  return typeof text === 'undefined' || text instanceof Array;
+const parseEntries = (entries: any[]): Entry[] => {
+  console.log('check entries type', entries);
+  if (!entries) {
+    throw new Error(`Incorrect or missing entry type: ${entries}`);
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return entries;
 };
 
-const parseEntries = (entries: any[]): string[] => {
-  if (!isStringArray(entries)) {
-    throw new Error(`Incorrect or missing entries: ${entries}`);
+const parseDxCode = (code: any): string => {
+  if (!code || !isString(code)) {
+    throw new Error(`Incorrect or missing code: ${code}`);
   }
-  return entries;
+
+  return code;
+};
+
+const parseDxName = (dname: any): string => {
+  if (!dname || !isString(dname)) {
+    throw new Error(`Incorrect or missing name: ${dname}`);
+  }
+
+  return dname;
+};
+
+const parseDxLatin = (latin: any): string => {
+  if (!isString(latin)) {
+    throw new Error(`Incorrect or missing latin: ${latin}`);
+  }
+
+  return latin;
+};
+
+export const toDiagnoses = (object: any): Diagnosis => {
+  return {
+    code: parseDxCode(object.code),
+    name: parseDxName(object.name),
+    latin: parseDxLatin(object.latin),
+  };
 };
 
 const toNewPatient = (object: any): NewPatient => {

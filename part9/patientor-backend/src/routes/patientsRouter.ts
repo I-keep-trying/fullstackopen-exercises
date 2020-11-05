@@ -1,10 +1,10 @@
 import express, { Request } from 'express';
 import {
-  addPatient,
+ // addPatient,
   getSecurePatient,
   findById,
 } from '../services/patientService';
-import toNewPatient from '../utils';
+//import toNewPatient from '../utils';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', (_req, res) => {
   res.send(getSecurePatient());
 });
 
-router.post('/', (req, res) => {
+/* router.post('/', (req, res) => {
   try {
     const newPatientRecord = toNewPatient(req.body);
     const addedRecord = addPatient(newPatientRecord);
@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
       res.status(400).send(e.message);
     }
   }
-});
+}); */
 
 router.get('/:id', (req: Request, res) => {
   try {

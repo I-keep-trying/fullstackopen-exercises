@@ -1,9 +1,6 @@
+import { Diagnosis } from '../types';
 import diagnosisRecords from '../../data/typedDiagnoses';
 
-import { Diagnosis } from '../types';
+export const getDiagnoses = (): Diagnosis[] => diagnosisRecords;
 
-const getDiagnoses = (): Array<Diagnosis> => {
-  return diagnosisRecords;
-};
 
-export default { getDiagnoses };
