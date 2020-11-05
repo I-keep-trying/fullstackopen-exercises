@@ -18,45 +18,51 @@ const HealthCheck: FC<{ entry: Entry }> = ({ entry }) => {
   ] = useStateValue();
   if (entry.type === 'HealthCheck') {
     return (
-        <Grid>
-            <Grid.Column>
-                
-            </Grid.Column>
-        </Grid>
-      <Table.Body key={entry.id}>
+      <>
+        <Grid key={entry.id} columns={1}>
           <Segment>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.type} </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.date} </Table.Cell>
-          <Table.Cell>{entry.description} </Table.Cell>
-        </Table.Row>
-        </Segment>
-        {entry.diagnosisCodes ? (
-          <>
-            <Table.Row>
-              <Table.Cell singleLine style={{ fontWeight: 'bold' }}>
-                Diagnosis Codes{' '}
-              </Table.Cell>
-            </Table.Row>
-            {entry.diagnosisCodes.map((dx) => {
-              const getDx = Object.values(diagnoses).filter(
-                (diagnosis: Diagnosis) => diagnosis.code === dx
-              );
-              const id = nanoid();
-              return (
-                <Table.Row key={id}>
-                  <Table.Cell>{dx} </Table.Cell>
-                  <Table.Cell>{getDx[0]?.name} </Table.Cell>
-                </Table.Row>
-              );
-            })}
-          </>
-        ) : (
-          <></>
-        )}
-      </Table.Body>
+            <Grid.Row>
+              <Grid.Column>
+                {' '}
+                <Icon className="stethoscope big icon" />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.date}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.description}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.specialist}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.healthCheckRating}</Grid.Column>
+            </Grid.Row>
+          </Segment>
+          {entry.diagnosisCodes ? (
+            <>
+              <Segment>
+                <Grid.Row>Diagnosis Codes</Grid.Row>
+                {entry.diagnosisCodes.map((dx) => {
+                  const getDx = Object.values(diagnoses).filter(
+                    (diagnosis: Diagnosis) => diagnosis.code === dx
+                  );
+                  const id = nanoid();
+                  return (
+                    <>
+                      <Grid.Row key={id}>{dx}</Grid.Row>
+                      <Grid.Row>{getDx[0]?.name}</Grid.Row>
+                    </>
+                  );
+                })}
+              </Segment>
+            </>
+          ) : (
+            <></>
+          )}
+        </Grid>
+      </>
     );
   }
   return null;
@@ -72,39 +78,68 @@ const OccupationalHealthcare: FC<{ entry: Entry }> = ({ entry }) => {
   ] = useStateValue();
   if (entry.type === 'OccupationalHealthcare') {
     return (
-      <Table.Body key={entry.id}>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.type} </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.date} </Table.Cell>
-          <Table.Cell>{entry.description} </Table.Cell>
-        </Table.Row>
+      <>
+        <Grid key={entry.id} columns={1}>
+          <Segment>
+            <Grid.Row>
+              <Grid.Column>
+                {' '}
+                <Icon className="medkit big icon" />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.date}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.description}</Grid.Column>
+            </Grid.Row>
 
-        {entry.diagnosisCodes ? (
-          <>
-            <Table.Row>
-              <Table.Cell singleLine style={{ fontWeight: 'bold' }}>
-                Diagnosis Codes{' '}
-              </Table.Cell>
-            </Table.Row>
-            {entry.diagnosisCodes.map((dx) => {
-              const getDx = Object.values(diagnoses).filter(
-                (diagnosis: Diagnosis) => diagnosis.code === dx
-              );
-              const id = nanoid();
-              return (
-                <Table.Row key={id}>
-                  <Table.Cell>{dx} </Table.Cell>
-                  <Table.Cell>{getDx[0]?.name} </Table.Cell>
-                </Table.Row>
-              );
-            })}
-          </>
-        ) : (
-          <></>
-        )}
-      </Table.Body>
+            <Grid.Row>
+              <Grid.Column>{entry.specialist}</Grid.Column>
+            </Grid.Row>
+
+            <Grid.Row>
+              <Grid.Column>{entry.employerName}</Grid.Column>
+            </Grid.Row>
+            {entry.sickLeave ? (
+              <>
+                <Grid.Row>
+                  <Grid.Column>Sick Leave:</Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>{entry.sickLeave.startDate}</Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>{entry.sickLeave.endDate}</Grid.Column>
+                </Grid.Row>
+              </>
+            ) : (
+              <></>
+            )}
+          </Segment>
+          {entry.diagnosisCodes ? (
+            <>
+              <Segment>
+                <Grid.Row>Diagnosis Codes</Grid.Row>
+                {entry.diagnosisCodes.map((dx) => {
+                  const getDx = Object.values(diagnoses).filter(
+                    (diagnosis: Diagnosis) => diagnosis.code === dx
+                  );
+                  const id = nanoid();
+                  return (
+                    <>
+                      <Grid.Row key={id}>{dx}</Grid.Row>
+                      <Grid.Row>{getDx[0]?.name}</Grid.Row>
+                    </>
+                  );
+                })}
+              </Segment>
+            </>
+          ) : (
+            <></>
+          )}
+        </Grid>
+      </>
     );
   }
   return null;
@@ -120,39 +155,63 @@ const HospitalEntry: FC<{ entry: Entry }> = ({ entry }) => {
   ] = useStateValue();
   if (entry.type === 'Hospital') {
     return (
-      <Table.Body key={entry.id}>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.type} </Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell singleLine>{entry.date} </Table.Cell>
-          <Table.Cell>{entry.description} </Table.Cell>
-        </Table.Row>
-
-        {entry.diagnosisCodes ? (
-          <>
-            <Table.Row>
-              <Table.Cell singleLine style={{ fontWeight: 'bold' }}>
-                Diagnosis Codes{' '}
-              </Table.Cell>
-            </Table.Row>
-            {entry.diagnosisCodes.map((dx) => {
-              const getDx = Object.values(diagnoses).filter(
-                (diagnosis: Diagnosis) => diagnosis.code === dx
-              );
-              const id = nanoid();
-              return (
-                <Table.Row key={id}>
-                  <Table.Cell>{dx} </Table.Cell>
-                  <Table.Cell>{getDx[0]?.name} </Table.Cell>
-                </Table.Row>
-              );
-            })}
-          </>
-        ) : (
-          <></>
-        )}
-      </Table.Body>
+      <>
+        <Grid key={entry.id} columns={1}>
+          <Segment>
+            <Grid.Row>
+              <Grid.Column>
+                {' '}
+                <Icon className="hospital outline big icon" />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.date}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.description}</Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column>{entry.specialist}</Grid.Column>
+            </Grid.Row>
+            {entry.discharge ? (
+              <>
+                <Grid.Row>
+                  <Grid.Column>Sick Leave:</Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>{entry.discharge.date}</Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                  <Grid.Column>{entry.discharge.criteria}</Grid.Column>
+                </Grid.Row>
+              </>
+            ) : (
+              <></>
+            )}
+          </Segment>
+          {entry.diagnosisCodes ? (
+            <>
+              <Segment>
+                <Grid.Row>Diagnosis Codes</Grid.Row>
+                {entry.diagnosisCodes.map((dx) => {
+                  const getDx = Object.values(diagnoses).filter(
+                    (diagnosis: Diagnosis) => diagnosis.code === dx
+                  );
+                  const id = nanoid();
+                  return (
+                    <>
+                      <Grid.Row key={id}>{dx}</Grid.Row>
+                      <Grid.Row>{getDx[0]?.name}</Grid.Row>
+                    </>
+                  );
+                })}
+              </Segment>
+            </>
+          ) : (
+            <></>
+          )}
+        </Grid>
+      </>
     );
   }
 

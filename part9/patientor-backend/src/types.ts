@@ -50,7 +50,6 @@ export type Entry =
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
 
-
 export interface Patient {
   id: string;
   name: string;
@@ -70,4 +69,3 @@ export interface Diagnosis {
 export type SecurePatient = Omit<Patient, 'ssn' | 'entries'>;
 
 export type NewPatient = Omit<Patient, 'id'>;
-
