@@ -19,6 +19,9 @@ const App: React.FC = () => {
         const { data: patientListFromApi } = await axios.get<Patient[]>(
           `${apiBaseUrl}/patients`
         );
+        console.log('{ data: patientListFromApi }', {
+          data: patientListFromApi,
+        });
         dispatch(setPatientList(patientListFromApi));
 
         const { data: diagnosisListFromApi } = await axios.get<Diagnosis[]>(

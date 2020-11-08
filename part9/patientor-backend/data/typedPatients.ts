@@ -1,16 +1,5 @@
-import {
-  Gender,
-  Patient,
-  /*   BaseEntry,
-  HealthCheckRating,
-  HealthCheckEntry,
-  Discharge,
-  HospitalEntry,
-  SickLeave,
-  OccupationalHealthcareEntry,
-  Entry,
-  Diagnosis, */
-} from '../src/types';
+import { Gender, Patient } from '../src/types';
+//import { toPatient } from '../src/utils/patientUtils';
 
 const patients: Patient[] = [
   {

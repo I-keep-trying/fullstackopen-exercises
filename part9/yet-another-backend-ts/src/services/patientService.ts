@@ -1,8 +1,10 @@
-import { Patient, NonSensitivePatient, NewPatient } from '../types';
+import { SecurePatient, Patient, NewPatient } from '../types';
 import patients from '../../data/patients';
+import { nanoid } from 'nanoid';
 
 export const getPatients = (): Patient[] => patients;
-export const getNonSensitivePatients = (): NonSensitivePatient[] =>
+
+export const getSecurePatient = (): SecurePatient[] =>
   getPatients().map(({ id, name, dateOfBirth, gender, occupation }) => ({
     id,
     name,
@@ -10,14 +12,16 @@ export const getNonSensitivePatients = (): NonSensitivePatient[] =>
     gender,
     occupation,
   }));
+
 export const addPatient = (entry: NewPatient): Patient => {
-  const newPatientEntry = {
+  const newPatient = {
     ...entry,
-    id: Date.now().toString(),
+    id: nanoid(),
   };
-  patients.push(newPatientEntry);
-  return newPatientEntry;
+  patients.push(newPatient);
+  return newPatient;
 };
-export const getPatientByID = (id: string): Patient | undefined => {
+
+export const findById = (id: string): Patient | undefined => {
   return getPatients().find((patient) => patient.id === id);
 };

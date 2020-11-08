@@ -1,31 +1,36 @@
 import express, { Request } from 'express';
 import {
-  getNonSensitivePatients,
-  addPatient,
-  getPatientByID,
+ // addPatient,
+  getSecurePatient,
+  findById,
 } from '../services/patientService';
-import { toNewPatient } from '../utils';
+//import toNewPatient from '../utils';
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
-  res.send(getNonSensitivePatients());
+  res.send(getSecurePatient());
 });
 
-router.post('/', (req, res) => {
+router.get('/:id', (req: Request, res) => {
   try {
-    const newPatient = toNewPatient(req.body);
-    const patient = addPatient(newPatient);
-    res.send(patient);
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(400).send(error.message);
+    res.send(findById(req.params.id));
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(404).send({ error: e.message });
     }
   }
 });
 
-router.get('/:id', (req: Request, res) => {
-  res.send(getPatientByID(req.params.id));
-});
-
+/* router.post('/', (req, res) => {
+  try {
+    const newPatientRecord = toNewPatient(req.body);
+    const addedRecord = addPatient(newPatientRecord);
+    res.json(addedRecord);
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(400).send(e.message);
+    }
+  }
+}); */
 export default router;

@@ -4,3 +4,7 @@ POST http://localhost:3011/api/patients
 content-type: application/json
 
 {"name":"fffffffff","ssn":"34234234","dateOfBirth":"1990-10-10","occupation":"New york city cop","entries":[], "gender":"male"}
+
+###
+GET http://localhost:3011/api/patients
+###

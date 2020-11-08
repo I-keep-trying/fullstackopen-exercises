@@ -1,4 +1,5 @@
 import { Diagnosis } from '../src/types';
+//import { toDiagnosis } from '../src/utils/dxUtils';
 
 const diagnosisRecords: Diagnosis[] = [
   {

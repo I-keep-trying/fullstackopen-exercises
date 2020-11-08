@@ -2,28 +2,71 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { Field, Formik, Form } from 'formik';
 
-import { TextField, SelectField, GenderOption } from './FormField';
-import { Gender, Patient, Entry } from '../types';
+import { TextField, SelectField } from '../AddPatientModal/FormField';
+import {
+  Entry,
+  HospitalEntry,
+  OccupationalHealthcareEntry,
+  HealthCheckEntry,
+} from '../types';
 
-/*
- * use type Patient, but omit id and entries,
- * because those are irrelevant for new patient object.
- */
-export type PatientFormValues = Omit<Patient, 'id'>;
-
+//export type PatientFormValues = Omit<Patient, 'id'>;
 // 'Entry' type should be ok to use without redefining type (?)
+
+type EntryOption = {
+    value: Entry;
+    label: string;
+  };
+
+export type NewHospitalEntry = Omit<HospitalEntry, 'id'>;
+
+export type NewOccupationalHealthcareEntry = Omit<
+  OccupationalHealthcareEntry,
+  'id'
+>;
+
+export type NewHealthCheckEntry = Omit<HealthCheckEntry, 'id'>;
+
+type SelectFieldProps = {
+    name: string;
+    label: string;
+    options: EntryOption[];
+  };
+
+  const SelectEntryField: React.FC<SelectFieldProps> = ({
+    name,
+    label,
+    options,
+  }: SelectFieldProps) => (
+    <Form.Field>
+      <label>{label}</label>
+      <Field as="select" name={name} className="ui dropdown">
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label || option.value}
+          </option>
+        ))}
+      </Field>
+    </Form.Field>
+  );
+
 interface Props {
-  onSubmit: (values: PatientFormValues) => void;
+  onSubmit: (
+    values:
+      | NewHospitalEntry
+      | NewOccupationalHealthcareEntry
+      | NewHealthCheckEntry
+  ) => void;
   onCancel: () => void;
 }
 
-const genderOptions: GenderOption[] = [
-  { value: Gender.Male, label: 'Male' },
-  { value: Gender.Female, label: 'Female' },
-  { value: Gender.Other, label: 'Other' },
+const entryTypeOptions: Entry[] = [
+  { value: HospitalEntry.type, label: 'Hospital' },
+  { value: OccupationalHealthcareEntry.type, label: 'Occupational Health' },
+  { value: HealthCheckEntry.type, label: 'Health Check' },
 ];
 
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
   return (
     <Formik
       initialValues={{
@@ -110,4 +153,4 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
   );
 };
 
-export default AddPatientForm;
+export default AddEntryForm;

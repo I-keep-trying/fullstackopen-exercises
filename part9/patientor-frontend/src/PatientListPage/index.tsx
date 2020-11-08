@@ -7,7 +7,6 @@ import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
 import AddPatientModal from "../AddPatientModal";
 import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
-import HealthRatingBar from "../components/HealthRatingBar";
 import { useStateValue } from "../state";
 import { addPatient } from '../state/reducer';
 
@@ -49,7 +48,6 @@ const PatientListPage: React.FC = () => {
             <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Gender</Table.HeaderCell>
             <Table.HeaderCell>Occupation</Table.HeaderCell>
-            <Table.HeaderCell>Health Rating</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -60,9 +58,7 @@ const PatientListPage: React.FC = () => {
               </Table.Cell>
               <Table.Cell>{patient.gender}</Table.Cell>
               <Table.Cell>{patient.occupation}</Table.Cell>
-              <Table.Cell>
-                <HealthRatingBar showText={false} rating={1} />
-              </Table.Cell>
+
             </Table.Row>
           ))}
         </Table.Body>
