@@ -16,14 +16,24 @@ export const getPatients = (): Patient[] => patients;
 export const getDiagnoses = (): Diagnosis[] => diagnoses;
 
 export const getSecurePatient = (): SecurePatient[] =>
+  getPatients().map(({ id, name, dateOfBirth, gender, occupation }) => ({
+    id,
+    name,
+    dateOfBirth,
+    gender,
+    occupation,
+  }));
+
+export const getPatientDetail = (): Patient[] =>
   getPatients().map(
-    ({ id, name, dateOfBirth, gender, occupation, entries }) => ({
+    ({ id, name, dateOfBirth, gender, occupation, entries, ssn }) => ({
       id,
       name,
       dateOfBirth,
       gender,
       occupation,
       entries,
+      ssn,
     })
   );
 

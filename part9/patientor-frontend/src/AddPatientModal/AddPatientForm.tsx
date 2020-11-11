@@ -2,28 +2,32 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { Field, Formik, Form } from 'formik';
 
-import { TextField, SelectField, GenderOption } from './FormField';
-import { Gender, Patient, Entry } from '../types';
+import { TextField, SelectField } from './FormField';
+import {
+  Gender,
+  Patient,
+} from '../types';
 
-/*
- * use type Patient, but omit id and entries,
- * because those are irrelevant for new patient object.
- */
 export type PatientFormValues = Omit<Patient, 'id'>;
 
-// 'Entry' type should be ok to use without redefining type (?)
 interface Props {
   onSubmit: (values: PatientFormValues) => void;
   onCancel: () => void;
 }
 
-const genderOptions: GenderOption[] = [
+export type GenderOption = {
+  value: Gender;
+  label: string;
+};
+
+export const selectOptions: GenderOption[] = [
   { value: Gender.Male, label: 'Male' },
   { value: Gender.Female, label: 'Female' },
   { value: Gender.Other, label: 'Other' },
 ];
 
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddPatientForm: React.FC<Props> = (props) => {
+  console.log('add patient props', props);
   return (
     <Formik
       initialValues={{
@@ -32,8 +36,9 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
         dateOfBirth: '1990-10-10',
         occupation: 'freeloader',
         gender: Gender.Other,
+        entries: [],
       }}
-      onSubmit={onSubmit}
+      onSubmit={props.onSubmit}
       validate={(values) => {
         const requiredError = 'Field is required';
         const errors: { [field: string]: string } = {};
@@ -82,10 +87,10 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
               name="occupation"
               component={TextField}
             />
-            <SelectField label="Gender" name="gender" options={genderOptions} />
+            <SelectField label="Gender" name="gender" options={selectOptions} />
             <Grid>
               <Grid.Column floated="left" width={5}>
-                <Button type="button" onClick={onCancel} color="red">
+                <Button type="button" onClick={props.onCancel} color="red">
                   Cancel
                 </Button>
               </Grid.Column>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Rating } from 'semantic-ui-react';
+import { Rating, Container } from 'semantic-ui-react';
 
 type BarProps = {
   rating: number;
@@ -15,10 +15,10 @@ const HEALTHBAR_TEXTS = [
 
 const HealthRatingBar = ({ rating, showText }: BarProps) => {
   return (
-    <div className="health-bar">
+    <Container className="health-bar">
       {<Rating icon="heart" disabled rating={4 - rating} maxRating={4} />}
-      {showText ? <p>{HEALTHBAR_TEXTS[rating]}</p> : null}
-    </div>
+      {showText ? <Container>{HEALTHBAR_TEXTS[rating]}</Container> : null}
+    </Container>
   );
 };
 

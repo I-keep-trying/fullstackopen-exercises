@@ -1,14 +1,15 @@
-import React from "react";
-import axios from "axios";
-import { Container, Table, Button } from "semantic-ui-react";
+import React from 'react';
+import axios from 'axios';
+import { Container, Table, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
-import AddPatientModal from "../AddPatientModal";
-import { Patient } from "../types";
-import { apiBaseUrl } from "../constants";
-import { useStateValue } from "../state";
+import { PatientFormValues } from '../AddPatientModal/AddPatientForm';
+import AddPatientModal from '../AddPatientModal';
+import { Patient } from '../types';
+import { apiBaseUrl } from '../constants';
+import { useStateValue } from '../state';
 import { addPatient } from '../state/reducer';
+
 
 const PatientListPage: React.FC = () => {
   const [{ patients }, dispatch] = useStateValue();
@@ -38,11 +39,11 @@ const PatientListPage: React.FC = () => {
   };
 
   return (
-    <div className="App">
-      <Container textAlign="center">
-        <h3>Patient list</h3>
+    <Container >
+      <Container as="h3" textAlign="center">
+        Patient list
       </Container>
-      <Table celled>
+      <Table celled >
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Name</Table.HeaderCell>
@@ -58,7 +59,6 @@ const PatientListPage: React.FC = () => {
               </Table.Cell>
               <Table.Cell>{patient.gender}</Table.Cell>
               <Table.Cell>{patient.occupation}</Table.Cell>
-
             </Table.Row>
           ))}
         </Table.Body>
@@ -70,7 +70,7 @@ const PatientListPage: React.FC = () => {
         onClose={closeModal}
       />
       <Button onClick={() => openModal()}>Add New Patient</Button>
-    </div>
+    </Container>
   );
 };
 

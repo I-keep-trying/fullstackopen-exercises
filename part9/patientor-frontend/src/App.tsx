@@ -11,6 +11,7 @@ import { setPatientList, setDiagnosisList } from './state';
 import PatientListPage from './PatientListPage';
 import PatientDetail from './PatientListPage/PatientDetail';
 
+
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
   React.useEffect(() => {
@@ -19,9 +20,6 @@ const App: React.FC = () => {
         const { data: patientListFromApi } = await axios.get<Patient[]>(
           `${apiBaseUrl}/patients`
         );
-        console.log('{ data: patientListFromApi }', {
-          data: patientListFromApi,
-        });
         dispatch(setPatientList(patientListFromApi));
 
         const { data: diagnosisListFromApi } = await axios.get<Diagnosis[]>(
@@ -36,21 +34,19 @@ const App: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <Router>
-        <Container>
-          <Header as="h1">Patientor</Header>
-          <Button as={Link} to="/" primary>
-            Home
-          </Button>
-          <Divider hidden />
-          <Switch>
-            <Route path="/patients/:id" render={() => <PatientDetail />} />
-            <Route path="/" render={() => <PatientListPage />} />
-          </Switch>
-        </Container>
-      </Router>
-    </div>
+    <Router>
+      <Container>
+        <Header as="h1">Patientor</Header>
+        <Button as={Link} to="/" primary>
+          Home
+        </Button>
+        <Divider hidden />
+        <Switch>
+          <Route path="/patients/:id" render={() => <PatientDetail />} />
+          <Route path="/" render={() => <PatientListPage />} />
+        </Switch>
+      </Container>
+    </Router>
   );
 };
 

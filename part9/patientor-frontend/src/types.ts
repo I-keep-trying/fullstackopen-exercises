@@ -1,4 +1,3 @@
-
 export enum Gender {
   Male = 'male',
   Female = 'female',
@@ -20,6 +19,12 @@ export enum HealthCheckRating {
   'CriticalRisk' = 3,
 }
 
+export enum EntryType {
+  HealthCheck = 'HealthCheck',
+  Hospital = 'Hospital',
+  OccupationalHealthcare = 'OccupationalHealthcare',
+}
+
 export interface HealthCheckEntry extends BaseEntry {
   type: 'HealthCheck';
   healthCheckRating: HealthCheckRating;
@@ -35,16 +40,22 @@ export interface HospitalEntry extends BaseEntry {
   discharge?: Discharge;
 }
 
-export interface SickLeave {
+export interface OccupationalHealthcareEntry extends BaseEntry {
+  type: 'OccupationalHealthcare';
+  employerName: string;
+  sickLeave?: boolean;
   startDate: string;
   endDate: string;
 }
 
-export interface OccupationalHealthcareEntry extends BaseEntry {
-  type: 'OccupationalHealthcare';
-  employerName: string;
-  sickLeave?: SickLeave;
-}
+export type SickLeave =
+  | OccupationalHealthcareEntry['startDate']
+  | OccupationalHealthcareEntry['endDate'];
+
+export type EntriesTypes =
+  | HospitalEntry['type']
+  | OccupationalHealthcareEntry['type']
+  | HealthCheckEntry['type'];
 
 export type Entry =
   | HospitalEntry
@@ -66,5 +77,3 @@ export interface Diagnosis {
   name: string;
   latin?: string;
 }
-
-
