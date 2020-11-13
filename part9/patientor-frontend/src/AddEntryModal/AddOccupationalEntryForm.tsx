@@ -2,14 +2,14 @@ import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
 import { Field, Formik, Form } from 'formik';
 import { useStateValue } from '../state';
-import { TextField, DiagnosisSelection, SickLeaveToggle } from './FormField';
+import { TextField, DiagnosisSelection } from './FormField';
 import {
-  OccupationalHealthcareEntry,
+  OccupationalHealthCareEntry,
   //SickLeave
 } from '../types';
 
 export type OccupationalEntryFormValues = Omit<
-  OccupationalHealthcareEntry,
+OccupationalHealthCareEntry,
   'id'
 >;
 
@@ -23,7 +23,6 @@ interface Props {
 }
 
 const AddOccupationalEntryForm: React.FC<Props> = (props) => {
-  console.log('props from addoccupationalhealthentryform', props);
   const [{ diagnoses }] = useStateValue();
   /* 
   const diagnoses: {
@@ -97,7 +96,7 @@ const AddOccupationalEntryForm: React.FC<Props> = (props) => {
         return errors;
       }}
     >
-      {({ isValid, dirty, setFieldValue, setFieldTouched }) => {
+      {({ isValid, dirty, setFieldValue, setFieldTouched, values }) => {
         return (
           <Form className="form ui">
             <Field
@@ -129,13 +128,6 @@ const AddOccupationalEntryForm: React.FC<Props> = (props) => {
               placeholder="Employer Name"
               name="employerName"
               component={TextField}
-            />
-            <Field
-              label="Sick Leave?"
-              name="sickLeave"
-              setFieldValue={setFieldValue}
-            //  onToggle={props.toggle}
-              component={SickLeaveToggle}
             />
 
             {/*             {values.sickLeave ? (

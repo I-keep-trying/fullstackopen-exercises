@@ -1,16 +1,13 @@
-import React, { FC, 
- // useEffect 
+import React, {
+  FC,
+  // useEffect
 } from 'react';
 //import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Icon, Accordion, Label, Divider, List } from 'semantic-ui-react';
 import {
-  Container,
-  Grid,
-  Icon,
-  Segment,
-  Divider} from 'semantic-ui-react';
-import { useStateValue, 
- // addPatient 
+  useStateValue,
+  // addPatient
 } from '../state';
 //import { apiBaseUrl } from '../constants';
 import { assertNever } from '../utils';
@@ -18,12 +15,186 @@ import { Entry, Diagnosis } from '../types';
 import HealthRatingBar from '../components/HealthRatingBar';
 import { nanoid } from 'nanoid';
 
+/* from types.ts
+export type Entry =
+  | HealthCheckEntry
+  | OccupationalHealthCareEntry
+  | HospitalEntry;
+*/
 
+/* same as what I already have
+interface EntryDetailsProps {
+  entry: Entry;
+} */
+
+/* BASE ENTRY
+  description: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnosis['code']>;
+*/
+
+export const BaseEntry: FC<{ entry: Entry }> = ({ entry }) => {
+  return (
+    <List>
+      <List.Item>
+        <Label basic horizontal>
+          Description
+        </Label>
+        {entry.description}
+      </List.Item>
+      <List.Item>
+        <Label basic horizontal>
+          Specialist
+        </Label>
+        {entry.specialist}
+      </List.Item>
+    </List>
+  );
+};
+
+export const EntryTypeDetails: FC<{ entry: Entry }> = ({ entry }) => {
+  const [activeIndex, setActiveIndex] = React.useState<number>(0);
+
+  const handleSelect = () => {
+    setActiveIndex(activeIndex === 0 ? -1 : 0);
+  };
+  console.log('entry', entry);
+  switch (entry.type) {
+    case 'Hospital':
+      return (
+        <div key={entry.id}>
+          <Accordion.Title
+            active={activeIndex === 0}
+            index={activeIndex}
+            onClick={handleSelect}
+          >
+            {entry.date}
+            <Icon color="blue" className="hospital outline big icon" />
+            {entry.type}
+          </Accordion.Title>
+          <BaseEntry entry={entry} />
+
+          <Accordion.Content>
+            <Label>Discharge Notes:</Label>
+            <Label basic horizontal>
+              {' '}
+              Date:{' '}
+            </Label>{' '}
+            {entry.discharge.date}
+            <Label basic horizontal>
+              {' '}
+              Criteria:{' '}
+            </Label>{' '}
+            {entry.discharge.criteria}
+          </Accordion.Content>
+        </div>
+      );
+    case 'OccupationalHealthcare':
+      return (
+        <Accordion key={entry.id}>
+          <Accordion.Title>
+            {entry.date}
+            <Icon color="red" className="medkit big icon" />
+            <Label basic horizontal>
+              {entry.type}
+            </Label>
+          </Accordion.Title>
+          <Accordion.Content>
+            <BaseEntry entry={entry} />
+            <Label basic horizontal>
+              Employment:
+            </Label>{' '}
+            {entry.employerName}
+            {entry.sickLeave ? (
+              <>
+                <Label>Sick Leave:</Label> Start: {entry.sickLeave.startDate}{' '}
+                End: {entry.sickLeave.endDate}
+              </>
+            ) : (
+              <></>
+            )}
+          </Accordion.Content>
+        </Accordion>
+      );
+    case 'HealthCheck':
+      return (
+        <Accordion key={entry.id}>
+          <Accordion.Title>
+            {entry.date}
+            <Icon color="green" className="stethoscope big icon" />
+            <Label basic horizontal>
+              {entry.type}
+            </Label>
+          </Accordion.Title>
+          <Accordion.Content>
+            <BaseEntry entry={entry} />
+            <Label basic horizontal>
+              Health Status:
+            </Label>
+            <HealthRatingBar
+              rating={entry.healthCheckRating}
+              showText={true}
+              showRating={false}
+            />
+          </Accordion.Content>
+        </Accordion>
+      );
+    default:
+      return assertNever(entry);
+  }
+};
+
+export const EntryDetails: FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [{ patients, diagnoses }] = useStateValue();
+
+  const entries = (): Entry[] => {
+    if (!patients[id]?.entries || patients[id].entries?.length === 0) {
+      return [];
+    }
+    return patients[id].entries;
+  };
+
+  if (entries().length > 0) {
+    return (
+      <>
+        {entries().map((entry) => {
+          return (
+            <div key={entry.id}>
+              <EntryTypeDetails entry={entry} />
+
+              {entry.diagnosisCodes?.map((dx) => {
+                const getDx = Object.values(diagnoses).filter(
+                  (diagnosis: Diagnosis) => diagnosis.code === dx
+                );
+                const id = nanoid();
+                return (
+                  <List>
+                    <List.Item>
+                      <Label key={id} basic horizontal color="teal">
+                        {dx}
+                      </Label>{' '}
+                      {getDx[0]?.name}
+                    </List.Item>
+                  </List>
+                );
+              })}
+            </div>
+          );
+        })}
+      </>
+    );
+  }
+  return null;
+};
+
+/* 
 const HealthCheck: FC<{ entry: Entry }> = ({ entry }) => {
   const [{ diagnoses }] = useStateValue();
   if (entry.type === 'HealthCheck') {
     return (
-      <Segment inverted>
+      <List inverted>
         <Grid key={entry.id}>
           <Grid.Column width={16}>
             <Grid.Row columns={1}>
@@ -66,7 +237,7 @@ const HealthCheck: FC<{ entry: Entry }> = ({ entry }) => {
             )}
           </Grid.Column>
         </Grid>
-      </Segment>
+      </List>
     );
   }
   return null;
@@ -77,7 +248,7 @@ const OccupationalHealthcare: FC<{ entry: Entry }> = ({ entry }) => {
 
   if (entry.type === 'OccupationalHealthcare') {
     return (
-      <Segment inverted>
+      <List inverted>
         <Grid key={entry.id} columns={1}>
           <Grid.Column width={16}>
             <Grid.Row columns={1}>
@@ -110,16 +281,6 @@ const OccupationalHealthcare: FC<{ entry: Entry }> = ({ entry }) => {
                
               </Grid.Column>
             </Grid.Row>
-{/*             {entry.sickLeave === true ? (
-              <Grid.Row>
-                <Grid.Column>
-                  Sick Leave: {entry.sickLeaveDates.startDate}
-                  {' to '} {entry.sickLeaveDates.endDate}
-                </Grid.Column>
-              </Grid.Row>
-            ) : (
-              <></>
-            )} */}
             {entry.diagnosisCodes ? (
               <>
                 <Divider inverted horizontal>
@@ -143,7 +304,7 @@ const OccupationalHealthcare: FC<{ entry: Entry }> = ({ entry }) => {
             )}
           </Grid.Column>
         </Grid>
-      </Segment>
+      </List>
     );
   }
   return null;
@@ -153,7 +314,7 @@ const HospitalEntry: FC<{ entry: Entry }> = ({ entry }) => {
   const [{ diagnoses }] = useStateValue();
   if (entry.type === 'Hospital') {
     return (
-      <Segment inverted>
+      <List inverted>
         <Grid columns={1}>
           <Grid.Column width={16}>
             <Grid.Row>
@@ -214,50 +375,10 @@ const HospitalEntry: FC<{ entry: Entry }> = ({ entry }) => {
 
           </Grid.Column>
         </Grid>
-      </Segment>
+      </List>
     );
   }
 
   return null;
 };
-
-const EntryDetails: FC<{ entry: Entry }> = ({ entry }) => {
-  switch (entry.type) {
-    case 'Hospital':
-      return <HospitalEntry entry={entry}  />;
-    case 'OccupationalHealthcare':
-      return <OccupationalHealthcare entry={entry} />;
-    case 'HealthCheck':
-      return <HealthCheck entry={entry} />;
-    default:
-      return assertNever(entry);
-  }
-};
-
-const Entries: FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [{ patients }, ] = useStateValue();
-
-
-
-  const entries = (): Entry[] => {
-    if (!patients[id]?.entries || patients[id].entries?.length === 0) {
-      return [];
-    }
-    return patients[id].entries;
-  };
-
-  if (entries().length > 0) {
-    return (
-      <Container>
-        <Container as={'h2'}>Entries</Container>
-        {entries().map((entry) => (
-            <EntryDetails key={entry.id} entry={entry}  />
-          ))}
-      </Container>
-    );
-  }
-  return null;
-};
-
-export default Entries;
+*/

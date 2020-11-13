@@ -1,13 +1,32 @@
 import React from 'react';
 import { ErrorMessage, Field, FieldProps, FormikProps } from 'formik';
-import {
-  Dropdown,
-  DropdownProps,
-  CheckboxProps,
-  Form,
-  Checkbox,
-} from 'semantic-ui-react';
-import { Diagnosis, EntryType, OccupationalHealthcareEntry } from '../types';
+import { Dropdown, DropdownProps, Form } from 'semantic-ui-react';
+import { Diagnosis, EntryType, Gender } from '../types';
+
+type SelectFieldProps = {
+  name: string;
+  label: string;
+  options: { value: Gender | EntryType; label: string }[];
+};
+
+export const SelectField: React.FC<SelectFieldProps> = ({
+  name,
+  label,
+  options,
+}: SelectFieldProps) => {
+  return (
+    <Form.Field>
+      <label>{label}</label>
+      <Field as="select" name={name} className="ui dropdown">
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label || option.value}
+          </option>
+        ))}
+      </Field>
+    </Form.Field>
+  );
+};
 
 interface TextProps extends FieldProps {
   label: string;
@@ -26,36 +45,6 @@ export const TextField: React.FC<TextProps> = ({
       <div style={{ color: 'red' }}>
         <ErrorMessage className="error" name={field.name} />
       </div>
-    </Form.Field>
-  );
-};
-
-interface ToggleProps extends FieldProps {
-  label: string;
-  toggle: boolean;
-}
-
-export const SickLeaveToggle = ({
-  toggle,
-  setFieldValue,
-}: {
-  toggle: OccupationalHealthcareEntry['sickLeave'];
-  setFieldValue: FormikProps<{ sickLeave: boolean }>['setFieldValue'];
-}) => {
-  const field = 'sickLeave';
-  const onToggle = (
-    _event: React.SyntheticEvent<HTMLElement, Event>,
-    data: CheckboxProps
-  ) => {
-    console.log('onchange data property', data);
-    // checked: true // changes when toggled!
-    setFieldValue(field, data.checked);
-  };
-  const stateOptions = toggle ? !toggle : toggle;
-
-  return (
-    <Form.Field>
-      <Checkbox options={stateOptions} onChange={onToggle} />
     </Form.Field>
   );
 };

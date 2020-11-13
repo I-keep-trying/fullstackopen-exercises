@@ -1,14 +1,10 @@
 import { State } from './state';
-import { Patient, Diagnosis, EntriesTypes } from '../types';
+import { Patient, Diagnosis } from '../types';
 
 export type Action =
   | {
       type: 'SET_PATIENT_LIST';
       payload: Patient[];
-    }
-  | {
-      type: 'SET_DIAGNOSIS_LIST';
-      payload: Diagnosis[];
     }
   | {
       type: 'SET_PATIENT';
@@ -19,12 +15,8 @@ export type Action =
       payload: Patient;
     }
   | {
-      type: 'GET_TYPES';
-      payload: EntriesTypes;
-    }
-  | {
-      type: 'ADD_ENTRY';
-      payload: Patient;
+      type: 'SET_DIAGNOSIS_LIST';
+      payload: Diagnosis[];
     };
 
 export const reducer = (state: State, action: Action): State => {
@@ -67,18 +59,7 @@ export const reducer = (state: State, action: Action): State => {
           [action.payload.id]: action.payload,
         },
       };
-    case 'ADD_ENTRY':
-      return {
-        ...state,
-        patients: {
-          ...state.patients,
-          [action.payload.id]: action.payload,
-        },
-      };
-    case 'GET_TYPES':
-      console.log('get types action.payload', action.payload);
 
-      return { ...state };
     default:
       return state;
   }
@@ -109,21 +90,5 @@ export const addPatient = (patient: Patient): Action => {
   return {
     type: 'ADD_PATIENT',
     payload: patient,
-  };
-};
-
-export const addEntry = (patient: Patient): Action => {
-  console.log('addEntry action reducer', patient);
-  return {
-    type: 'ADD_ENTRY',
-    payload: patient,
-  };
-};
-
-export const getTypes = (type: EntriesTypes): Action => {
-  console.log('getTypes action reducer', type);
-  return {
-    type: 'GET_TYPES',
-    payload: type,
   };
 };
