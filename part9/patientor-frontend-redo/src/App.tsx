@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import { Button, Divider, Header, Menu, Container } from 'semantic-ui-react';
+import {  Divider,  Menu, Container } from 'semantic-ui-react';
 
 import { apiBaseUrl } from './constants';
-import { useStateValue, setPatientList, setDiagnosisList  } from './state';
+import { useStateValue, setPatientList, setDiagnosisList } from './state';
 import { Patient, Diagnosis } from './types';
 
 import PatientListPage from './PatientListPage';
@@ -13,14 +13,12 @@ import PatientDetail from './PatientDetail';
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
   React.useEffect(() => {
-    axios.get<void>(`${apiBaseUrl}/ping`);
-
     const fetchPatientList = async () => {
       try {
         const { data: patientListFromApi } = await axios.get<Patient[]>(
           `${apiBaseUrl}/patients`
         );
-        dispatch({ type: 'SET_PATIENT_LIST', payload: patientListFromApi });
+        dispatch(setPatientList(patientListFromApi));
         const { data: diagnosisListFromApi } = await axios.get<Diagnosis[]>(
           `${apiBaseUrl}/diagnoses`
         );

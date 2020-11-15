@@ -7,7 +7,7 @@ import {
   HealthCheckRating,
   Discharge,
   SickLeave,
-//  Diagnosis,
+  //  Diagnosis,
 } from '../types';
 //import toDiagnosis from './dxUtils';
 
@@ -105,8 +105,8 @@ const isHealthCheckRating = (
 const parseHealthCheckRating = (
   healthCheckRating: any | undefined
 ): HealthCheckRating => {
-  if (!healthCheckRating || !isHealthCheckRating(healthCheckRating)) {
-    throw new Error('Incorrect of missing health check rating: ');
+  if (!isHealthCheckRating(healthCheckRating)) {
+    throw new Error('Incorrect or missing health check rating ');
   }
   return healthCheckRating;
 };

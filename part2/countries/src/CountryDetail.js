@@ -8,11 +8,10 @@ const CountryDetail = ({ country }) => {
   const [weather, setWeather] = useState({})
   const [unit, setUnit] = useState('m')
 
-  const coordinates = () => {
-    return country.latlng[0] + ',' + country.latlng[1]
-  }
-
   useEffect(() => {
+    const coordinates = () => {
+      return country.latlng[0] + ',' + country.latlng[1]
+    }
     const uri = `http://api.weatherstack.com/current?access_key=${
       process.env.REACT_APP_WEATHER_KEY
     }&query=${coordinates()}&units=${unit} `

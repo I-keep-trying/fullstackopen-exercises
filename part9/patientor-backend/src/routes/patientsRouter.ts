@@ -3,7 +3,7 @@ import express from 'express';
 import {
   addPatient,
   getSecurePatient,
- // getPatientDetail,
+  // getPatientDetail,
   findById,
   addEntry,
 } from '../services/patientService';
@@ -21,7 +21,7 @@ router.get('/', (_req, res) => {
 
 router.get('/:id', (req, res) => {
   try {
-   // res.send(getPatientDetail());
+    // res.send(getPatientDetail());
     res.send(findById(req.params.id));
   } catch (e) {
     if (e instanceof Error) {
