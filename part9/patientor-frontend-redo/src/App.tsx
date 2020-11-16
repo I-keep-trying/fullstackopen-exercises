@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import {  Divider,  Menu, Container } from 'semantic-ui-react';
+import { Divider, Menu, Container, Icon } from 'semantic-ui-react';
 
 import { apiBaseUrl } from './constants';
 import { useStateValue, setPatientList, setDiagnosisList } from './state';
@@ -9,6 +9,7 @@ import { Patient, Diagnosis } from './types';
 
 import PatientListPage from './PatientListPage';
 import PatientDetail from './PatientDetail';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   const [, dispatch] = useStateValue();
@@ -33,13 +34,16 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
-        <Menu inverted color={'blue'}>
+        <Menu fixed="top" inverted>
           <Container>
             <Menu.Item header>
+              <Icon name="heartbeat" color="teal" size="large" />
               <Link to="/">Patientor</Link>
             </Menu.Item>
           </Container>
         </Menu>
+        <Divider />
+        <Divider />
         <Container>
           <Divider hidden />
           <Switch>
@@ -47,6 +51,7 @@ const App: React.FC = () => {
             <Route path="/" render={() => <PatientListPage />} />
           </Switch>
         </Container>
+        <Footer />
       </Router>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   Segment,
   Header,
   Label,
+  List,
 } from 'semantic-ui-react';
 import AnimateHeight from 'react-animate-height';
 import { useStateValue } from '../../state';
@@ -71,44 +72,50 @@ export const EntryDetails: FC = () => {
                         {entry.specialist}
                       </Table.Cell>
                     </Table.Row>
-                    <Table.Row>
-                      {entry.diagnosisCodes ? (
-                        entry.diagnosisCodes?.map((dx) => {
-                          const getDx = Object.values(diagnoses).filter(
-                            (diagnosis: Diagnosis) => diagnosis.code === dx
-                          );
-                          const id = nanoid();
-                          return (
-                            <>
-                              <Table.Cell>Diagnoses</Table.Cell>
-                              <Table.Cell key={id}>
-                                <Label basic horizontal color="teal">
-                                  {dx}
-                                </Label>{' '}
-                                {getDx[0]?.name}
-                              </Table.Cell>
-                            </>
-                          );
-                        })
-                      ) : (
-                        <></>
-                      )}
-                    </Table.Row>
+                    {entry.diagnosisCodes ? (
+                      <Table.Row>
+                        <Table.Cell>Diagnosis</Table.Cell>
+                        <Table.Cell>
+                          <List divided verticalAlign="middle">
+                            {entry.diagnosisCodes?.map((dx) => {
+                              const getDx = Object.values(diagnoses).filter(
+                                (diagnosis: Diagnosis) => diagnosis.code === dx
+                              );
+                              const id = nanoid();
+                              return (
+                                <List.Item key={id}>
+                                  <Label basic horizontal color="teal">
+                                    {dx}
+                                  </Label>{' '}
+                                  {getDx[0]?.name}
+                                </List.Item>
+                              );
+                            })}
+                          </List>
+                        </Table.Cell>
+                      </Table.Row>
+                    ) : (
+                      <></>
+                    )}
+
+                    {entry.type === 'Hospital' ? (
+                      <HospitalEntry entry={entry} />
+                    ) : entry.type === 'HealthCheck' ? (
+                      <HealthEntry entry={entry} />
+                    ) : (
+                      <OccupationalEntry entry={entry} />
+                    )}
                   </Table.Body>
                 </Table>
               </AnimateHeight>
               <Accordion.Content className={`content ${active}`}>
-                {entry.type === 'Hospital' ? (
+                {/*  {entry.type === 'Hospital' ? (
                   <HospitalEntry entry={entry} />
                 ) : entry.type === 'HealthCheck' ? (
                   <HealthEntry entry={entry} />
                 ) : (
                   <OccupationalEntry entry={entry} />
-                )}
-                {/* 
-                {entry.diagnosisCodes?.map(() => {
-                  return <Diagnoses entry={entry} />;
-                })} */}
+                )} */}
               </Accordion.Content>
             </Accordion>
           );

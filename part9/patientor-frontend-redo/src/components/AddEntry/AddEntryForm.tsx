@@ -10,7 +10,7 @@ import {
 import { useStateValue } from '../../state';
 import {
   Diagnosis,
-  NewEntries, //same as EntryFormValues
+  NewEntries, 
   EntriesType,
 } from '../../types';
 
@@ -72,13 +72,11 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-     
-
         try {
           onSubmit(values);
           console.log('add entry form onSubmit actions', actions);
           console.log('add entry form onSubmit values', values);
-           actions.resetForm();
+          actions.resetForm();
         } catch (e) {
           console.error('Add Entry form validation error', e.response.data);
         }
@@ -100,13 +98,7 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
         if (!values.type) {
           errors.type = requiredError;
         } else if (values.type === 'HealthCheck') {
-          // const healthRating = String(values.healthCheckRating);
-          /*  if (healthRating === '' || values.healthCheckRating === undefined) {
-            errors.healthCheckRating = requiredError;
-          } else  */ if (
-            values.healthCheckRating > 3 ||
-            values.healthCheckRating < 0
-          ) {
+          if (values.healthCheckRating > 3 || values.healthCheckRating < 0) {
             errors.healthCheckRating =
               'Choose Health Check Rating between 0 to 3, 0 being Healthy to 3 being at Critical Risk';
           }
@@ -137,13 +129,7 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
         return errors;
       }}
     >
-      {({
-        values,
-        isValid,
-        dirty,
-        setFieldValue,
-        setFieldTouched,
-      }) => {
+      {({ values, isValid, dirty, setFieldValue, setFieldTouched }) => {
         return (
           <Form className="form ui">
             <SelectField name="type" label="Type" options={entryTypeOptions} />
@@ -159,12 +145,14 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
               placeholder="Description"
               name="description"
               component={TextField}
+              required
             />
             <Field
               label="Specialist"
               placeholder="Specialist"
               name="specialist"
               component={TextField}
+              required
             />
             <DiagnosisSelection
               setFieldValue={setFieldValue}
@@ -179,21 +167,24 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
                 component={NumberField}
                 min={0}
                 max={3}
+                required
               />
             ) : null}
             {String(values.type) === 'Hospital' ? (
               <>
-                <Field
+                 <Field
                   label="Date of discharge"
                   placeholder="Date of discharge"
                   name="discharge.date"
                   component={TextField}
+                  required
                 />
                 <Field
                   label="Criteria of discharge"
                   placeholder="Criteria"
                   name="discharge.criteria"
                   component={TextField}
+                  required
                 />
               </>
             ) : null}
@@ -204,6 +195,7 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
                   placeholder="Employer Name"
                   name="employerName"
                   component={TextField}
+                  required
                 />
                 <Field
                   label="Sick Leave Start"

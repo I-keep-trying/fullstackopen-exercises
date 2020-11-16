@@ -56,8 +56,6 @@ export const reducer = (state: State, action: Action): State => {
         },
       };
     case 'ADD_PATIENT': {
-      console.log('state', state);
-      console.log('action', action.payload);
       return {
         ...state,
         patients: {

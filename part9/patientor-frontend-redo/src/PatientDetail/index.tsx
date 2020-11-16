@@ -52,7 +52,7 @@ const PatientPage: React.FC = () => {
       }
     };
     fetchPatient();
-  }, [dispatch, id]);
+  }, [dispatch, id, patients]);
 
   const submitNewEntry = async (values: NewEntries) => {
     try {

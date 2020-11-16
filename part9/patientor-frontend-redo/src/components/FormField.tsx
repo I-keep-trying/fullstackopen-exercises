@@ -1,6 +1,10 @@
 import React from 'react';
 import { ErrorMessage, Field, FieldProps, FormikProps } from 'formik';
-import { Dropdown, DropdownProps, Form } from 'semantic-ui-react';
+import {
+  Dropdown,
+  DropdownProps,
+  Form,
+} from 'semantic-ui-react';
 import { Diagnosis, Gender, EntriesType } from '../types';
 
 // structure of a single option
@@ -36,14 +40,16 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 interface TextProps extends FieldProps {
   label: string;
   placeholder: string;
+  required: string;
 }
 
 export const TextField: React.FC<TextProps> = ({
   field,
   label,
   placeholder,
+  required,
 }) => (
-  <Form.Field>
+  <Form.Field required={required}>
     <label>{label}</label>
     <Field placeholder={placeholder} {...field} />
     <div style={{ color: 'red' }}>

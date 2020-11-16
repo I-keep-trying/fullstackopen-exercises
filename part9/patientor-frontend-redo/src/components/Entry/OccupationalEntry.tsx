@@ -1,42 +1,27 @@
 import React, { FC } from 'react';
-import { List, Label } from 'semantic-ui-react';
+import { Table } from 'semantic-ui-react';
 import { OccupationalHealthCareEntry } from '../../types';
 
 const OccupationalEntry: FC<{ entry: OccupationalHealthCareEntry }> = ({
   entry,
 }) => {
   return (
-    <div key={entry.id}>
-      {/*       <List.Item>
-        <Icon color="red" className="medkit big icon" />
-      </List.Item> */}
-      <List.List>
-        <List.Item>
-          <Label basic horizontal>
-            Employment
-          </Label>{' '}
-          {entry.employerName}
-        </List.Item>
-
-        {entry.sickLeave ? (
-          <List.Item>
-            <Label basic horizontal>
-              Sick Leave
-            </Label>
-            <Label basic horizontal>
-              Start:{' '}
-            </Label>
-            {entry.sickLeave.startDate}
-            <Label basic horizontal>
-              End:{' '}
-            </Label>
-            {entry.sickLeave.endDate}
-          </List.Item>
-        ) : (
-          <></>
-        )}
-      </List.List>
-    </div>
+    <>
+      <Table.Row>
+        <Table.Cell> Employment</Table.Cell>
+        <Table.Cell className="word-break">{entry.employerName}</Table.Cell>
+      </Table.Row>
+      {entry.sickLeave ? (
+        <Table.Row>
+          <Table.Cell> Sick Leave</Table.Cell>
+          <Table.Cell className="word-break">
+            {entry.sickLeave.startDate} {' <to> '} {entry.sickLeave.endDate}
+          </Table.Cell>
+        </Table.Row>
+      ) : (
+        <></>
+      )}
+    </>
   );
 };
 
