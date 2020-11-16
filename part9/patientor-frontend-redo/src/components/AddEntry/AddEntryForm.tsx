@@ -74,8 +74,6 @@ const AddEntryForm: React.FC<AddEntryFormProps> = ({ onSubmit, onCancel }) => {
       onSubmit={(values, actions) => {
         try {
           onSubmit(values);
-          console.log('add entry form onSubmit actions', actions);
-          console.log('add entry form onSubmit values', values);
           actions.resetForm();
         } catch (e) {
           console.error('Add Entry form validation error', e.response.data);

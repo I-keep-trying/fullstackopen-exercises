@@ -107,7 +107,6 @@ export const addPatient = (patient: Patient): Action => {
 };
 
 export const addEntry = (patient: Patient): Action => {
-  console.log('addEntry action reducer', patient);
   return {
     type: 'ADD_ENTRY',
     payload: patient,
